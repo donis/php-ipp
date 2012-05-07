@@ -1,0 +1,33 @@
+Index: PrintIPP.php
+===================================================================
+RCS file: /sources/phpprintipp/phpprintipp/php_classes/PrintIPP.php,v
+retrieving revision 1.1
+diff -u -r1.1 PrintIPP.php
+--- PrintIPP.php	21 Jun 2008 00:30:57 -0000	1.1
++++ PrintIPP.php	31 Aug 2010 18:58:36 -0000
+@@ -481,7 +481,7 @@
+                          . $this->meta->which_jobs 
+                          . $this->meta->my_jobs
+                          ;
+-       if ($subset)
++       if ($subset) {
+            $this->stringjob .=
+                           chr(0x44) // keyword
+                          . self::_giveMeStringLength('requested-attributes')
+@@ -504,6 +504,16 @@
+                          . self::_giveMeStringLength('job-state-reason')
+                          . 'job-state-reason'
+                          ;
++        }
++        else { # cups 1.4.4 doesn't return much of anything without this
++            $this->stringjob .=
++                          chr(0x44) // keyword
++                         . self::_giveMeStringLength('requested-attributes')
++                         . 'requested-attributes'
++                         . self::_giveMeStringLength('all')
++                         . 'all'
++                         ;
++        }
+         $this->stringjob .= chr(0x03); // end-of-attributes | end-of-attributes-tag
+                          
+         self::_putDebug(sprintf(_("String sent to the server is:\n%s\n"), $this->stringjob));

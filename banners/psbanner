@@ -1,0 +1,412 @@
+%!PS-Adobe-3.0 
+%%Creator: Thomas Harding
+%%CreationDate: 2006-05-14, 23:30
+%%Title: PHP PrintIPP banner page
+%%PageOrder: Ascend 
+%%Orientation: Portrait
+%%Pages: 1
+%%BoundingBox: 0 0 596 842
+%%EndComments 
+%%BeginProlog 
+%%BeginResource: definitions 
+%
+% Copyright (c)2006, Thomas Harding 
+%
+%  This file is free software; you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation; either version 2 of the License, or
+%  (at your option) any later version.
+%  
+%  This documentation is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%  
+%  You should have received a copy of the GNU General Public License
+%  along with this documentation; if not, write to the Free Software
+%  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+%
+%
+/CENTER {			% Draw centered text
+				% (name) CENTER -
+  dup stringwidth pop		% Get the width of the string
+  0.5 mul neg 0 rmoveto		% Shift left 1/2 of the distance
+  show				% Show the string
+} bind def
+/RIGHT {			% Draw right-justified text
+				% (name) RIGHT -
+  dup stringwidth pop		% Get the width of the string
+  neg 0 rmoveto			% Shift left the entire distance
+  show				% Show the string
+} bind def
+/COPYRIGHT {
+(    Copyright \(C\) 2008,  Thomas Harding \(thomas.harding@laposte.net\), Gnu General Public License.)
+} bind def
+%%EndResource 
+%%EndProlog
+%%Page: 1 1
+gsave
+
+  % Determine the imageable area and device resolution...
+  initclip newpath clippath pathbbox	% Get bounding rectangle
+  72 div /pageTop exch def		% Get top margin in inches
+  72 div /pageRight exch def		% Get right margin in inches
+  72 div /pageBottom exch def		% Get bottom margin in inches
+  72 div /pageLeft exch def		% Get left margin in inches
+
+  4 setlinewidth			% Draw wide lines
+  0 setgray closepath stroke		% Draw a clipping rectangle
+  1 setlinewidth			% Draw normal lines
+
+  /pageWidth pageRight pageLeft sub def	% pageWidth = pageRight - pageLeft
+  /pageHeight pageTop pageBottom sub def% pageHeight = pageTop - pageBottom
+
+  72 72 dtransform			% Get device resolution per inch
+  /yResolution exch abs def		% yResolution = abs(yres)
+  /xResolution exch abs def		% xResolution = abs(xres)
+
+  % Offset page to account for lower-left margin...
+  pageLeft 72 mul
+  pageBottom 72 mul
+  translate
+
+
+gsave
+
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+pageWidth 36 mul %left: 50% (72 / 2)
+pageHeight 60 mul %top: 90% (72 * 0.9)
+translate
+0 0 moveto
+/Arial-Bold findfont 16 scalefont setfont 
+(PHP PrintIPP Banner page) CENTER 
+grestore
+%
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+/Times-Roman-Bold findfont 48 scalefont setfont
+0.7 setgray
+pageWidth 36 mul %left: 50% (72 / 2)
+pageHeight 64 mul %top: 3/4
+translate
+-80 0 moveto
+(PHP)
+show
+%
+/Times-Roman-Bold findfont 48 scalefont setfont
+0.8 setgray
+-20 -18 moveto 
+(IPP)
+show
+%
+/Times-Roman-Bold findfont 25 scalefont setfont
+0.5 setgray
+-30 -8 moveto
+(Print)
+show
+grestore
+%
+%
+% CUPS TEMPLATES
+%
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20  mul %left: 50% (72 / 2)
+pageHeight 55 mul %top: 50%
+2 copy
+moveto
+(Job ID: ) RIGHT
+moveto
+({job-id}) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20 mul %left: 50% (72 / 2)
+pageHeight 54 mul %top: 50%
+2 copy
+moveto
+(Job Name: ) RIGHT
+moveto
+({job-name}) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20 mul %left: 50% (72 / 2)
+pageHeight 53 mul %top: 50%
+2 copy
+moveto
+(Job Billing: ) RIGHT
+moveto
+({job-billing}) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20 mul %left: 50% (72 / 2)
+pageHeight 52 mul %top: 50%
+2 copy
+moveto
+(From User: ) RIGHT
+moveto
+({job-originating-user-name}) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20 mul %left: 50% (72 / 2)
+pageHeight 51 mul %top: 50%
+2 copy
+moveto
+(From Computer: ) RIGHT
+moveto
+({job-originating-host-name} \(127.0.0.1 = local\)) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20 mul %left: 50% (72 / 2)
+pageHeight 50 mul %top: 50%
+2 copy
+moveto
+(Job Priority: ) RIGHT
+moveto
+({job-priority} out of 100) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20 mul %left: 50% (72 / 2)
+pageHeight 49 mul %top: 50%
+2 copy
+moveto
+(Printer Name: ) RIGHT
+moveto
+({printer-name}) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20 mul %left: 50% (72 / 2)
+pageHeight 48 mul %top: 50%
+2 copy
+moveto
+(Printer URI: ) RIGHT
+moveto ({job-printer-uri})
+show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20 mul %left: 50% (72 / 2)
+pageHeight 47 mul %top: 50%
+2 copy
+moveto
+(Creation Time: ) RIGHT
+moveto
+({time-at-creation}) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+0 setgray
+/Arial findfont 10 scalefont setfont
+pageWidth 20 mul %left: 50% (72 / 2)
+pageHeight 46 mul %top: 50%
+2 copy
+moveto
+(Document name: ) RIGHT
+moveto
+({document-name}) show
+grestore
+%
+%
+% COPYRIGHT
+%
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+pageWidth 67 mul %left: margin (not change)
+pageHeight 5 mul % bottom: 10%
+0.6000000 setgray
+translate
+[] 0 setdash
+0.500000 setlinewidth
+1 setlinejoin
+0 setlinecap
+0 0 moveto
+/thefontsize pageWidth 0.8 mul def
+/Arial findfont thefontsize scalefont setfont 
+/thelenght COPYRIGHT stringwidth pop neg def
+newpath
+%
+0 thelenght  2.6 4 0 360 arc 
+stroke
+newpath
+0 thelenght 2.6 2.4 -130 130 arc
+stroke
+0 0 moveto
+COPYRIGHT RIGHT
+grestore
+%
+% LOGO
+%
+gsave [1.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000] concat
+translate
+pageWidth 10 mul %left: 10%
+pageHeight 12 mul %top: 20%
+translate
+/Arial findfont 8 scalefont setfont 
+/thefontsize pageWidth 1 mul def
+/AvantGarde-DemiOblique-bold findfont thefontsize scalefont setfont
+60 -40 moveto
+(PHP PrintIpp is a PHP5 class which implements an Internet Printing Protocol client)
+show
+0.80000000 -0.80000000 scale
+[] 0 setdash
+2.0000000 setlinewidth
+1 setlinejoin
+0 setlinecap
+% round square fill
+newpath
+19.651587 3.9389901 moveto
+52.623835 3.9389901 lineto
+61.842930 3.9389901 69.264801 10.033592 69.264801 17.604018 curveto
+69.264801 55.899481 lineto
+69.264801 63.469907 61.842930 69.564509 52.623835 69.564509 curveto
+19.651587 69.564509 lineto
+10.432491 69.564509 3.0106204 63.469907 3.0106204 55.899481 curveto
+3.0106204 17.604018 lineto
+3.0106204 10.033592 10.432491 3.9389901 19.651587 3.9389901 curveto
+closepath
+0.85 setgray
+fill
+% round square
+0.85 setgray
+19.651587 3.9389901 moveto
+52.623835 3.9389901 lineto
+61.842930 3.9389901 69.264801 10.033592 69.264801 17.604018 curveto
+69.264801 55.899481 lineto
+69.264801 63.469907 61.842930 69.564509 52.623835 69.564509 curveto
+19.651587 69.564509 lineto
+10.432491 69.564509 3.0106204 63.469907 3.0106204 55.899481 curveto
+3.0106204 17.604018 lineto
+3.0106204 10.033592 10.432491 3.9389901 19.651587 3.9389901 curveto
+closepath
+stroke
+gsave [1.0975540 0.0000000 0.0000000 0.91111700 0.0000000 0.0000000] concat
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 12.345897 66.912621] concat
+/Arial-bold findfont
+19.721474 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(I) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 18.162191 66.912621] concat
+/Arial-bold findfont
+19.721474 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(P) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 30.064408 66.912621] concat
+/Arial-bold findfont
+19.721474 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(P) show
+grestore
+grestore
+gsave [0.94888600 0.0000000 0.0000000 1.0538680 0.0000000 0.0000000] concat
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 15.402272 39.776627] concat
+/Arial-bold findfont
+12.546721 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(P) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 22.974415 39.776627] concat
+/Arial-bold findfont
+12.546721 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(H) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 32.408961 39.776627] concat
+/Arial-bold findfont
+12.546721 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(P) show
+grestore
+grestore
+% curve line
+0.6 setgray
+[] 0 setdash
+2.0000000 setlinewidth
+0 setlinejoin
+0 setlinecap
+newpath
+8.2421236 45.252709 moveto
+33.365286 45.201119 lineto
+41.136943 45.160983 41.835500 37.951998 43.581392 34.135423 curveto
+45.959901 28.181598 45.967790 28.267051 51.110567 13.849839 curveto
+stroke
+gsave [0.38583600 -1.2039480 0.73581200 0.29577500 0.0000000 0.0000000] concat
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 -18.524168 77.822601] concat
+/Arial-bold findfont
+8.9158688 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(P) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 -13.300026 77.822601] concat
+/Arial-bold findfont
+8.9158688 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(r) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 -9.6257131 77.822601] concat
+/Arial-bold findfont
+8.9158688 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(i) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 -7.1529526 77.822601] concat
+/Arial-bold findfont
+8.9158688 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(n) show
+grestore
+gsave [1.0000000 0.0000000 0.0000000 -1.0000000 -1.4934656 77.822601] concat
+/Arial-bold findfont
+8.9158688 scalefont
+setfont
+0 setgray
+newpath
+0.0000000 0.0000000 moveto
+(t) show
+grestore
+grestore
+grestore
+showpage 

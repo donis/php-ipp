@@ -1,0 +1,5 @@
+#printer_uri = "/printers/Parallel_Port_1"
+#unix = /var/run/cups/cups.sock
+#ipp_server = localhost
+#askpass = false
+#server_type = CUPS

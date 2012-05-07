@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>phpprintipp</title><meta name="generator" content="DocBook XSL Stylesheets V1.71.0" /></head><body><div class="refentry" lang="en" xml:lang="en"><a id="id2452647"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>phpprintipp — A command line interface to talk to IPP print servers</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">phpprintipp</code>  [<code class="option">--abanner <em class="replaceable"><code>sheet</code></em></code>] [<code class="option">--bbanner <em class="replaceable"><code>sheet</code></em></code>] [<code class="option">--copies <em class="replaceable"><code>#</code></em></code>] [<code class="option">--file <em class="replaceable"><code>file</code></em></code>] [<code class="option">-h</code>] [<code class="option">--help</code>] [<code class="option">--host <em class="replaceable"><code>hostname</code></em></code>] [<code class="option">--job </code>uri] [<code class="option">--job-attributes</code>] [<code class="option">--logfile <em class="replaceable"><code>path</code></em></code>] [<code class="option">--mediatype <em class="replaceable"><code>mime-type</code></em></code>] [<code class="option">--nohttpX</code>] [<code class="option">--noippX</code>] [<code class="option">-p</code>] [<code class="option">--password <em class="replaceable"><code>password</code></em></code>] [<code class="option">--paths <em class="replaceable"><code>"path,path,path,path"</code></em></code>] [<code class="option">--port <em class="replaceable"><code>#</code></em></code>] [<code class="option">--printer <em class="replaceable"><code>uri</code></em></code>] [<code class="option">--printer-attributes</code>] [<code class="option">--server <em class="replaceable"><code>rcfile</code></em></code>] [<code class="option">--sides <em class="replaceable"><code>token</code></em></code>] [<code class="option">--tempdir <em class="replaceable"><code>dir</code></em></code>] [<code class="option">--user <em class="replaceable"><code>username</code></em></code>]</p></div></div><div class="refsect1" lang="en" xml:lang="en"><a id="id2453142"></a><h2>DESCRIPTION</h2><p><span><strong class="command">phpprintipp</strong></span> is a php CLI interface to print
+      servers.</p><p>It uses PHP classes located in /usr/share/php/printipp.</p><p>Combined together with foomatic-rip, it allows to print to
+      network IPP printers/servers without needing of a spooler
+      on your system.</p></div><div class="refsect1" lang="en" xml:lang="en"><a id="id2453170"></a><h2>OPTIONS</h2><p><span><strong class="command">phpprintipp</strong></span> has following options:</p><div class="variablelist"><dl><dt><span class="term"><code class="option">--abanner banner</code></span></dt><dd><p>the banner sheet to print after job</p></dd><dt><span class="term"><code class="option">--bbanner banner</code></span></dt><dd><p>the banner sheet to print before job</p></dd><dt><span class="term"><code class="option">-c</code>
+          <code class="option">--credits</code></span></dt><dd><p>Display credits and licence then exit.</p></dd><dt><span class="term"><code class="option">--copies number</code></span></dt><dd><p>number of document copies to print</p></dd><dt><span class="term"><code class="option">--file /path/to/file_to_print</code></span></dt><dd><p>path, relative or absolute, to a printable file</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Will print the file name if it is unreadable</p></div></dd><dt><span class="term"><code class="option">-h</code>
+          <code class="option">--help</code></span></dt><dd><p>print help</p></dd><dt><span class="term"><code class="option">--host "hostname"</code></span></dt><dd><p>resolvable hostname/FQDN, or ipV4/V6 IP</p></dd><dt><span class="term"><code class="option">--job "job uri"</code></span></dt><dd><p>get job attributes for this job</p></dd><dt><span class="term"><code class="option">--job-attributes</code></span></dt><dd><p>display the printed job attributes</p></dd><dt><span class="term"><code class="option">--logfile /path/to/log/file</code></span></dt><dd><p>default to /dev/null</p></dd><dt><span class="term"><code class="option">--mediatype "application/octet-stream"</code></span></dt><dd><p>the mime media type of the file provided 
+            to your printer
+            (default to application/octet-stream). most printers allows
+            only that type and "text/plain".</p></dd><dt><span class="term"><code class="option">--nohttpX</code></span></dt><dd><p>do not handle http exceptions</p></dd><dt><span class="term"><code class="option">--noippX</code></span></dt><dd><p>do not handle ipp exceptions</p></dd><dt><span class="term"><code class="option">-p</code></span></dt><dd><p>print (from pipe or standard input),
+            overridden by <code class="option">--file</code></p></dd><dt><span class="term"><code class="option">--password "password"</code></span></dt><dd><p>the printer password, if needed</p></dd><dt><span class="term"><code class="option">--paths "/,/admin,/printers,/jobs"</code></span></dt><dd><p>comma separed list of the four destinations
+            as above (the cups default)</p><p>For example, <code class="option">--path "/P1,/P1,/lpt1,/P1"</code></p></dd><dt><span class="term"><code class="option">--port "port number"</code></span></dt><dd><p>default to IPP standard port (631)</p></dd><dt><span class="term"><code class="option">--printer "printer uri"</code></span></dt><dd><p>mandatory if not set in rcfile (IPP standard...)</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Tip</h3><p>more often the "printer queue" name</p></div></dd><dt><span class="term"><code class="option">--printer-attributes </code></span></dt><dd><p>get printer attributes</p></dd><dt><span class="term"><code class="option">--server "rcfile"</code></span></dt><dd><p>server: load options from "rcfile"
+            <code class="filename">$HOME/.printipp/rcfile</code>
+            if not found <code class="filename">$ETC/printipp/rcfile</code>,
+            then <code class="filename">/etc/printipp/rcfile</code></p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>By default, if you do not ask for 
+          <code class="literal">--server</code>, phpprintipp will
+          try to load <code class="filename">'default'</code> file
+          from the relevant paths.</p></div></dd><dt><span class="term"><code class="option">--sides (1|2|2CE)</code></span></dt><dd><p>1 for one-sided (default), 2 for two-sided, 2CE 
+            for two-sided on short edge</p></dd><dt><span class="term"><code class="option">--tempdir /path/to/temp</code></span></dt><dd><p>default is /tmp</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>You need a valid directory path, as file/string
+          is streamed to a temp-file, then streamed from the last (allow
+          large files printing, to pass round the PHP "set_memory_limit"
+          directive</p></div></dd><dt><span class="term"><code class="option">--user "username"</code></span></dt><dd><p>your user name, from printer point of view</p></dd></dl></div></div><div class="refsect1" lang="en" xml:lang="en"><a id="id2453831"></a><h2>RCFILES</h2><p>Each server or network printer given by
+    <code class="option">--server myserver</code>
+    needs an rcfile, located (in search order) in: 
+    <code class="filename">$HOME/.printipp/</code>
+    <code class="filename">$ETC/printipp/</code>
+    <code class="filename">/etc/printipp/</code></p><p>The rcfile format is variable = "value". Blank lines
+    and lines beginning with a "#" are ignored.</p><p>Here is a sample (complete) file</p><pre class="programlisting">
+
+          debug = false // false or 0 to 5 (5 = less verbose)
+
+          username = guest
+          password = verysecret // set it if you need authentication
+          
+          host = "localhost"
+          server_type = CUPS
+          printer = "ipp://localhost:631/printers/reseauipp";
+          
+          paths = false 
+          # =&gt; the PrintIPP defaults (CUPS compliant)
+          # example: paths = "/root,/admin,/printers,/jobs"
+          
+          get_printer_attrs = false
+          print = false
+          get_job_attrs = false
+          port = 631
+          mediatype = "text/plain"
+          logfile = "/tmp/phpprintipp_log"
+          handle_http_exceptions = true
+          handle_ipp_exceptions = true
+          tempdir = "/tmp"
+
+    </pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>rcfiles settings are overriden by command-line options</p></div></div><div class="refsect1" lang="en" xml:lang="en"><a id="id2453914"></a><h2>EXAMPLES</h2><pre class="programlisting">
+echo -e \
+  'test\r\nThe quick brown fox jumps over the lazy dog.\f\0027' | \
+  phpprintipp -p --server myprinter --mediatype 'text/plain'
+  </pre><p>assuming rasterfile is in a format compliant with your printer:</p><pre class="programlisting">
+phpprintipp --server myprinter \
+            --mediatype 'application/octet-stream' \
+            --file /path/to/rasterfile
+  </pre><p>assuming you have foomatic installed and 
+  <code class="filename">/etc/foomatic/direct/epson.ppd</code>
+  with directive 
+  <span class="emphasis"><em><code class="literal">*FoomaticRIPPostPipe: "| cat "</code></em></span> in,
+  and <code class="filename">/etc/printipp/TE100</code> rcfile as above, you can
+  type:</p><pre class="programlisting">
+foomatic-rip -P epson /path/to/file.ps | phpprintipp -p --server TE100
+  </pre><p>Same as above, and using graphicsmagic to convert a png file:</p><pre class="programlisting">
+gm convert ~/Artwork/Gnu/gnu.png eps:- | foomatic-rip -P epson | \
+   phpprintipp -p --server TE100
+  </pre></div><div class="refsect1" lang="en" xml:lang="en"><a id="id2453993"></a><h2>FILES</h2><div class="itemizedlist"><ul type="disc"><li><code class="filename">/usr/bin/phpprintipp</code></li><li><p>Printers configuration files given by</p><div class="cmdsynopsis"><p>[<code class="option">--server <em class="replaceable"><code>theserver</code></em></code>]</p></div><p>, scanned for in (in order):</p><table class="simplelist" border="0" summary="Simple list"><tr><td><code class="filename">$HOME/.printipp/*</code></td></tr><tr><td><code class="filename">$ETC/printipp/*</code>(Win$ systems)</td></tr><tr><td><code class="filename">/etc/printipp/*</code></td></tr></table></li><li><p><code class="filename">/usr/share/php/printipp/</code>
+	and its files:</p><table class="simplelist" border="0" summary="Simple list"><tr><td><code class="filename">http_class.php</code>
+	(http backend)</td></tr><tr><td><code class="filename">BasicIPP.php</code>
+	(base class)</td></tr><tr><td><code class="filename">PrintIPP.php</code>
+	(main class)</td></tr><tr><td><code class="filename">ExtendedPrintIPP.php</code>
+	(non RFC2911 extensions)</td></tr><tr><td><code class="filename">CupsPrintIPP.php</code>
+	(CUPS specific class)</td></tr></table></li></ul></div></div><div class="refsect1" lang="en" xml:lang="en"><a id="id2454128"></a><h2>SEE ALSO</h2><p><a href="http://www.nongnu.org/phpprintipp/usage" target="_top">PrintIPP usage</a></p><p><a href="http://www.nongnu.org/phpprintipp/rc_example" target="_top">rcfile example</a></p><p>foomatic-rip (1)</p><p>gm (1)</p></div><div class="refsect1" lang="en" xml:lang="en"><a id="id2454158"></a><h2>COPYRIGHT</h2><p>Copyright 2005-2008 Thomas Harding.</p><p>All rights reserved.</p><p>Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are
+    met:</p><div class="itemizedlist"><ul type="disc"><li>Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+    </li><li>Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+    </li><li>Neither the name of the author nor the names of its
+       contributors may be used to endorse or promote products derived from
+       this software without specific prior written permission.
+    </li></ul></div><p><span class="emphasis"><em> This software is provided by the copyright holders and
+    contributors "as is" and any express or implied warranties, including, but
+    not limited to, the implied warranties of merchantability and fitness for a
+    particular purpose are disclaimed. In no event shall the copyright holder
+    or contributors be liable for any direct, indirect, incidental, special,
+    exemplary, or consequential damages (including, but not limited to,
+    procurement of substitute goods or services; loss of use, data, or profits;
+    or business interruption) however caused and on any theory of liability,
+    whether in contract, strict liability, or tort (including negligence or
+    otherwise) arising in any way out of the use of this software, even if
+    advised of the possibility of such damage.</em></span></p></div><div class="refsect1" lang="en" xml:lang="en"><a id="id2466945"></a><h2>AUTHORS</h2><p>
+    	These program and manual were written by
+	<span class="author"><span class="firstname">Thomas</span> <span class="surname">Harding</span></span></p></div></div></body></html>

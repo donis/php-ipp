@@ -1,0 +1,70 @@
+
+###############
+#
+# ALL
+#
+#
+
+SEE documentation/install.html
+
+FORMER (SHORT) INSTRUCTIONS:
+########
+# UNIX/LINUX
+#
+
+We use autogen/autoconf/automake, so type:
+
+./autogen.sh && make install
+
+This install assumes that your php.ini have
+include_path = ".:/usr/local/share/php"
+directive in your php.ini files
+
+you may link /usr/local/etc/apache2/sites-available/phpprintipp
+to etc/apache2/sites-available/phpprintipp
+
+for a site-wide install:
+./autogen.sh --prefix=/usr \
+             --sysconfdir=/etc \
+             --localstatedir=/var && make install
+
+
+Usage:
+require_once("printipp/CupsPrintIPP.php") // WITHOUT './' (search_path...)
+// or ExtendedPrintIPP.php or PrintIPP.php, if you need less operations
+Then see usage.html in documentation directory
+
+#######
+#Other systems and remote hosting:
+#
+
+Copy files: 
+	ExtendedPrintIPP.php
+	PrintIPP.php
+	CupsPrintIPP.php
+	http_class.php
+to the location you need.
+
+Usage:
+See usage.html in documentation directory
+
+
+#######
+# Note
+#
+
+IF YOU WANT AN HTTP BACKEND WITH AUTH SCHEMES OTHER THAN "Basic":
+
+    download phphttp <http://en.static.phpclasses.org/browse/package/3.html>
+    (you need to register)
+    download phpsasl <http://en.static.phpclasses.org/browse/package/1888.html>
+    (you need to register)
+
+    cd ./PrintIPP/HTTP # this is IMPORTANT, as HTTP expends files in current directory
+
+    tar zxvf /PATH/TO/http-XXXX-XX-XX.tar.gz
+
+    cd ../SASL # this is IMPORTANT, as SASL expends files in current directory
+
+    tar zxvf /PATH/TO/sasl-XXXX-XX-XX.tar.gz
+

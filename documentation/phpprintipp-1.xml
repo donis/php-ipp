@@ -1,0 +1,405 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://docbook.org/xml/4.5/docbookx.dtd">
+<refentry>
+  <refentryinfo>
+    <title>phpprintipp</title>
+    <productname>PHP PrintIPP</productname>
+    <productnumber>Version 0.81</productnumber>
+    <copyright>
+      <year>2005</year>
+      <year>2008</year>
+      <holder>Thomas Harding</holder>
+    </copyright>
+    <date>2008-06-16</date>
+    <authorgroup>
+      <author>
+    <firstname>Thomas</firstname>
+    <surname>Harding</surname>
+    <email>thomas.harding@laposte.net</email>
+      </author>
+    </authorgroup>
+    <revhistory>
+      <revision>
+    <revnumber>1</revnumber>
+    <date>2008-06-16</date>
+    <authorinitials>HDG</authorinitials>
+    <revremark>1st DocBook/XML version</revremark>
+      </revision>
+    </revhistory>
+  </refentryinfo>
+  <refmeta>
+    <refentrytitle>phpprintipp</refentrytitle>
+    <manvolnum>1</manvolnum>
+  </refmeta>
+  <refnamediv>
+    <refname>phpprintipp</refname>
+    <refpurpose>A command line interface to talk to IPP print servers</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>phpprintipp</command>
+      <arg><option>--abanner <replaceable>sheet</replaceable></option></arg>
+      <arg><option>--bbanner <replaceable>sheet</replaceable></option></arg>
+      <arg><option>--copies <replaceable>#</replaceable></option></arg>
+      <arg><option>--file <replaceable>file</replaceable></option></arg>
+      <arg><option>-h</option></arg>
+      <arg><option>--help</option></arg>
+      <arg><option>--host <replaceable>hostname</replaceable></option></arg>
+      <arg><option>--job </option>uri</arg>
+      <arg><option>--job-attributes</option></arg>
+      <arg><option>--logfile <replaceable>path</replaceable></option></arg>
+      <arg><option>--mediatype <replaceable>mime-type</replaceable></option></arg>
+      <arg><option>--nohttpX</option></arg>
+      <arg><option>--noippX</option></arg>
+      <arg><option>-p</option></arg>
+      <arg><option>--password <replaceable>password</replaceable></option></arg>
+      <arg><option>--paths <replaceable>"path,path,path,path"</replaceable></option></arg>
+      <arg><option>--port <replaceable>#</replaceable></option></arg>
+      <arg><option>--printer <replaceable>uri</replaceable></option></arg>
+      <arg><option>--printer-attributes</option></arg>
+      <arg><option>--server <replaceable>rcfile</replaceable></option></arg>
+      <arg><option>--sides <replaceable>token</replaceable></option></arg>
+      <arg><option>--tempdir <replaceable>dir</replaceable></option></arg>
+      <arg><option>--user <replaceable>username</replaceable></option></arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>DESCRIPTION</title>
+    <para><command>phpprintipp</command> is a php CLI interface to print
+      servers.</para>
+    <para>It uses PHP classes located in /usr/share/php/printipp.</para>
+    <para>Combined together with foomatic-rip, it allows to print to
+      network IPP printers/servers without needing of a spooler
+      on your system.</para>
+  </refsect1>
+  <refsect1>
+    <title>OPTIONS</title>
+    <para><command>phpprintipp</command> has following options:</para>
+    <variablelist>
+      <varlistentry>
+        <term><option>--abanner banner</option></term>
+        <listitem>
+          <para>the banner sheet to print after job</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--bbanner banner</option></term>
+        <listitem>
+          <para>the banner sheet to print before job</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-c</option>
+          <option>--credits</option></term>
+        <listitem>
+          <para>Display credits and licence then exit.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--copies number</option></term> 
+        <listitem>
+          <para>number of document copies to print</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--file /path/to/file_to_print</option></term> 
+        <listitem>
+          <para>path, relative or absolute, to a printable file</para>
+          <note><para>Will print the file name if it is unreadable</para></note>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-h</option>
+          <option>--help</option></term>
+        <listitem>
+          <para>print help</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--host "hostname"</option></term>
+        <listitem>
+          <para>resolvable hostname/FQDN, or ipV4/V6 IP</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--job "job uri"</option></term>
+        <listitem>
+          <para>get job attributes for this job</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--job-attributes</option></term>
+        <listitem>
+          <para>display the printed job attributes</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--logfile /path/to/log/file</option></term>
+        <listitem>
+          <para>default to /dev/null</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--mediatype "application/octet-stream"</option></term>
+        <listitem>
+          <para>the mime media type of the file provided 
+            to your printer
+            (default to application/octet-stream). most printers allows
+            only that type and "text/plain".</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--nohttpX</option></term>
+        <listitem>
+          <para>do not handle http exceptions</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--noippX</option></term>
+        <listitem>
+          <para>do not handle ipp exceptions</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-p</option></term>
+        <listitem>
+          <para>print (from pipe or standard input),
+            overridden by <option>--file</option></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--password "password"</option></term>
+        <listitem>
+          <para>the printer password, if needed</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--paths "/,/admin,/printers,/jobs"</option></term>
+        <listitem>
+          <para>comma separed list of the four destinations
+            as above (the cups default)</para>
+          <para>For example, <option>--path "/P1,/P1,/lpt1,/P1"</option></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--port "port number"</option></term>
+        <listitem>
+          <para>default to IPP standard port (631)</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--printer "printer uri"</option></term>
+        <listitem>
+          <para>mandatory if not set in rcfile (IPP standard...)</para>
+          <tip><para>more often the "printer queue" name</para></tip>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--printer-attributes </option></term>
+        <listitem>
+          <para>get printer attributes</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--server "rcfile"</option></term>
+        <listitem>
+          <para>server: load options from "rcfile"
+            <filename>$HOME/.printipp/rcfile</filename>
+            if not found <filename>$ETC/printipp/rcfile</filename>,
+            then <filename>/etc/printipp/rcfile</filename></para>
+          <note><para>By default, if you do not ask for 
+          <literal>--server</literal>, phpprintipp will
+          try to load <filename>'default'</filename> file
+          from the relevant paths.</para></note>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--sides (1|2|2CE)</option></term>
+        <listitem>
+          <para>1 for one-sided (default), 2 for two-sided, 2CE 
+            for two-sided on short edge</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--tempdir /path/to/temp</option></term>
+        <listitem>
+          <para>default is /tmp</para>
+          <warning><para>You need a valid directory path, as file/string
+          is streamed to a temp-file, then streamed from the last (allow
+          large files printing, to pass round the PHP "set_memory_limit"
+          directive</para></warning>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--user "username"</option></term>
+        <listitem>
+          <para>your user name, from printer point of view</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+ 
+  <refsect1>
+    <title>RCFILES</title>
+    <para>Each server or network printer given by
+    <option>--server myserver</option>
+    needs an rcfile, located (in search order) in: 
+    <filename class="directory">$HOME/.printipp/</filename>
+    <filename class="directory">$ETC/printipp/</filename>
+    <filename class="directory">/etc/printipp/</filename></para>
+    <para>The rcfile format is variable = "value". Blank lines
+    and lines beginning with a "#" are ignored.</para>
+    <para>Here is a sample (complete) file</para>
+    <programlisting>
+          debug = false // false or 0 to 5 (5 = less verbose)
+          username = guest
+          password = verysecret // set it if you need authentication
+          
+          host = "localhost"
+          server_type = CUPS
+          printer = "ipp://localhost:631/printers/reseauipp";
+          
+          paths = false 
+          # => the PrintIPP defaults (CUPS compliant)
+          # example: paths = "/root,/admin,/printers,/jobs"
+          
+          get_printer_attrs = false
+          print = false
+          get_job_attrs = false
+          port = 631
+          mediatype = "text/plain"
+          logfile = "/tmp/phpprintipp_log"
+          handle_http_exceptions = true
+          handle_ipp_exceptions = true
+          tempdir = "/tmp"
+    </programlisting>
+    <note>
+    <para>rcfiles settings are overriden by command-line options</para>
+    </note>
+  </refsect1>
+  <refsect1>
+  <title>EXAMPLES</title>
+  
+  <programlisting>
+echo -e \
+  'test\r\nThe quick brown fox jumps over the lazy dog.\f\0027' | \
+  phpprintipp -p --server myprinter --mediatype 'text/plain'
+  </programlisting>
+  <para>assuming rasterfile is in a format compliant with your printer:</para>
+  <programlisting>
+phpprintipp --server myprinter \
+            --mediatype 'application/octet-stream' \
+            --file /path/to/rasterfile
+  </programlisting>
+  
+  <para>assuming you have foomatic installed and 
+  <filename>/etc/foomatic/direct/epson.ppd</filename>
+  with directive 
+  <emphasis><literal>*FoomaticRIPPostPipe: "| cat "</literal></emphasis> in,
+  and <filename>/etc/printipp/TE100</filename> rcfile as above, you can
+  type:</para>
+  <programlisting>
+foomatic-rip -P epson /path/to/file.ps | phpprintipp -p --server TE100
+  </programlisting>
+  <para>Same as above, and using graphicsmagic to convert a png file:</para>
+  <programlisting>
+gm convert ~/Artwork/Gnu/gnu.png eps:- | foomatic-rip -P epson | \
+   phpprintipp -p --server TE100
+  </programlisting>
+  </refsect1>
+  <refsect1>
+    <title>FILES</title>
+    	<itemizedlist>
+	<listitem>
+	<simpara><filename>/usr/bin/phpprintipp</filename></simpara>
+	</listitem>
+	<listitem>
+	<simpara>Printers configuration files given by</simpara>
+	<cmdsynopsis>
+	<arg><option>--server <replaceable>theserver</replaceable></option></arg>
+	</cmdsynopsis>
+	<simpara>, scanned for in (in order):</simpara>
+	<simplelist>
+	<member><filename>$HOME/.printipp/*</filename></member>
+	<member><filename>$ETC/printipp/*</filename>(Win$ systems)</member>
+	<member><filename>/etc/printipp/*</filename></member>
+	</simplelist>
+	</listitem>
+	<listitem>
+	<simpara><filename class="directory">/usr/share/php/printipp/</filename>
+	and its files:</simpara>
+	<simplelist>
+	<member><filename>http_class.php</filename>
+	(http backend)</member>
+	<member><filename>BasicIPP.php</filename>
+	(base class)</member>
+	<member><filename>PrintIPP.php</filename>
+	(main class)</member>
+	<member><filename>ExtendedPrintIPP.php</filename>
+	(non RFC2911 extensions)</member>
+	<member><filename>CupsPrintIPP.php</filename>
+	(CUPS specific class)</member>
+	</simplelist>
+	</listitem>
+	</itemizedlist>
+  </refsect1>
+  <refsect1>
+    <title>SEE ALSO</title>
+    <para><ulink
+    url="http://www.nongnu.org/phpprintipp/usage">PrintIPP usage</ulink></para>
+    <para><ulink
+    url="http://www.nongnu.org/phpprintipp/rc_example">rcfile example</ulink></para>
+    <para>foomatic-rip (1)</para>
+    <para>gm (1)</para>
+  </refsect1>
+  <refsect1>
+    <title>COPYRIGHT</title>
+    <para>Copyright 2005-2008 Thomas Harding.</para>
+    <para>All rights reserved.</para>
+ 
+    <para>Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are
+    met:</para>
+    
+    <itemizedlist>
+    <listitem>
+    <simpara>Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+    </simpara>
+    </listitem>
+    <listitem>
+    <simpara>Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+    </simpara>
+    </listitem>
+    <listitem>
+    <simpara>Neither the name of the author nor the names of its
+       contributors may be used to endorse or promote products derived from
+       this software without specific prior written permission.
+    </simpara>
+    </listitem>
+    </itemizedlist>
+    <para><emphasis> This software is provided by the copyright holders and
+    contributors "as is" and any express or implied warranties, including, but
+    not limited to, the implied warranties of merchantability and fitness for a
+    particular purpose are disclaimed. In no event shall the copyright holder
+    or contributors be liable for any direct, indirect, incidental, special,
+    exemplary, or consequential damages (including, but not limited to,
+    procurement of substitute goods or services; loss of use, data, or profits;
+    or business interruption) however caused and on any theory of liability,
+    whether in contract, strict liability, or tort (including negligence or
+    otherwise) arising in any way out of the use of this software, even if
+    advised of the possibility of such damage.</emphasis></para>
+  </refsect1>
+  <refsect1>
+    <title>AUTHORS</title>
+    <para>
+    	These program and manual were written by
+	<author><firstname>Thomas</firstname>
+	<surname>Harding</surname>
+	<email>thomas.harding@laposte.net</email></author></para>
+  </refsect1>
+</refentry>
+<!-- vim: set expandtab tabstop=2 shiftwidth=2: -->

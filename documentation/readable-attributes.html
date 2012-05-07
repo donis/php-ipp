@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!-- 
+@(#) $Header: /sources/phpprintipp/phpprintipp/documentation/readable-attributes.html,v 1.4 2008/05/12 20:19:37 harding Exp $
+ -->
+    <head>
+         <!--
+            Copyright (C) The Internet Society (2000).  All Rights Reserved.
+
+            Formatting: Copyright © 2006  Thomas Harding.
+                  
+                  These files are free software; you can redistribute them and/or modify
+                  them under the terms of the GNU General Public License as published by
+                  the Free Software Foundation; either version 2 of the License, or
+                  (at your option) any later version.
+
+                  This documentation is distributed in the hope that it will be useful,
+                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                  GNU General Public License for more details.
+
+                  You should have received a copy of the GNU General Public License
+                  along with this documentation; if not, write to the Free Software
+                  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+         -->
+        <!-- 
+        vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: 
+        let &termencoding = &encoding: 
+        set encoding=utf-8:
+        -->
+  
+        <meta name="Author" content="Thomas Harding" />
+        <meta http-equiv="Description" content="PhpPrintIPP documentation: readable attributes" />
+        <meta http-equiv="Keywords" content="documentation,PhpPrintIPP,php,IPP,internet printing protocol,lgpl" />
+        <link type="image/png" rel="shortcut icon" href="images/printipp-logo-shicon.png" title="PHP PrintIPP logo" />
+        <link rev="made" href="mailto:thomas.harding@laposte.net" />
+  
+        <style type="text/css">
+        /* <![CDATA[ */
+            body
+            {
+              padding-top: 2em ;
+              padding-bottom: 4em ;
+              padding-left: 2em ;
+              padding-right: 4em;
+              background-color: white ;
+              color: black;
+              counter-reset: section;
+            }
+
+            li.menulogo
+            {
+              position: absolute;
+              top: 20px;
+            }
+
+            img.logo
+            {
+              margin-bottom: -0.2ex;
+            }
+
+            div.section
+            {
+              padding-left: 5em;
+              counter-increment: section;
+              counter-reset: subsection;
+              counter-reset: subsubsection;
+            }
+
+            div.section h2
+            {
+              margin-left: -2em;
+            }
+
+            div.subsubsection
+            {
+              padding-left: 5em;
+              counter-increment: subsubsection;
+            }
+
+            div.subsection
+            {
+              padding-left: 5em;
+              counter-increment: subsection;
+              counter-reset: subsubsection;
+            }
+
+            div.subsection h3
+            {
+              margin-left: -4em;
+            }
+
+            div.subsubsection h4
+            {
+              margin-left: -2em;
+            }
+
+            pre.pre
+            {
+              display: block;
+              white-space: pre;
+              font-family: monospace;
+            }
+
+            pre.pre span.normal
+            {
+              margin-left: -2em;
+              white-space: normal;
+              font-family: serif;
+            }
+
+            p.typewriter
+            {
+              display: block;
+              font-family: monospace;
+            }
+
+            p.note:before
+            {
+              content: 'Note: ';
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            p.note
+            {
+              font-size: 80%;
+            }
+
+            span.important
+            {
+              display: block ;
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            div.section h2:before
+            {
+              content: counter(section) ". ";
+            }
+
+            div.subsection h3:before
+            {
+              content: counter(section) "." counter(subsection) " ";
+            }
+
+            div.subsubsection h4:before
+            {
+              content: counter(section) "." counter(subsection) "." counter(subsubsection) " ";
+            }
+
+            div.menu dl {
+                counter-reset: depth;
+                }
+            div.menu dt:before {
+                content: counters(depth,".")". ";
+                counter-increment: depth;
+                }
+            
+            span.h2
+            {
+              font-size: 120%;    
+            }
+            span.h3
+            {
+              font-size: 110%;
+            }
+        
+            p.footer
+            {
+              width: 80% ;
+              margin-left: 170px;
+              margin-bottom: 1em;
+              text-align: center;
+              font-family: sans-serif;
+              font-size: 60%;
+              color: black;
+              background-color: #AAAAFF;
+            }
+ 
+        /* ]]> */
+        </style>
+
+
+
+        <title>PHP PrintIPP usage: readable attributes</title>
+    </head>
+    <body>
+        <h1>Attributes</h1>
+        
+        <div class='menu'>
+            <h2><a href="usage.html">back to PrintIPP usage</a></h2>
+            <h2><a href="attributes.html">back to standard attributes</a></h2>
+            
+            <h2>summary</h2>
+                <dl>
+                    <dt><span class="h2"><a href="#introduction">introduction</a></span></dt>
+                    <dt><span class="h2"><a href="#warning">warning about format returned by 
+                    PrintIPP</a></span></dt>
+                    
+                    <dt><span class="h3"><a href='#common-attributes'>Common attributes</a></span></dt>
+                    <dd>
+                    <dl>
+                        <dt><a href='#a1'>attributes-charset</a></dt>
+                        <dt><a href='#a2'>attributes-natural-language</a></dt>
+                    </dl>
+                    </dd>
+                    <dt><span class="h3"><a href='#jobs-attributes'>Jobs attributes</a></span></dt>
+                    <dd>
+                    <dl>
+		    	<dt>Job description attributes</dt>
+			<dd>
+			<dl>
+                          <dt><a href='#a3'>job-uri</a></dt>
+                          <dt><a href='#a4'>job-id</a></dt>
+                          <dt><a href='#a5'>job-printer-uri</a></dt>
+                          <dt><a href='#a6'>job-more-info</a></dt>
+                          <!-- <dt><a href='#a7'></a></dt> -->
+                          <dt><a href='#a8'>job-name</a></dt>
+                          <dt><a href='#a9'>job-originating-user-name</a></dt>
+                          <dt><a href='#a10'>job-state</a></dt>
+                          <dt><a href='#a11'>job-state-reasons</a></dt>
+                          <dt><a href='#a12'>job-state-message</a></dt>
+                          <dt><a href='#a13'>job-detailed-status-messages</a></dt>
+                          <dt><a href='#a14'>job-document-access-errors</a></dt>
+                          <dt><a href='#a15'>number-of-documents</a></dt>
+                          <dt><a href='#a16'>output-device-assigned</a></dt>
+			</dl>
+			</dd>
+			<dt>Event Time Job Description Attributes</dt>
+			<dd>
+			<dl>
+                          <dt><a href='#a17'>time-at-creation</a></dt>
+                          <dt><a href='#a18'>time-at-processing</a></dt>
+                          <dt><a href='#a19'>time-at-completed</a></dt>
+                          <dt><a href='#a20'>job-printer-up-time</a></dt>
+                          <dt><a href='#a21'>date-time-at-creation</a></dt>
+                          <dt><a href='#a22'>date-time-at-processing</a></dt>
+                          <dt><a href='#a23'>date-time-at-completed</a></dt>
+			</dl>
+			</dd>
+			<dt></dt>
+			<dd>
+			<dl>
+                          <dt><a href='#a24'>number-of-intervening-jobs</a></dt>
+                          <dt><a href='#a25'>job-message-from-operator</a></dt>
+			</dl>
+			</dd>
+			<dt>Job Size Attributes</dt>
+			<dd>
+			<dl>
+                          <dt><a href='#a26'>job-k-octets</a></dt>
+                          <dt><a href='#a27'>job-impressions</a></dt>
+                          <dt><a href='#a28'>job-media-sheets</a></dt>
+			</dl>
+			</dd>
+			<dt>Job Progress Attributes</dt>
+                        <dd>
+			<dl>
+			  <dt><a href='#a29'>job-k-octets-processed</a></dt>
+                          <dt><a href='#a30'>job-impressions-completed</a></dt>
+                          <dt><a href='#a31'>job-media-sheets-completed</a></dt>
+			</dl>
+			</dd>
+                    </dl>    
+                    </dd>      
+                    <dt><span class="h3"><a href='#printer-attributes'>Printer attributes</a></span></dt>
+                    <dd>
+                    <dl>
+		    <dt>Printer Description Attributes</dt>
+		    <dd>
+		      <dl>
+                        <dt><a href='#a32'>printer-uri-supported</a></dt>
+                        <dt><a href='#a33'>uri-authentication-supported</a></dt>
+                        <dt><a href='#a34'>uri-security-supported</a></dt>
+                        <dt><a href='#a35'>printer-name</a></dt>
+                        <dt><a href='#a36'>printer-location</a></dt>
+                        <dt><a href='#a37'>printer-info</a></dt>
+                        <dt><a href='#a38'>printer-more-info</a></dt>
+                        <dt><a href='#a39'>printer-driver-installer</a></dt>
+                        <dt><a href='#a40'>printer-make-and-model</a></dt>
+                        <dt><a href='#a41'>printer-more-info-manufacturer</a></dt>
+                        <dt><a href='#a42'>printer-state</a></dt>
+                        <dt><a href='#a43'>printer-state-reasons</a></dt>
+                        <dt><a href='#a44'>printer-state-message</a></dt>
+                        <dt><a href='#a45'>ipp-versions-supported</a></dt>
+                        <dt><a href='#a46'>operations-supported</a></dt>
+                        <dt><a href='#a47'>multiple-document-jobs-supported</a></dt>
+                        <dt><a href='#a48'>charset-configured</a></dt>
+                        <dt><a href='#a49'>charset-supported</a></dt>
+                        <dt><a href='#a50'>natural-language-configured</a></dt>
+                        <dt><a href='#a51'>generated-natural-language-supported</a></dt>
+                        <dt><a href='#a52'>document-format-default</a></dt>
+                        <dt><a href='#a53'>document-format-supported</a></dt>
+                        <dt><a href='#a54'>printer-is-accepting-jobs</a></dt>
+                        <dt><a href='#a55'>queued-job-count</a></dt>
+                        <dt><a href='#a56'>printer-message-from-operator</a></dt>
+                        <dt><a href='#a57'>color-supported</a></dt>
+                        <dt><a href='#a58'>reference-uri-schemes-supported</a></dt>
+                        <dt><a href='#a59'>pdl-override-supported</a></dt>
+                        <dt><a href='#a60'>printer-up-time</a></dt>
+                        <dt><a href='#a61'>printer-current-time</a></dt>
+                        <dt><a href='#a62'>multiple-operation-time-out</a></dt>
+                        <dt><a href='#a63'>compression-supported</a></dt>
+                        <dt><a href='#a64'>job-k-octets-supported</a></dt>
+                        <dt><a href='#a65'>job-impressions-supported</a></dt>
+                        <dt><a href='#a66'>job-media-sheets-supported</a></dt>
+                        <dt><a href='#a67'>pages-per-minute</a></dt>
+                        <dt><a href='#a68'>pages-per-minute-color</a></dt>
+                       </dl> 
+                      </dd>
+                    </dl>
+                    </dd>
+                    <dt><span class="h2"><a href="#copyright">copyright of this document</a></span></dt>
+                </dl>
+        </div>
+        
+        <div class="section" id="introduction">
+            <h2>introduction</h2>
+            
+            <p>Here are some readable attributes and their values, as described in RFC 2911.</p>
+        </div>
+        <div class="section" id="warning">
+            <h2>Warning</h2>
+            <p>attributes names returned by print-ipp are written with underscores
+            and not with dashes (which are interpreted like minus operation
+            by PHP).
+            </p>
+            <p>
+            eg: <span class='code'>'printer-uri'</span>
+            will be written <span class='code'>'printer_uri'</span>.
+            </p>
+            <p>This rewriting do not affects attributes data</p>
+        </div>
+        
+        <div class="section" id="common-attributes">
+            <h2>common attributes</h2>
+                <div class="subsection">
+                     <div class="subsubsection">
+                        <h4><a id='a1'>attributes-charset</a></h4>
+                          (charset)
+                         <p>
+                         in which charset is returned the response
+                         </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a2'>attributes-natural-language</a></h4>
+                           (naturalLanguage)
+                         <p>
+                         in which language is returned the response
+                         </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+                </div>
+        </div>        
+        <div class="section" id="job-attributes">
+            <h2>Job Attributes</h2>
+                <div class="subsection">
+                <h3>Job description attributes</h3>
+                     <div class="subsubsection">
+                        <h4><a id='a3'>job-uri</a></h4>
+                         (uri)
+                         <p>
+                         </p>
+                         Uniform Resource Identifier of the job
+                         <dl>
+                         <dt></dt>
+                         <dd>
+                         this attribute defined job unique identification
+                         and can be used in 
+                         cancelJob, getJobAttributes, holdJob,
+                         releaseJob, restartJob and setJobAttributes
+                         operations.
+                         </dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a4'>job-id</a></h4>
+                          (integer(1:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>id nbr of the job</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a5'>job-printer-uri</a></h4>
+                          (uri)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>which Printer
+                            object has created the Job object</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a6'>job-more-info</a></h4>
+                          (uri)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt>self-explanatory</dt><dd></dd>
+                         </dl>
+                     </div>
+                     <!--  <div class="subsubsection">
+                        <h4><a id='a7'></a></h4>
+                         boolean
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+		     -->
+                      <div class="subsubsection">
+                        <h4><a id='a8'>job-name</a></h4>
+                          (name(MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a9'>job-originating-user-name</a></h4>
+                          (name(MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>who created the job</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a10'>job-state</a></h4>
+                         (type1 enum)
+                         <p>
+                        <!-- 
+                        Forwarding Servers
+                        Partitioning of Job States
+                        -->
+                         </p>
+                         <dl>
+                         <dt>job's current state</dt><dd></dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a11'>job-state-reasons</a></h4>
+                         (1set Of  type2 keyword)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a12'>job-state-message</a></h4>
+                         (text(MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a13'>job-detailed-status-messages</a></h4>
+                         (1set Of text(MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a14'>job-document-access-errors</a></h4>
+                          (1set Of text(MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>
+                         especially for printUri operation, returns
+                         error code of given protocol and document uri,<br />
+                         eg: (404) http://www.foobar.com/mydocument.ps<br />
+                         [ encountered a 404 http error (document not found) ]
+                         </dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a15'>number-of-documents</a></h4>
+                         (integer(0:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a16'>output-device-assigned</a></h4>
+                         (name(127))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>Useful when a printer objects
+                         support multiple devices (fan-out).</dd>
+                         </dl>
+                     </div>
+                
+                
+                </div>
+                <div class="subsection">
+                <h3>Event Time Job Description Attributes</h3>
+
+                      <div class="subsubsection">
+                        <h4><a id='a17'>time-at-creation</a></h4>
+                        (integer(MIN:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a18'>time-at-processing</a></h4>
+                          (integer(MIN:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a19'>time-at-completed</a></h4>
+                          (integer(MIN:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a20'>job-printer-up-time</a></h4>
+                          (integer(1:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>printer uptime</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a21'>date-time-at-creation</a></h4>
+                          (dateTime)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a22'>date-time-at-processing</a></h4>
+                          (dateTime)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a23'>date-time-at-completed</a></h4>
+                          (dateTime)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                
+                </div>
+                <div class="subsection">
+                <h3></h3>
+                
+                    <div class="subsubsection">
+                        <h4><a id='a24'>number-of-intervening-jobs</a></h4>
+                          (integer(0:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>Jobs count before to process this one</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a25'>job-message-from-operator</a></h4>
+                          (text(127))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     
+                  </div>
+                  <div class='subsection'>
+                     <h3>Job Size Attributes</h3>
+                     
+                      <div class="subsubsection">
+                        <h4><a id='a26'>job-k-octets</a></h4>
+                          (integer(0:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a27'>job-impressions</a></h4>
+                         (integer(0:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt>total number of impressions</dt><dd>an impression is the image
+                         (can be more than one print-stream page, see number-up)
+                         onto a single media page.</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a28'>job-media-sheets</a></h4>
+                          (integer(0:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>the
+                            total number of media sheets to be 
+                            produced for this job</dd>
+                         </dl>
+                     </div>
+                     
+                 </div>
+                 <div class='subsection'>
+                    <h3>Job Progress Attributes</h3>
+                      
+                      <div class="subsubsection">
+                        <h4><a id='a29'>job-k-octets-processed</a></h4>
+                          (integer(0:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a30'>job-impressions-completed</a></h4>
+                          (integer(0:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>the impressions completed
+                            includes interpreting, marking, and 
+                            stacking the output</dd>
+                         </dl>
+                     </div>
+                      <div class="subsubsection">
+                        <h4><a id='a31'>job-media-sheets-completed</a></h4>
+                          (integer(0:MAX))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     
+                 </div>    
+            
+            </div>    
+            <div class="section" id="printer-attributes">
+            <h2>Printer Attributes</h2>
+                
+                <div class="subsection">
+                  <h3>Printer Description Attributes</h3>
+                     
+                     <div class="subsubsection">
+                        <h4><a id='a32'>printer-uri-supported</a></h4>
+                         (1set Of uri)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>printer uri</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a33'>uri-authentication-supported</a></h4>
+                         (1set Of type2 keyword)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>authentication mechanism (if any)<br />
+                         same count than printer-uri-supported</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a34'>uri-security-supported</a></h4>
+                         (1set Of type2 keyword)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>indicate the security mechanisms 
+                         (if any) used for each URI listed
+                          in "printer-uri-supported"</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a35'>printer-name</a></h4>
+                         (name(127))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a36'>printer-location</a></h4>
+                         (text(127))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>where is the printer, physically</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a37'>printer-info</a></h4>
+                         (text(127))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>descriptive information about
+                          the printer object</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a38'>printer-more-info</a></h4>
+                          (uri)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>URI of printer's information</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a39'>printer-driver-installer</a></h4>
+                          (uri)
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>contains a URI to use to locate the driver
+                         installer for the printer</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a40'>printer-make-and-model</a></h4>
+                          (text(127))
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a41'>printer-more-info-manufacturer</a></h4>
+                         (uri) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>manufacturer URI of printer information</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a42'>printer-state</a></h4>
+                         (type1 enum) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a43'>printer-state-reasons</a></h4>
+                         (1set Of type2 keyword) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a44'>printer-state-message</a></h4>
+                         (text(MAX)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a45'>ipp-versions-supported</a></h4>
+                         (1set Of type2 keyword) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>1.0 or/and 1.1</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a46'>operations-supported</a></h4>
+                         (1set Of type2 enum) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a47'>multiple-document-jobs-supported</a></h4>
+                         (boolean) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a48'>charset-configured</a></h4>
+                         (charset) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>in which charset are sent 'text' and 'name'
+                         information (nothing to do with printed document)</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a49'>charset-supported</a></h4>
+                         (1set Of charset) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>Idem (s/sent/can be sent/). at least UTF-8</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a50'>natural-language-configured</a></h4>
+                         (naturalLanguage) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>identifies the natural language that
+                            the Printer object has been configured to represent 
+                            'text' and 'name' printer attributes that are set 
+                            by the operator, system
+                            administrator, or manufacturer (i.e. printer-location,
+                            printer-info ...)</dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection">
+                        <h4><a id='a51'>generated-natural-language-supported</a></h4>
+                         (1set Of naturalLanguage)                        
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>see above</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a52'>document-format-default</a></h4>
+                         (mimeMediaType) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>document format that
+                            the Printer object has been configured to assume
+                            if the client does not supply a "document-format"
+                            operation attribute (MIME type, like 'application/pdf')</dd>
+                         </dl>
+                     </div>
+                     
+                     <div class="subsubsection">
+                        <h4><a id='a53'>document-format-supported</a></h4>
+                         (1set Of mimeMediaType) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>see above</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a54'>printer-is-accepting-jobs</a></h4>
+                         (boolean) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a55'>queued-job-count</a></h4>
+                         (integer(0:MAX)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>number of jobs that are either 
+                         'pending', 'processing', 'pending-held', or
+                         'processing-stopped'</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a56'>printer-message-from-operator</a></h4>
+                         (text(127)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>end user information or 
+                         status of the printer</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a57'>color-supported</a></h4>
+                         (boolean) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a58'>reference-uri-schemes-supported</a></h4>
+                         (1set Of uriScheme) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>URI schemes supported by 
+                         printUri operation<br />
+                         if printUri is supported, at least ftp</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a59'>pdl-override-supported</a></h4>
+                         (type2 keyword) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>ability for a particular printer 
+                         implementation to either attempt to override
+                         document data instructions with IPP 
+                         attributes or not</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a60'>printer-up-time</a></h4>
+                         (integer(1:MAX)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a61'>printer-current-time</a></h4>
+                         (dateTime) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a62'>multiple-operation-time-out</a></h4>
+                         (integer(1:MAX)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>the minimum time (in seconds) that
+                         the Printer object waits for additional sendDocument or 
+                         sendURI operations to follow a still-open Job object
+                         before taking  any recovery actions</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a63'>compression-supported</a></h4>
+                         (1set Of type3 keyword) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>standard values: 'none', 'deflate' 
+                         (ZIP public domain),
+                         'gzip', 'compress' (RFC 1977 UNIX compression 
+                         technology)</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a64'>job-k-octets-supported</a></h4>
+                         (rangeOfInteger(0:MAX)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>max size of job</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a65'>job-impressions-supported</a></h4>
+                         (rangeOfInteger(0:MAX)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>max <a href='#27'>pages</a> of job</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a66'>job-media-sheets-supported</a></h4>
+                         (rangeOfInteger(0:MAX)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>max sheets</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a67'>pages-per-minute</a></h4>
+                         (integer(0:MAX)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection">
+                        <h4><a id='a68'>pages-per-minute-color</a></h4>
+                         (integer(0:MAX)) 
+                         <p>
+                         </p>
+                         <dl>
+                         <dt></dt><dd>self-explanatory</dd>
+                         </dl>
+                     </div>
+                </div>
+        </div>
+        
+        <div id="copyright" class="pre">
+        <h2>Copyrights</h2>
+        
+            <h3>RFC 2911 Copyright</h3>
+            Copyright (C) The Internet Society (2000).  All Rights Reserved.
+	                     
+        </div>
+      <div>
+      <p class="footer">Copyright © 2005-2008 Thomas Harding.
+            <br />
+            Copying and distribution of this article can be made under General Public License.
+            see <a href="README">README</a> and <a href="COPYING">COPYING</a>.
+      </p>
+      </div>
+    </body>
+</html>

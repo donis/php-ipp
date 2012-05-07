@@ -1,0 +1,151 @@
+2010-09-07:
+   - applying a patche from Brian Kroth (untesteds) :
+      fix getjobs attributes for CUPS 1.4.4
+2010-08-22:
+   - applying two patches from Brian Kroth (untesteds) :
+        * deprecated split function replaced by preg_split
+        * modification of _interpretAttribute function
+2008-06-21:
+   - changed phpprintipp CLI's rcfile
+     syntax to variable = "value"
+
+2008-06-21 V 0.81:
+   - worked on debian and tar.gz packaging
+   - reshaped all the archive for concistency
+
+2008-06-16:
+   - changing some defaults on phpprintipp
+   - writing phpprintipp man page
+
+2008-06-15:
+   - removing some time-sleepings in http backend: Works now
+     with my brand new one TRENDnet TE100-P1P print server,
+     and obviously with CUPS.
+   - adding user/password inputs on tespage.php and
+     advancedpage.php.
+   - introducing "phpprintipp" CLI program. Works fine
+     together with foomatic-rip (which converts PostScript
+     to a printer-comprehensive format, with many adjustable
+     parameters), or with GIMP printed-to-file files, or 
+     standalone for (ASCII) text/plain. You may adjust
+     $tempdir (/tmp) in to fit your system (a tempfile is
+     necessary to avoid memory consumption, by streaming to/
+     from it).
+     type ./phpprintipp -h for help. TODO: add some options
+     and manpage...
+
+2008-06-03:
+   - removing "tiny PrintIPP", as it was a hassle to keep it in sync...
+   - adding BasicIPP (only printJob(), as tiny was).
+     PrintIPP extends now BasicIPP.
+
+2008-06-01 V.0.80:
+   - adding ippException (see html docs)
+   - changing debugging (now $ipp->debug is 0 for verbose to 4 for quiet)
+
+2008-05-31 V.0.79:
+   - add setUnix($socket) => set the socket path,
+     enable unix socket mode (and disable tcp/tls)
+     you can re-enable  tcp/tls by using setHost($host)
+
+2008-05-15 V.0.78:
+   - worked hard to find what was wrong with Digest auth.:
+     CUPS server misconfiguration (do not put AuthType directive
+     in "All" section, write a "Location /printer" instead ;).
+   - Both Digest and Basic authentications are OK and verified.
+   - for ones who uses the http backend furnished for other
+     purposes, note the API has changed: you need to setup
+     ($http)->port now.
+   - Had fun with the postscript test page and the new CUPS banners pages.
+     Fonts scalled and other geek features :P
+     If you plan to use the banners, put them in /usr/share/cups
+     __with a short name__.
+     $ipp->setAttribute('job-sheets',array('startbanner',endbanner'));
+   - Written 'testpage.php': a comprehensive example with no classes
+     and only one function (copyright!). Good challenge :P
+
+2008-05-13 V 0.77:
+   - Realized that ipv6 addresses and port syntax
+     is a complex stuff. Things are OK now.
+
+2008-05-12 V 0.76:
+   - working hard to get rid of messages
+     about "Creating default object from empty value"
+     and about default timezone (E_STRICT)
+   - ipv6 addresses works, now
+   - begining "exceptions rising support" (currently, only http connection)
+     you need set $ipp->with_exceptions to to get them (backward compatibility)
+   - documentation/usage.html : setJobAttributes were very confusing
+
+2008-05-09 V0.75:
+  - improved documentation (links, html cleaning, css, spelling)
+  - modified http backend to use stream_get_metadata instead of stream_select
+  - added setAuthentication, make setAuthentification an alias to it
+
+2005-01-20 V0.74:
+  - fixed a bug in http backend: were blocked with specific
+    strings length.
+  - public variable "attributes" filled systematically.
+  - improved doc with variables documentation.
+  - http digest authentication works (with CUPS)!
+    don't forget to make "lppasswd -a user" before to test :).
+    
+2005-01-18 V0.73:
+  - added CupsAcceptJobs adn cupsRejectJobs operations in CupsPrintIPP.
+  - added CUPS specific job attributes in CupsPrintIPP.
+  - added documentation for attributes
+  
+2005-01-16 V0.72:
+  - Improved setAttribute and related: 1setOf xxx now supported:
+    use setAttribute('attribute',array('foo','bar'))
+        for 1set Of ...
+    or
+        setAttribute('attribute','foo') for one attribute only.
+    NOTE: unsetAttribute('attribute') delete the complete set.
+  - Corrected _integerBuild and _interpretInteger. Have doubts on values < 0.
+  - Adding support for RFC3382 'collection' attribute *parsing*.
+    No nested collection to test: it /may/ work for nested collections.
+  - Adding operation setJobAttributes (From RFC3380) in ExtendedPrintIPP
+  - Adding operation cupsGetDefaults (From CUPS-IPP-1.1) in CupsPrintIPP
+  - correcting parsing of validateJob() operation: now result is found
+    in $ipp->attributes.
+  
+2005-01-10 V0.71:
+    Improved HTTP backend: loads systematically complete 
+    response from server
+
+2005-01-09 V0.7:
+   Wriitten a new http_class which replace HTTP and SASL backend
+        - same api
+        - not very stable :)
+        - identification mechanisms: Digest only
+        - no SSL
+
+2005-01-07 V0.6b:
+  - Integrated changes by Manuel Lemos on _sendHTTP
+    to merge with his new HTTP backend.
+  
+  - HTTP backend is no more shipped-with:
+    You have to download it at
+    http://www.phpclasses.org/browse/package/3.html
+
+  - Largefiles: use V.06a, or patch the http backend :)
+
+2005-01-06 V0.6a:
+    last cvs version
+
+2005-01-06 (CVS):
+    solved getPrinterAttributes "return" bug
+
+2005-01-06 V0.6:
+    Last CVS version with improved doc
+
+2005-01-05 (CVS):
+    all RFC 2911 operations implemented
+    
+2006-01-4 V0.5a:
+    corrected bugs in html.php, corrected testfiles
+
+2006-01-03 V0.5: 
+    all RFC2911 mandatory operations implemented
+

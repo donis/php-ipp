@@ -1,0 +1,561 @@
+#!/usr/bin/php
+<?php
+/*
+ * PIPE command, with Exceptions handling
+ * Successfull at least with CUPS 1.2 and TRENDnet TE100-P1P
+ *
+ * Copyright(C) 2008 Thomas Harding
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Thomas Harding nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *   mailto:thomas.harding@laposte.net
+ *
+ */
+
+/*
+*
+* DEFAULTS SETTINGS, YOU ARE PLEASED TO PLAY WITH THEM
+*
+*/
+
+error_reporting(E_ALL|E_STRICT);
+
+$debug = false; // false or 0 to 5 (5 = less verbose)
+
+$username="guest";
+$password=false; // set it if you need authentication to print
+$host="localhost";
+$printer=false; // $printer="ipp://localhost:631/printers/my_printer";
+$paths = false; // defaults settings to CUPS
+//$paths = array ("root" => "/P1", "admin" => "/P1", "printers" => "/P1", "jobs" => "/");
+$get_printer_attrs = false;
+$print = false;
+$get_job_attrs = false;
+$port=631;
+$mediatype="application/octet-stream";
+$logfile="/dev/null";
+$handle_http_exceptions=true;
+$handle_ipp_exceptions=true;
+$tempdir = "/tmp";
+$server_type='CUPS';
+
+$cmdline = (arguments($argv));
+
+putenv('include_path=.:/usr/share/php:/usr/share/pear:/usr/local/share/php');
+
+
+/*
+END OF SETTINGS
+*/
+
+$options = array_keys($cmdline['options']);
+$flags = $cmdline['flags'];
+$commands = $cmdline['commands'];
+$arguments = $cmdline['arguments'];
+
+
+if (in_array('h',$flags)) { print_help($argv); exit(0); }
+if (in_array('help',$options)) { print_help($argv); exit(0); }
+if (in_array('server',$options))
+{
+  $srv = $cmdline['options']['server'];
+  if (file_exists( sprintf("%s/.printipp/%s", getenv('HOME'), $srv)))
+    $conffile = fopen( sprintf("%s/.printipp/%s", getenv('HOME'), $srv),'r');
+  elseif (file_exists(sprintf("%s/printipp/%s", getenv('ETC'), $srv)))
+    $conffile = fopen( sprintf("%s/printipp/%s", getenv('ETC'), $srv));
+  elseif (file_exists(sprintf('/etc/printipp/%s',$srv)))
+    $conffile = fopen( sprintf('/etc/printipp/%s',$srv));
+  else
+  {
+    fwrite(STDERR, sprintf("scanned for %s/.printipp/%s, %s/printipp/%s, "
+      . "/etc/printipp/%s:\r\n",
+        getenv('HOME'), $srv, getenv('ETC'), $srv, $srv));
+    fwrite(STDERR, sprintf("No configuration file found for %s, please read doc or use '-h' option\r\n",$srv));
+    exit(1);
+  }
+}
+else
+{
+  if (file_exists( sprintf("%s/.printipp/%s", getenv('HOME'), 'default')))
+    $conffile = fopen( sprintf("%s/.printipp/%s", getenv('HOME'), 'default'));
+  elseif (file_exists(sprintf("%s/printipp/%s", getenv('ETC'), 'default')))
+    $conffile = fopen( sprintf("%s/printipp/%s", getenv('ETC'), 'default'));
+  elseif (file_exists(sprintf('/etc/printipp/%s','default')))
+    $conffile = fopen( sprintf('/etc/printipp/%s','default'));
+}
+if (isset($conffile))
+ while ($line = fgetcsv( $conffile, 1024, '=', '"' ))
+ {
+  if ((!empty($line[0])) && (strstr(trim($line[0]),'#') !== 1))
+  {
+    $var = trim($line[0]);
+    $res = trim($line[1]);
+    switch ($res)
+    {
+      case 'false':
+        $$var = false;
+        break;
+      case 'true':
+        $$var = true;
+        break;
+      case 'NULL':
+        $$var = NULL;
+        break;
+      default:
+        $$var = $res;
+        break;
+    }
+    if ($var == 'paths' && $paths !== false)
+    {
+      $paths = array();
+      list ($paths["root"],$paths["admin"],$paths["printers"],$paths["jobs"]) = explode(",",$res,4);
+    }
+  }
+ }
+
+if (in_array('file',$options)) { $data = $cmdline['options']['file']; $print = true; }
+if (in_array('user',$options)) $username = $cmdline['options']['user'];
+if (in_array('password',$options)) $password = $cmdline['options']['password'];
+if (in_array('host',$options)) $host = $cmdline['options']['host'];
+if (in_array('port',$options)) $port = $cmdline['options']['port'];
+if (in_array('job',$options)) $job = $cmdline['options']['job'];
+if (in_array('all-jobs',$options)) $alljobs = ($cmdline['options']['all-jobs'] !== true) ? $cmdline['options']['all-jobs'] : 10;
+if (in_array('printer',$options)) $printer = $cmdline['options']['printer'];
+if (in_array('paths',$options)) { 
+  $paths = explode(',',$options['paths']);
+  $paths = array ("root" => $paths[0],
+                  "admin" => $paths[1],
+                  "printers" => $paths[2],
+                  "jobs" => $paths[3]);
+  }
+if (in_array('printer-attributes',$options)) $get_printer_attrs = true;
+if (in_array('job-attributes',$options)) $get_job_attrs = true;
+if (in_array('mediatype',$options)) $mediatype = $cmdline['options']['mediatype'];
+if (in_array('logfile',$options)) { $logfile = $cmdline['options']['logfile']; $debug = 2;}
+if (in_array('tempdir',$options)) $tempdir = $cmdline['options']['tempdir'];
+if (in_array('nohttpX',$options)) $handle_http_exceptions = false;
+if (in_array('noippX',$options)) $handle_ipp_exceptions = false;
+if (in_array('p',$flags)) $print = true;
+if (in_array('bbanner',$options)) $bsheet = $cmdline['options']['bbanner'];
+if (in_array('abanner',$options)) $asheet = $cmdline['options']['abanner'];
+if (in_array('copies',$options)) $copies = $cmdline['options']['copies'];
+if (in_array('sides',$options)) $sides = $cmdline['options']['sides'];
+
+// tick use required as of PHP 4.3.0
+declare(ticks = 1);
+global $unlink;
+$unlink = false;
+if ($print)
+{
+  if (!isset($data))
+  {
+    $file = tempnam  ($tempdir  , 'printipp_'  );
+    global $data;
+    $data = $file;
+    $fp = fopen($file,'w');
+    catchsigs();
+    $stdin = fopen('php://stdin', 'r');
+    do
+      fwrite($fp,fread($stdin,8192)); 
+    while (!feof($stdin));
+    $unlink = true;
+  }
+}
+
+
+if ($printer === false && $server_type == 'CUPS')
+  require_once('printipp/CupsPrintIPP.php');
+elseif ($get_printer_attrs || $get_job_attrs || isset($job))
+  require_once('printipp/PrintIPP.php'); 
+else
+  require_once('printipp/BasicIPP.php'); 
+
+
+//
+if ($printer === false  && $server_type == 'CUPS')
+  $ipp = new CupsPrintIPP();
+elseif ($get_printer_attrs || $get_job_attrs || isset($job))
+  $ipp = new PrintIPP(); 
+else
+  $ipp = new BasicIPP();
+
+$ipp->with_exceptions = $handle_ipp_exceptions;
+$ipp->handle_http_exceptions = $handle_http_exceptions;
+$ipp->setHost($host);
+if ($paths) $ipp->paths = $paths;
+$ipp->setLanguage(getenv('LANG'));
+  // various tests for ipv6 and SSL you can enable instead
+	//$ipp->setHost("ip6-localhost");
+	//$ipp->setHost("127.0.0.1");
+	//$ipp->setHost("::1");
+	//$ipp->ssl = 1;
+$ipp->setPort($port);
+  // $ipp->setPort("65537"); // uncomment to generate http error
+
+$ipp->debug_level = $debug; // Debugging
+$ipp->setLog($logfile,'file',$debug); // logging
+$ipp->setUserName($username); // setting user name for server
+if ($username && $password)
+ $ipp->setAuthentication($username,$password);
+
+if ($printer === false && $server_type == 'CUPS')
+{
+  $ipp->cupsGetDefaults();
+  if (isset($ipp->printer_attributes->printer_uri_supported->_value0))
+  {
+    $printer = $ipp->printer_attributes->printer_uri_supported->_value0;
+  }
+  else
+  {
+    fwrite(STDERR, "Cannot guess default printer uri\n");
+    exit(1);
+  } 
+}
+elseif ($printer === false)
+{
+   fwrite(STDERR, 
+   "Default printer uri guessing currently only available with CUPS\n");
+   exit(1);
+}
+// set the value to your printer
+$ipp->setPrinterURI($printer); 
+
+
+$ipp->setDocumentName("test");
+$ipp->setCharset('utf-8');
+$ipp->setMimeMediaType($mediatype);
+if (isset($data))
+  $ipp->setData($data);//String or path to file.
+$ipp->setAttribute("requested-attributes",
+	array("copies-supported",
+	      "document-format-supported",
+        "operations-supported",
+	      "printer-is-accepting-jobs",
+	      "printer-state",
+	      "printer-state-reasons")
+	);
+
+try
+{
+  try
+  {
+    if ($get_printer_attrs)
+    {
+      printf (_("Get Printer Attributes of printer %s: %s\n"),
+        $printer,
+        $ipp->getPrinterAttributes());
+      parse($ipp->printer_attributes);
+    }
+    $ipp->unsetAttribute("requested-attributes");
+  
+    if ($print)
+    {
+ 
+      echo "media type: ",$mediatype,"\r\n";
+      
+      if (isset($copies))
+        $ipp->setCopies($copies);
+      if (isset($sides))
+        $ipp->setSides($sides);
+
+      if (isset($asheet) || isset($bsheet))
+      {
+        $ipp->setAttribute('job-sheets',
+        array((isset($bsheet)) ? $bsheet : "none",(isset($asheet)) ? $asheet : "none"));
+      }
+      printf(_("Job status: %s\r\n"), $status = $ipp->printJob());
+	    echo "job: ",$ipp->last_job,"\r\n";
+      if ($unlink) unlink($data);
+      if ($get_job_attrs)
+      {
+        parse($ipp->job_attributes);
+      }
+    }
+    if (isset($job) || isset($alljobs))
+    {
+      if (isset($alljobs))
+      {
+        echo "Getting all jobs (", $alljobs, ")\r\n";
+        $ipp->getJobs(true,$alljobs,'completed',false);
+        parse($ipp->jobs_attributes,2);
+      }
+      else
+      {
+      printf (_("Get job Attributes of job %s: %s\n"),
+          $job,
+          $ipp->getJobAttributes($job));
+      parse($ipp->job_attributes);
+      }
+    }
+  }
+  catch (httpException $e)
+  {
+    if ($unlink) unlink($data);
+    printf("%s\nerrno: %s\n",$e->getMessage(),$e->getErrno());
+    trigger_error("I prefer to quit", E_USER_ERROR);
+  }
+}
+catch (ippException $e)
+{
+  if ($unlink) unlink($data);
+  printf("%s\nerrno: %s\n",$e->getMessage(),$e->getErrno());
+  trigger_error("I prefer to quit", E_USER_ERROR);
+}
+
+if ($debug !== false)
+  print $ipp->getDebug(); // display debugging output
+
+
+function parse(&$attrs,$depth=1)
+{
+if (is_object($attrs))
+  foreach ($attrs as $key => $attr)
+  {
+    echo $key,": \r\n";
+    foreach ($attr as $attrkey => $attval)
+      if (is_object($attval))
+      {
+        echo "\t ", $attrkey, ": \r\n";
+        foreach ($attval as $key => $val)
+        if (strpos($key,'value'))
+            echo "\t\t", $val, "\r\n";
+      }
+      else
+        if (strpos($attrkey,'value'))
+  	      echo "   ", $attval, "\r\n";
+  }
+echo "\r\n";
+}
+
+function print_help($argv) {
+$prog = $argv[0];
+echo <<<END
+
+USAGE:
+  $prog [options]
+  -h:      print_help
+  --help:   //
+  -p: print (from pipe or standard input)
+  --nohttpX: do not handle http exceptions
+  --noippX:  do not handle ipp exceptions
+
+  --file /path/to/file_to_print
+  --user "username"
+  --password "password"
+  --host "hostname"
+  --port "port number"
+  --job "job uri" (get job attributes for)
+  --printer "printer uri"
+  --printer-attributes (get printer attributes)
+  --paths "/ /admin /printers /jobs"
+  --job-attributes: display printed job attributes
+  --mediatype "application/octet-stream" (is the default), "text/plain" ...
+  --logfile /path/to/log/file
+  --copies number
+  --sides 1|2|2CE
+  --server server: load options from rcfile '\$HOME/.printipp/server',
+      if not found '\$ETC/printipp/server', then '/etc/printipp/server'
+
+
+RCFILE variables (option --server) (overridden by command-line options):
+
+          debug = false // false or 0 to 5 (5 = less verbose)
+          username = guest
+          password = verysecret // set it if you need authentication
+          host = "localhost"
+          server_type = CUPS
+          printer = "ipp://localhost:631/printers/reseauipp";
+          paths = false // => the PrintIPP defaults (CUPS compliant)
+              // example: paths = "/root,/admin,/printers,/jobs"
+          get_printer_attrs = false
+          print = false
+          get_job_attrs = false
+          port = 631
+          mediatype = "text/plain"
+          logfile = "/tmp/phpprintipp_log"
+          handle_http_exceptions = true
+          handle_ipp_exceptions = true
+          tempdir = "/tmp"
+
+EXAMPLES:
+
+echo -e 'test\f\\0027' | phpprintipp -p --server cups --mediatype 'text/plain'
+
+assuming rasterfile is in a format compliant with your printer:
+
+phpprintipp --server cups --mediatype 'application/octet-stream' \
+  --file /path/to/rasterfile
+
+assuming you have /etc/foomatic/direct/epson.ppd
+with directive '*FoomaticRIPPostPipe: "| cat "' in,
+and /etc/printipp/TE100 file as above, you can type:
+
+foomatic-rip -P epson /path/to/file.ps | phpprintipp -p --server TE100
+
+END;
+}
+
+function arguments ( $args )
+{
+  array_shift( $args );
+  $endofoptions = false;
+
+  $ret = array
+    (
+    'commands' => array(),
+    'options' => array(),
+    'flags'    => array(),
+    'arguments' => array(),
+    );
+
+  while ( $arg = array_shift($args) )
+  {
+    if ($arg == "") break;
+    
+    // if we have reached end of options,
+    //we cast all remaining argvs as arguments
+    if ($endofoptions)
+    {
+      $ret['arguments'][] = $arg;
+      continue;
+    }
+
+    // Is it a command? (prefixed with --)
+    if ( substr( $arg, 0, 2 ) === '--' )
+    {
+      
+      // is it the end of options flag?
+      if (!isset ($arg[3])) 
+      {
+        $endofoptions = true;; // end of options;
+        continue;
+      }
+      
+      $value = "";
+      $com   = substr( $arg, 2 );
+      
+      // is it the syntax '--option=argument'?
+      if (strpos($com,'='))
+        list($com,$value) = split("=",$com,2);
+      
+      // is the option not followed by another option but by arguments
+      elseif (isset($args[0]) && strpos($args[0],'-') !== 0)
+      {
+        while (isset($args[0]) && strpos($args[0],'-') !== 0)
+        {
+          $value .= array_shift($args).' ';
+        }
+        $value = rtrim($value,' ');
+      }
+
+      $ret['options'][$com] = !empty($value) ? $value : true;
+      continue;
+
+    }
+
+    // Is it a flag or a serial of flags? (prefixed with -)
+    if ( substr( $arg, 0, 1 ) === '-' )
+    {
+      for ($i = 1; isset($arg[$i]) ; $i++)
+        $ret['flags'][] = $arg[$i];
+      continue;
+    }
+
+    // finally, it is not option, nor flag, nor argument
+    $ret['commands'][] = $arg;
+    continue;
+  }
+
+  if (!count($ret['options']) && !count($ret['flags']))
+  {
+    $ret['arguments'] = array_merge($ret['commands'], $ret['arguments']);
+    $ret['commands'] = array();
+  }
+return $ret;
+}
+
+// signal handler function
+function sig_handler($signo)
+{
+  global $unlink;
+  global $data;
+  switch ($signo)
+  {
+    case SIGHUP:
+    // handle restart tasks
+    case SIGTERM:
+    case SIGINT:
+    case SIGQUIT:
+    case SIGILL:
+    case SIGABRT:
+    case SIGFPE:
+    case SIGSEGV:
+    case SIGPIPE:
+    case SIGALRM:
+    case SIGUSR1:
+    case SIGUSR2:
+    // handle shutdown tasks
+      if ($unlink) unlink($data);
+      exit;
+      break;
+    default:
+    // handle all other signals
+      break;
+  }
+
+}
+
+function catchsigs()
+{
+$signals = array(
+  SIGHUP,
+  SIGINT,
+  SIGQUIT,
+  SIGILL,
+  SIGABRT,
+  SIGFPE,
+  SIGSEGV,
+  SIGPIPE,
+  SIGALRM,
+  SIGTERM,
+  SIGUSR1,
+  SIGUSR2,
+  SIGCHLD,
+  SIGCONT,
+  //SIGSTOP,
+  SIGTSTP,
+  SIGTTIN,
+  SIGTTOU);
+foreach ($signals as $sig)
+  pcntl_signal($sig, "sig_handler");
+}
+exit (0)
+
+/* vim: set expandtab tabstop=2 shiftwidth=2: */
+
+
+?>

@@ -1,0 +1,17 @@
+only in patch2:
+unchanged:
+--- PrintIPP.php	21 Jun 2008 00:30:57 -0000	1.1
++++ PrintIPP.php	16 Aug 2010 21:53:43 -0000
+@@ -853,7 +853,11 @@
+                     $this->jobs_attributes->$job_index->$php_name->_type = $type;
+                     $this->jobs_attributes->$job_index->$php_name->_range = $range;
+                     for ($j = 0 ; $j < (count($this->parsed[$job_nbr][$i]) - 3) ; $j ++) {
+-                        $value = self::_interpretAttribute($name,$type,$this->parsed[$job_nbr][$i][$j]);
++                        # This causes incorrect parsing of integer job attributes.
++                        # 2010-08-16
++                        # bpkroth
++                        #$value = self::_interpretAttribute($name,$type,$this->parsed[$job_nbr][$i][$j]);
++                        $value = $this->parsed[$job_nbr][$i][$j];
+                         $index = '_value'.$j;
+                         $this->jobs_attributes->$job_index->$php_name->$index = $value;
+                         }

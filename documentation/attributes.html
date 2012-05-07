@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: -->
+<!-- vim: set encoding=utf-8: -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!-- 
+@(#) $Header: /sources/phpprintipp/phpprintipp/documentation/attributes.html,v 1.13 2008/05/12 20:19:36 harding Exp $
+ -->
+    <head>
+        <!--
+             Copyright © 2005-2008  Thomas Harding.
+                  
+                  Due to non-DFSG compliance of GFDL, this document is distributed under dual licence :
+                  
+                        The GNU Free Documentation License
+                        The GNU General Public License
+                  
+                  Permission is granted to copy, distribute and/or modify this document
+                  under the terms of the GNU Free Documentation License, Version 1.2
+                  or any later version published by the Free Software Foundation;
+                  with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+                  Texts.  A copy of the license is included in the section entitled "GNU
+                  Free Documentation License" of page "usage.html".
+                  
+                  These files are free software; you can redistribute them and/or modify
+                  them under the terms of the GNU General Public License as published by
+                  the Free Software Foundation; either version 2 of the License, or
+                  (at your option) any later version.
+
+                  This documentation is distributed in the hope that it will be useful,
+                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                  GNU General Public License for more details.
+
+                  You should have received a copy of the GNU General Public License
+                  along with this documentation; if not, write to the Free Software
+                  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+            
+            Copyright of non trivial code examples
+            
+                  Copyright © 2005-2006  Thomas Harding.
+                    
+                    All rights reserved.
+  
+                    Redistribution and use in source and binary forms, with or without
+                    modification, are permitted provided that the following conditions are
+                    met:
+ 
+                    Redistributions of source code must retain the above copyright
+                    notice, this list of conditions and the following disclaimer.
+                    Redistributions in binary form must reproduce the above copyright
+                    notice, this list of conditions and the following disclaimer in the
+                    documentation and/or other materials provided with the distribution.
+                    Neither the name of its Author nor the names of its
+                    contributors may be used to endorse or promote products derived from
+                    this software without specific prior written permission.
+
+                    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+                    IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+                    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+                    PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+                    CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+                    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+                    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+                    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+                    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+                    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+                    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+        -->
+  
+        <meta name="Author" content="Thomas Harding" />
+        <meta name="Description" content="PhpPrintIPP documentation: writable attributes" />
+        <meta name="Keywords" content="documentation,php,IPP,PhpPrintIPP,internet printing protocol,lgpl" />
+        <link type="image/png" rel="shortcut icon" href="images/printipp-logo-shicon.png" title="PHP PrintIPP logo" />
+        <link rev="made" href="mailto:thomas.harding@laposte.net" />
+
+        <style type="text/css">
+        /* <![CDATA[ */
+            body
+            {
+              padding-top: 2em ;
+              padding-bottom: 4em ;
+              padding-left: 2em ;
+              padding-right: 4em;
+              background-color: white ;
+              color: black;
+              counter-reset: section;
+            }
+
+            li.menulogo
+            {
+              position: absolute;
+              top: 20px;
+            }
+
+            img.logo
+            {
+              margin-bottom: -0.2ex;
+            }
+
+            div.section
+            {
+              padding-left: 5em;
+              counter-increment: section;
+              counter-reset: subsection;
+              counter-reset: subsubsection;
+            }
+
+            div.section h2
+            {
+              margin-left: -2em;
+            }
+
+            div.subsubsection
+            {
+              padding-left: 5em;
+              counter-increment: subsubsection;
+            }
+
+            div.subsection
+            {
+              padding-left: 5em;
+              counter-increment: subsection;
+              counter-reset: subsubsection;
+            }
+
+            div.subsection h3
+            {
+              margin-left: -4em;
+            }
+
+            div.subsubsection h4
+            {
+              margin-left: -2em;
+            }
+
+            pre.pre
+            {
+              display: block;
+              white-space: pre;
+              font-family: monospace;
+            }
+
+            pre.pre span.normal
+            {
+              margin-left: -2em;
+              white-space: normal;
+              font-family: serif;
+            }
+
+            p.typewriter
+            {
+              display: block;
+              font-family: monospace;
+            }
+
+            p.note:before
+            {
+              content: 'Note: ';
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            p.note
+            {
+              font-size: 80%;
+            }
+
+            span.important
+            {
+              display: block ;
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            div.section h2:before
+            {
+              content: counter(section) ". ";
+            }
+
+            div.subsection h3:before
+            {
+              content: counter(section) "." counter(subsection) " ";
+            }
+
+            div.subsubsection h4:before
+            {
+              content: counter(section) "." counter(subsection) "." counter(subsubsection) " ";
+            }
+
+            div.menu dl {
+                counter-reset: depth;
+                }
+            div.menu dt:before {
+                content: counters(depth,".")". ";
+                counter-increment: depth;
+                }
+            
+            span.h2
+            {
+              font-size: 120%;    
+            }
+            span.h3
+            {
+              font-size: 110%;
+            }
+        
+            p.footer
+            {
+              width: 80% ;
+              margin-left: 170px;
+              margin-bottom: 1em;
+              text-align: center;
+              font-family: sans-serif;
+              font-size: 60%;
+              color: black;
+              background-color: #AAAAFF;
+            }
+ 
+        /* ]]> */
+        </style>
+
+
+        <title>PHP PrintIPP usage</title>
+
+    </head>
+    <body>
+        <h1>Attributes</h1>
+        
+        <div class='menu'>
+        <h2><a href="usage.html">back to PrintIPP usage</a></h2>
+        <h2>summary</h2>
+        <dl>
+            <dt><span class="h2"><a href="#introduction">introduction</a></span></dt>
+            <dt><span class="h2"><a href="#attributes">writable attributes</a></span></dt>
+            <dd>
+            <dl>
+            <dt><span class="h3">Attributes with dedicated functions</span></dt>
+                <dd>
+                    <dl>
+                        <dt><a href="#copies">copies</a></dt>
+                        <dt><a href="#document-format">document-format</a></dt>
+                        <dt><a href="#page-ranges">page-ranges</a></dt>
+                        <dt><a href="#sides">sides</a></dt>
+                    </dl>
+                </dd>
+            <dt><span class="h3">Attributes settable via setAttribute()</span></dt>
+                <dd>
+                    <dl>
+                        <dt><a href="#finishings">finishings</a></dt>
+                        <dt><a href="#job-hold-until">job-hold-until</a></dt>
+                        <dt><a href="#job-priority">job-priority</a></dt>
+                        <dt><a href="#job-sheets">job-sheets</a></dt>
+                        <dt><a href="#media">media</a></dt>
+                        <dt><a href="#multiple-document-handling">multiple-document-handling</a></dt>
+                        <dt><a href="#number-up">number-up</a></dt>
+                        <dt><a href="#orientation-requested">orientation-requested</a></dt>
+                        <dt><a href="#printer-resolution">printer-resolution</a></dt>
+                        <dt><a href="#print-quality">print-quality</a></dt>
+                    </dl>
+                </dd>
+            </dl>
+            </dd>    
+            <dt><span class="h2"><a href="#readable-attributes">readable attributes</a></span></dt>
+            <dt><span class="h2"><a href="#cups-attributes">CUPS specific attributes</a></span></dt>
+        </dl>
+        </div>
+        
+        <div class="section" id="introduction">
+            <h2>introduction</h2>
+            
+            <p>Here are attributes and their values, as described in various RFCs 
+            related to IPP.</p>
+        </div>
+        
+        <div class="section" id="attributes">
+            <h2>Attributes</h2>
+                <div class="subsection">
+                    <h3>Attributes with dedicated functions</h3>
+                   <div id="copies" class="subsubsection">
+                        <h4>copies</h4>
+                        integer (1:max)   
+                        <p>setCopies(5)</p>
+                   </div>
+                   <div id="document-format" class="subsubsection">
+                        <h4>document-format</h4>
+                    <p>mime media type as described in RFC 2046: Multipurpose
+                    Internet Mail Extensions (MIME) Part Two: Media Types.
+                    (Updated by RFC2646, RFC3798).</p>
+                    <p>setMimeMediaType($document_format)</p>
+
+                    <p>default: "application/octet-stream"</p>
+                   </div>     
+                   <div id="page-ranges" class="subsubsection">
+                        <h4>page-ranges</h4>
+                        1 set Of range Of Integer (1:max)
+                        <dl>
+                        <dt>2-3</dt>   
+                        <dt>1-3 8-12 9-25</dt>   
+                        </dl>
+                        <p>setPageRanges("1-2 9-19")</p>
+                    </div>
+                    <div id="sides" class="subsubsection">
+                        <h4>sides</h4>
+                        keyword   
+                        <dl>
+                        <dt>one-sided</dt><dd>setSides(1)</dd>
+                        <dt>two-sided-long-edge</dt><dd>setSides(2)</dd>
+                        <dt>two-sided-short-edge</dt><dd>setSides(2CE)</dd>
+                        </dl> 
+                    </div>
+                </div>
+                <div class="subsection">
+                    <h3>Attributes settable via setAttribute()</h3>
+                    <div id="finishings" class="subsubsection">
+                        <h4>finishings</h4>
+                        1 set Of enum
+                        <dl>
+                        <dt>none</dt><dd></dd>
+                        <dt>staple</dt><dd></dd>
+                        <dt>punch</dt><dd>holes are required in the
+                                            finished document.</dd>
+                        <dt>cover</dt><dd>select
+                                            a non-printed (or pre-printed)
+                                            cover for the document.  This does
+                                            not supplant the specification of a
+                                            printed cover (on cover stock
+                                            medium) by the document itself.
+                                            </dd>
+                        <dt>bind</dt><dd></dd>
+                        <dt>saddle-stitch</dt><dd>one or more
+                                     staples (wire stitches) along the middle fold</dd>
+                        <dt>edge-stitch</dt><dd>Bind the document(s) with one or more staples
+                                     (wire stitches) along one edge.</dd>
+                        <dt>staple-top-left</dt><dd></dd>
+                        <dt>staple-bottom-left</dt><dd></dd>
+                        <dt>staple-top-right</dt><dd></dd>
+                        <dt>staple-bottom-right</dt><dd></dd>
+                        <dt>edge-stitch-left</dt><dd>Bind the document(s) with one or more
+                                     staples (wire stitches) along the left edge</dd>
+                        <dt>edge-stitch-top</dt><dd></dd>
+                        <dt>edge-stitch-right</dt><dd></dd>
+                        <dt>edge-stitch-bottom</dt><dd></dd>
+                        <dt>staple-dual-left</dt><dd>two staples along the left edge assuming a portrait document</dd>
+                        <dt>staple-dual-top</dt><dd></dd>
+                        <dt>staple-dual-right</dt><dd></dd>
+                        <dt>staple-dual-bottom</dt><dd></dd>
+                        </dl>
+                    </div>
+                   <div id="job-hold-until" class="subsubsection">
+                        <h4>job-hold-until</h4>
+                         keyword | name
+                         <dl>
+                         <dt>no-hold</dt><dd>immediately</dd>
+                         <dt>indefinite</dt><dd>until RelaeseJob()</dd>
+                         <dt>day-time</dt><dd>during the day</dd>
+                         <dt>evening</dt>
+                         <dt>night</dt>
+                         <dt>weekend</dt>
+                         <dt>second-shift</dt><dd>after close of business</dd>
+                         <dt>third-shift</dt><dd>after midnight</dd>
+                         </dl>
+                    </div>
+                    <div id="job-priority" class="subsubsection">
+                        <h4>job-priority</h4>
+                        integer 1:100
+                    </div>
+                     <div id="job-sheets" class="subsubsection">
+                        <h4>job-sheets</h4>
+                        keyword | name
+                        <dl>
+                        <dt>none</dt>
+                        <dt>standard</dt><dd>one or more site specific standard job sheets are
+                                             printed, e.g. a single start sheet or both start and 
+                                             end sheet is printed</dd>
+                        </dl>
+                    </div>
+                   <div class="subsubsection" id="media">
+                        <h4>media</h4>
+                        keyword | name  
+                        <p>not limited to list, as  An administrator MAY define
+                        additional values using the 'name' or 'keyword'
+                        attribute syntax, depending on implementation.</p>
+                        <p>The better way to determine which media sizes are supported
+                        is to parse the media-supported attribute after
+                        getPrinterAttributes() (eg. $ipp-&gt;printer_attributes-&gt;media_supported).</p>
+                        <dl>
+                        <dt>default</dt><dd>The default medium for the output device</dd>
+                        <dt>iso-a4-white</dt><dd>ISO A4 white medium: 210 mm x 297 mm</dd>
+                        <dt>iso-a4-colored</dt><dd>ISO A4 colored medium: 210 mm x 297 mm</dd>
+                        <dt>iso-a4-transparent</dt><dd>ISO A4 transparent medium: 210 mm x 297 mm</dd>
+                        <dt>iso-a3-white</dt><dd>ISO A3 white medium: 297 mm x 420 mm</dd>
+                        <dt>iso-a3-colored</dt><dd></dd>
+                        <dt>iso-a5-white</dt><dd>ISO A5 white medium: 148 mm x 210 mm</dd>
+                        <dt>iso-a5-colored</dt><dd></dd>
+                        <dt>iso-b4-white</dt><dd>ISO B4 white medium: 250 mm x 353 mm</dd>
+                        <dt>iso-b4-colored</dt><dd></dd>
+                        <dt>iso-b5-colored</dt><dd></dd>
+                        <dt>jis-b4-white</dt><dd>JIS B4 white medium: 257 mm x 364 mm</dd>
+                        <dt>jis-b4-colored</dt><dd></dd>
+                        <dt>jis-b5-white</dt><dd>JIS B5 white medium: 182 mm x 257 mm</dd>
+                        <dt>jis-b5-colored</dt><dd></dd>
+                        <dt>na-letter-white</dt><dd>North American letter white</dd>
+                        <dt>na-letter-colored</dt><dd></dd>
+                        <dt>na-letter-transparent</dt><dd></dd>
+                        <dt>na-legal-white</dt><dd>North American legal white</dd>
+                        <dt>na-legal-colored</dt><dd></dd>
+                        <dt>iso-b4-envelope</dt><dd>ISO B4 envelope</dd>
+                        <dt>iso-b5-envelope</dt><dd></dd>
+                        <dt>iso-c3-envelope</dt><dd></dd>
+                        <dt>iso-c4-envelope</dt><dd></dd>
+                        <dt>iso-c5-envelope</dt><dd></dd>
+                        <dt>iso-c6-envelope</dt><dd></dd>
+                        <dt>iso-designated-long-envelope</dt><dd>ISO Designated Long envelope</dd>
+                        <dt>na-10x13-envelope</dt><dd>North American 10x13 envelope</dd>
+                        <dt>na-9x12-envelope</dt><dd></dd>
+                        <dt>monarch-envelope</dt><dd></dd>
+                        <dt>na-number-10-envelope</dt><dd>North American number 10 business envelope</dd>
+                        <dt>na-7x9-envelope</dt><dd>North American 7x9 inch envelope</dd>
+                        <dt>na-9x11-envelope</dt><dd></dd>
+                        <dt>na-10x14-envelope</dt><dd></dd>
+                        <dt>na-number-9-envelope</dt><dd></dd>
+                        <dt>na-6x9-envelope</dt><dd></dd>
+                        <dt>na-10x15-envelope</dt><dd></dd>
+                        <dt>executive-white</dt><dd>executive</dd>
+                        <dt>folio-white</dt><dd>folio white</dd>
+                        <dt>invoice-white</dt><dd></dd>
+                        <dt>ledger-white</dt><dd></dd>
+                        <dt>quarto-white</dt><dd></dd>
+                        <dt>iso-a0-white</dt><dd>ISO A0 white medium: 841 mm x 1189 mm</dd>
+                        <dt>iso-a0-transparent</dt><dd></dd>
+                        <dt>iso-a0-translucent</dt><dd>ISO A0 translucent</dd>
+                        <dt>iso-a1-white</dt><dd>ISO A1 white medium: 594 mm x 841 mm</dd>
+                        <dt>iso-a1-transparent</dt><dd></dd>
+                        <dt>iso-a1-translucent</dt><dd></dd>
+                        <dt>iso-a2-white</dt><dd>ISO A2 white medium: 420 mm x 594 mm</dd>
+                        <dt>iso-a2-transparent</dt><dd></dd>
+                        <dt>iso-a2-translucent</dt><dd></dd>
+                        <dt>iso-a3-transparent</dt><dd>ISO A3 transparent medium: 297 mm x 420 mm</dd>
+                        <dt>iso-a3-translucent</dt><dd></dd>
+                        <dt>iso-a4-translucent</dt><dd>ISO A4 translucent medium: 210 mm x 297 mm</dd>
+                        <dt>iso-a5-transparent</dt><dd>ISO A5 transparent medium: 148 mm x 210 mm</dd>
+                        <dt>iso-a5-translucent</dt><dd></dd>
+                        <dt>iso-a6-white</dt><dd>ISO A6 white medium: 105 mm x 148 mm</dd>
+                        <dt>iso-a7-white</dt><dd>ISO A7 white medium: 74 mm x 105 mm</dd>
+                        <dt>iso-a8-white</dt><dd>ISO A8 white medium: 52 mm x 74 mm</dd>
+                        <dt>iso-a9-white</dt><dd>ISO A9 white medium: 37 mm x 52 mm</dd>
+                        <dt>iso-a10-white</dt><dd>ISO A10 white medium: 26 mm x 37 mm</dd>
+                        <dt>iso-b0-white</dt><dd>ISO B0 white medium: 1000 mm x 1414 mm</dd>
+                        <dt>iso-b1-white</dt><dd>ISO B1 white medium: 707 mm x 1000 mm</dd>
+                        <dt>iso-b2-white</dt><dd>ISO B2 white medium: 500 mm x 707 mm</dd>
+                        <dt>iso-b3-white</dt><dd>ISO B3 white medium: 353 mm x 500 mm</dd>
+                        <dt>iso-b6-white</dt><dd>ISO B6 white medium: 125 mm x 176 mm</dd>
+                        <dt>iso-b7-white</dt><dd>ISO B7 white medium: 88 mm x 125 mm</dd>
+                        <dt>iso-b8-white</dt><dd>ISO B8 white medium: 62 mm x 88 mm</dd>
+                        <dt>iso-b9-white</dt><dd>ISO B9 white medium: 44 mm x 62 mm</dd>
+                        <dt>iso-b10-white</dt><dd>ISO B10 white medium: 31 mm x 44 mm</dd>
+                        <dt>jis-b0-white</dt><dd>JIS B0 white medium: 1030 mm x 1456 mm</dd>
+                        <dt>jis-b0-transparent</dt><dd></dd>
+                        <dt>jis-b0-translucent</dt><dd></dd>
+                        <dt>jis-b1-white</dt><dd>JIS B1 white medium: 728 mm x 1030 mm</dd>
+                        <dt>jis-b1-transparent</dt><dd></dd>
+                        <dt>jis-b1-translucent</dt><dd></dd>
+                        <dt>jis-b2-white</dt><dd>JIS B2 white medium: 515 mm x 728 mm</dd>
+                        <dt>jis-b2-transparent</dt><dd></dd>
+                        <dt>jis-b2-translucent</dt><dd></dd>
+                        <dt>jis-b3-white</dt><dd>JIS B3 white medium: 364 mm x 515 mm</dd>
+                        <dt>jis-b3-transparent</dt><dd></dd>
+                        <dt>jis-b3-translucent</dt><dd></dd>
+                        <dt>jis-b4-transparent</dt><dd>JIS B4 transparent medium: 257 mm x 364 mm</dd>
+                        <dt>jis-b4-translucent</dt><dd></dd>
+                        <dt></dt><dd></dd>
+                        <dt>jis-b5-transparent</dt><dd>JIS B5 transparent medium: 182 mm x 257 mm</dd>
+                        <dt>jis-b5-translucent</dt><dd></dd>
+                        <dt>jis-b6-white</dt><dd>JIS B6 white medium: 128 mm x 182 mm</dd>
+                        <dt>jis-b7-white</dt><dd>JIS B7 white medium: 91 mm x 128 mm</dd>
+                        <dt>jis-b8-white</dt><dd>JIS B8 white medium: 64 mm x 91 mm</dd>
+                        <dt>jis-b9-white</dt><dd>JIS B9 white medium: 45 mm x 64 mm</dd>
+                        <dt>jis-b10-white</dt><dd>JIS B10 white medium: 32 mm x 45 mm</dd>
+                        <dt>a-white</dt><dd>ANSI A size white medium: 8.5 inches x 11 inches</dd>
+                        <dt>a-transparent</dt><dd></dd>
+                        <dt>a-translucent</dt><dd></dd>
+                        <dt>b-white</dt><dd>ANSI B size white medium: 11 inches x 17 inches</dd>
+                        <dt>b-transparent</dt><dd></dd>
+                        <dt>b-translucent</dt><dd></dd>
+                        <dt>c-white</dt><dd>ANSI C size white medium: 17 inches x 22 inches</dd>
+                        <dt>c-transparent</dt><dd></dd>
+                        <dt>c-translucent</dt><dd></dd>
+                        <dt>d-white</dt><dd>ANSI D size white medium: 22 inches x 34 inches</dd>
+                        <dt>d-transparent</dt><dd></dd>
+                        <dt>d-translucent</dt><dd></dd>
+                        <dt>e-white</dt><dd> ANSI E size white medium: 34 inches x 44 inches</dd>
+                        <dt>e-transparent</dt><dd></dd>
+                        <dt>e-translucent</dt><dd></dd>
+                        <dt>axsynchro-white</dt><dd>Specifies the roll paper having the width of the
+                            longer edge (11 inches) of the engineering ANSI A size white medium
+                                and cuts synchronizing with data.</dd>
+                        <dt>axsynchro-transparent</dt><dd></dd>
+                        <dt>axsynchro-translucent</dt><dd></dd>
+                        <dt>bxsynchro-white</dt><dd>Specifies the roll paper having the width of the
+                            longer edge (17 inches) of the engineering ANSI B size white medium
+                                and cuts synchronizing with data.</dd>
+                        <dt>bxsynchro-transparent</dt><dd></dd>
+                        <dt>bxsynchro-translucent</dt><dd></dd>
+                        <dt>cxsynchro-white</dt><dd>Specifies the roll paper having the width of the
+                            longer edge (22 inches) of the engineering ANSI C size white medium
+                                and cuts synchronizing with data.</dd>
+                        <dt>cxsynchro-transparent</dt><dd></dd>
+                        <dt>cxsynchro-translucent</dt><dd></dd>
+                        <dt>dxsynchro-white</dt><dd>Specifies the roll paper having the width of the
+                            longer edge (34 inches) of the engineering ANSI D size white medium
+                                and cuts synchronizing with data.</dd>
+                        <dt>dxsynchro-transparent</dt><dd></dd>
+                        <dt>dxsynchro-translucent</dt><dd></dd>
+                        <dt>exsynchro-white</dt><dd>Specifies the roll paper having the width of the
+                            longer edge (44 inches) of the engineering ANSI E size white medium
+                                and cuts synchronizing with data.</dd>
+                        <dt>exsynchro-transparent</dt><dd></dd>
+                        <dt>exsynchro-translucent</dt><dd></dd>
+                        <dt>arch-a-white</dt><dd> Specifies the Architectural A size white medium: 9 inches x 12 inches</dd>
+                        <dt>arch-a-transparent</dt><dd></dd>
+                        <dt>arch-a-translucent</dt><dd></dd>
+                        <dt>arch-b-white</dt><dd>Architectural B size white medium: 12 inches x 18 inches</dd>
+                        <dt>arch-b-transparent</dt><dd></dd>
+                        <dt>arch-b-translucent</dt><dd></dd>
+                        <dt>arch-c-white</dt><dd>Architectural C size white medium: 18 inches x 24 inches</dd>
+                        <dt>arch-c-transparent</dt><dd></dd>
+                        <dt>arch-c-translucent</dt><dd></dd>
+                        <dt>arch-d-white</dt><dd>Architectural D size white medium: 24 inches x 36 inches</dd>
+                        <dt>arch-d-transparent</dt><dd></dd>
+                        <dt>arch-d-translucent</dt><dd></dd>
+                        <dt>arch-e-white</dt><dd>Architectural E size white medium: 36 inches x 48 inches</dd>
+                        <dt>arch-e-transparent</dt><dd></dd>
+                        <dt>arch-e-translucent</dt><dd></dd>
+                        <dt>arch-axsynchro-white</dt><dd>Specifies the roll paper having the width of
+                            the longer edge (12 inches) of the Architectural A size white
+                                medium and cuts synchronizing with data.</dd>
+                        <dt>arch-axsynchro-transparent</dt><dd></dd>
+                        <dt>arch-axsynchro-translucent</dt><dd></dd>
+                        <dt>arch-bxsynchro-white</dt><dd>Specifies the roll paper having the width of
+                            the longer edge (18 inches) of the Architectural B size white
+                                medium and cuts synchronizing with data.</dd>
+                        <dt>arch-bxsynchro-transparent</dt><dd></dd>
+                        <dt>arch-bxsynchro-translucent</dt><dd></dd>
+                        <dt>arch-cxsynchro-white</dt><dd> Specifies the roll paper having the width of
+                            the longer edge (24 inches) of the Architectural C size white
+                                medium and cuts synchronizing with data.</dd>
+                        <dt>arch-cxsynchro-transparent</dt><dd></dd>
+                        <dt>arch-cxsynchro-translucent</dt><dd></dd>
+                        <dt>arch-dxsynchro-white</dt><dd> Specifies the roll paper having the width of
+                            the longer edge (36 inches) of the Architectural D size white
+                                medium and cuts synchronizing with data.</dd>
+                        <dt>arch-dxsynchro-transparent</dt><dd></dd>
+                        <dt>arch-dxsynchro-translucent</dt><dd></dd>
+                        <dt>arch-exsynchro-white</dt><dd>Specifies the roll paper having the width of
+                            the longer edge (48 inches) of the Architectural E size white
+                                medium and cuts synchronizing with data.</dd>
+                        <dt>arch-exsynchro-transparent</dt><dd></dd>
+                        <dt>arch-exsynchro-translucent</dt><dd></dd>
+                        <dt>iso-a1x3-white</dt><dd> Specifies the ISO A1X3 white medium having the
+                              width of the longer edge (841 mm) of the ISO A1 medium</dd>
+                        <dt>iso-a1x3-transparent</dt><dd></dd>
+                        <dt>iso-a1x3-translucent</dt><dd></dd>
+                        <dt>iso-a1x4-white</dt><dd>Specifies the ISO A1X4 white medium having the
+                              width of the longer edge (841 mm) of the ISO A1 medium </dd>
+                        <dt>iso-a1x4-transparent</dt><dd></dd>
+                        <dt>iso-a1x4-translucent</dt><dd></dd>
+                        <dt>iso-a2x3-white</dt><dd> Specifies the ISO A2X3 white medium having the
+                              width of the longer edge (594 mm) of the ISO A2 medium</dd>
+                        <dt>iso-a2x3-transparent</dt><dd></dd>
+                        <dt>iso-a2x3-translucent</dt><dd></dd>
+                        <dt>iso-a2x4-white</dt><dd> Specifies the ISO A2X4 white medium having the
+                              width of the longer edge (594 mm) of the ISO A2 medium</dd>
+                        <dt>iso-a2x4-transparent</dt><dd></dd>
+                        <dt>iso-a2x4-translucent</dt><dd></dd>
+                        <dt>iso-a2x5-white</dt><dd> Specifies the ISO A2X5 white medium having the
+                              width of the longer edge (594 mm) of the ISO A2 medium</dd>
+                        <dt>iso-a2x5-transparent</dt><dd></dd>
+                        <dt>iso-a2x5-translucent</dt><dd></dd>
+                        <dt>iso-a3x3-white</dt><dd>Specifies the ISO A3X3 white medium having the
+                              width of the longer edge (420 mm) of the ISO A3 medium</dd>
+                        <dt>iso-a3x3-transparent</dt><dd></dd>
+                        <dt>iso-a3x3-translucent</dt><dd></dd>
+                        <dt>iso-a3x4-white</dt><dd>Specifies the ISO A3X4 white medium having the
+                              width of the longer edge (420 mm) of the ISO A3 medium</dd>
+                        <dt>iso-a3x4-transparent</dt><dd></dd>
+                        <dt>iso-a3x4-translucent</dt><dd></dd>
+                        <dt>iso-a3x5-white</dt><dd>Specifies the ISO A3X5 white medium having the
+                            width of the longer edge (420 mm) of the ISO A3 medium</dd>
+                        <dt>iso-a3x5-transparent</dt><dd></dd>
+                        <dt>iso-a3x5-translucent</dt><dd></dd>
+                        <dt>iso-a3x6-white</dt><dd>Specifies the ISO A3X6 white medium having the
+                              width of the longer edge (420 mm) of the ISO A3 medium</dd>
+                        <dt>iso-a3x6-transparent</dt><dd></dd>
+                        <dt>iso-a3x6-translucent</dt><dd></dd>
+                        <dt>iso-a3x7-white</dt><dd>Specifies the ISO A3X7 white medium having the
+                              width of the longer edge (420 mm) of the ISO A3 medium</dd>
+                        <dt>iso-a3x7-transparent</dt><dd></dd>
+                        <dt>iso-a3x7-translucent</dt><dd></dd>
+                        <dt>iso-a4x3-white</dt><dd>Specifies the ISO A4X3 white medium having the
+                              width of the longer edge (297 mm) of the ISO A4 medium</dd>
+                        <dt>iso-a4x3-transparent</dt><dd></dd>
+                        <dt>iso-a4x3-translucent</dt><dd></dd>
+                        <dt>iso-a4x4-white</dt><dd>Specifies the ISO A4X4 white medium having the
+                              width of the longer edge (297 mm) of the ISO A4 medium</dd>
+                        <dt>iso-a4x4-transparent</dt><dd></dd>
+                        <dt>iso-a4x4-translucent</dt><dd></dd>
+                        <dt>iso-a4x5-white</dt><dd>Specifies the ISO A4X5 white medium having the
+                        width of the longer edge (297 mm) of the ISO A4 medium
+                        </dd>
+                        <dt>iso-a4x5-transparent</dt><dd></dd>
+                        <dt>iso-a4x5-translucent</dt><dd></dd>
+                        <dt>iso-a4x6-white</dt><dd>Specifies the ISO A4X6 white medium having the
+                              width of the longer edge (297 mm) of the ISO A4 medium</dd>
+                        <dt>iso-a4x6-transparent</dt><dd></dd>
+                        <dt>iso-a4x6-translucent</dt><dd></dd>
+                        <dt>iso-a4x7-white</dt><dd>Specifies the ISO A4X7 white medium having the
+                              width of the longer edge (297 mm) of the ISO A4 medium</dd>
+                        <dt>iso-a4x7-transparent</dt><dd></dd>
+                        <dt>iso-a4x7-translucent</dt><dd></dd>
+                        <dt>iso-a4x8-white</dt><dd></dd>
+                        <dt>iso-a4x8-transparent</dt><dd></dd>
+                        <dt>iso-a4x8-translucent</dt><dd></dd>
+                        <dt>iso-a4x9-white</dt><dd>Specifies the ISO A4X9 white medium having the
+                              width of the longer edge (297 mm) of the ISO A4 medium </dd>
+                        <dt>iso-a4x9-transparent</dt><dd></dd>
+                        <dt>iso-a4x9-translucent</dt><dd></dd>
+                        <dt>iso-a0xsynchro-white</dt><dd>Specifies the paper having the width of the
+                              longer edge (1189 mm) of the ISO A0 white medium and cuts
+                                    synchronizing with data.</dd>
+                        <dt>iso-a0xsynchro-transparent</dt><dd></dd>
+                        <dt>iso-a0xsynchro-translucent</dt><dd></dd>
+                        <dt>iso-a1xsynchro-white</dt><dd>Specifies the paper having the width of the
+                              longer edge (841 mm) of the ISO A1 white medium and cuts
+                                    synchronizing with data.</dd>
+                        <dt>iso-a1xsynchro-transparent</dt><dd></dd>
+                        <dt>iso-a1xsynchro-translucent</dt><dd></dd>
+                        <dt>iso-a2xsynchro-white</dt><dd>Specifies the paper having the width of the
+                              longer edge (594 mm) of the ISO A2 white medium and cuts
+                                    synchronizing with data.</dd>
+                        <dt>iso-a2xsynchro-transparent</dt><dd></dd>
+                        <dt>iso-a2xsynchro-translucent</dt><dd></dd>
+                        <dt>iso-a3xsynchro-white</dt><dd>Specifies the paper having the width of the
+                              longer edge (420 mm) of the ISO A3 white medium and cuts
+                                    synchronizing with data.</dd>
+                        <dt>iso-a3xsynchro-transparent</dt><dd></dd>
+                        <dt>iso-a3xsynchro-translucent</dt><dd></dd>
+                        <dt>iso-a4xsynchro-white</dt><dd>Specifies the paper having the width of the
+                              longer edge (297 mm) of the ISO A4 white medium and cuts
+                                    synchronizing with data.</dd>
+                        <dt>iso-a4xsynchro-transparent</dt><dd></dd>
+                        <dt>iso-a4xsynchro-translucent</dt><dd></dd>
+                        <dt>auto-white</dt><dd>Specifies that the printer selects the white medium
+                              with the appropriate fixed size (e.g. a1, a2, etc.) or data-
+                                    synchro size, and the selection is implementation-defined.</dd>
+                        <dt>auto-transparent</dt><dd></dd>
+                        <dt>auto-translucent</dt><dd></dd>
+                        <dt>auto-fixed-size-white</dt><dd>Specifies that the printer selects the white
+                              medium with the appropriate fixed size (e.g. a1, a2, etc.) or
+                                    the appropriate long fixed size listed above.</dd>
+                        <dt>auto-fixed-size-transparent</dt><dd></dd>
+                        <dt>auto-fixed-size-translucent</dt><dd></dd>
+                        <dt>auto-synchro-white</dt><dd> Specifies that the printer selects the white
+                              paper with the appropriate width and cuts it synchronizing with
+                                    data.</dd>
+                        <dt>auto-synchro-transparent</dt><dd></dd>
+                        <dt>auto-synchro-translucent</dt><dd></dd>
+                        </dl>
+                        <p>The following standard values are defined for input-trays (from ISO
+                           DPA and the Printer MIB):</p>
+                        <dl>
+                        <dt>top</dt><dd>The top input tray in the printer.</dd>
+                        <dt>middle</dt><dd>The middle input tray in the printer.</dd>
+                        <dt>bottom</dt><dd>The bottom input tray in the printer.</dd>
+                        <dt>envelope</dt><dd>The envelope input tray in the printer.</dd>
+                        <dt>manual</dt><dd>The manual feed input tray in the printer.</dd>
+                        <dt>large-capacity</dt><dd>The large capacity input tray in the printer.</dd>
+                        <dt>main</dt><dd>The main input tray</dd>
+                        <dt>side</dt><dd>The side input tray</dd>
+                        </dl>
+                        <p>The following standard values are defined for media sizes (from ISO
+                           DPA):</p>
+                        <dl>
+                        <dt>iso-a0</dt><dd>Specifies the ISO A0 size: 841 mm by 1189 mm as defined in
+                            ISO 216</dd>
+                        <dt>iso-a1</dt><dd>594 mm by 841 mm</dd>
+                        <dt>iso-a2</dt><dd>420 mm by 594 mm</dd>
+                        <dt>iso-a3</dt><dd>297 mm by 420 mm</dd>
+                        <dt>iso-a4</dt><dd> 210 mm by 297 mm</dd>
+                        <dt>iso-a5</dt><dd>148 mm by 210 mm</dd>
+                        <dt>iso-a6</dt><dd>105 mm by 148 mm</dd>
+                        <dt>iso-a7</dt><dd>74 mm by 105 mm</dd>
+                        <dt>iso-a8</dt><dd> 52 mm by 74 mm</dd>
+                        <dt>iso-a9</dt><dd>37 mm by 52 mm</dd>
+                        <dt>iso-a10</dt><dd>26 mm by 37 mm</dd>
+                        <dt>iso-b0</dt><dd>1000 mm by 1414 mm</dd>
+                        <dt>iso-b1</dt><dd>707 mm by 1000 mm</dd>
+                        <dt>iso-b2</dt><dd>500 mm by 707 mm</dd>
+                        <dt>iso-b3</dt><dd>353 mm by 500 mm</dd>
+                        <dt>iso-b4</dt><dd>250 mm by 353 mm</dd>
+                        <dt>iso-b5</dt><dd>176 mm by 250 mm</dd>
+                        <dt>iso-b6</dt><dd>125 mm by 176 mm</dd>
+                        <dt>iso-b7</dt><dd>88 mm by 125 mm</dd>
+                        <dt>iso-b8</dt><dd>62 mm by 88 mm</dd>
+                        <dt>iso-b9</dt><dd>44 mm by 62 mm</dd>
+                        <dt>iso-b10</dt><dd>31 mm by 44 mm</dd>
+                        <dt>na-letter</dt><dd>Specifies the North American letter size: 8.5 inches by
+                            11 inches</dd>
+                        <dt>na-legal</dt><dd> 8.5 inches by 14 inches</dd>
+                        <dt>na-8x10</dt><dd>8 inches by 10 inches</dd>
+                        <dt>na-5x7</dt><dd>5 inches by 7 inches</dd>
+                        <dt>executive</dt><dd>executive size (7.25 X 10.5 in)</dd>
+                        <dt>folio</dt><dd>folio size (8.5 X 13 in)</dd>
+                        <dt>invoice</dt><dd>invoice size (5.5 X 8.5 in)</dd>
+                        <dt>ledger</dt><dd>ledger size (11 X 17 in)</dd>
+                        <dt>quarto</dt><dd>quarto size (8.5 X 10.83 in)</dd>
+                        <dt>iso-c3</dt><dd>ISO C3 size: 324 mm by 458 mm as defined in
+                            ISO 269</dd>
+                        <dt>iso-c4</dt><dd>229 mm by 324 mm</dd>
+                        <dt>iso-c5</dt><dd>162 mm by 229 mm</dd>
+                        <dt>iso-c6</dt><dd>114 mm by 162 mm</dd>
+                        <dt>iso-designated-long</dt><dd>ISO Designated Long size: 110 mm
+                            by 220 mm</dd>
+                        <dt>na-10x13-envelope</dt><dd> Specifies the North American 10x13 size: 10
+                            inches by 13 inches</dd>
+                        <dt>na-9x12-envelope</dt><dd> 9 inches  by 12 inches</dd>
+                        <dt>na-number-10-envelope</dt><dd>number 10
+                            business envelope size: 4.125 inches by 9.5 inches</dd>
+                        <dt>na-7x9-envelope</dt><dd>7x9 inch</dd>
+                        <dt>na-9x11-envelope</dt><dd>9x11 inch</dd>
+                        <dt>na-10x14-envelope</dt><dd>10x14 inch</dd>
+                        <dt>na-number-9-envelope</dt><dd>Specifies the North American number 9
+                            business envelope size</dd>
+                        <dt>na-6x9-envelope</dt><dd>Specifies the North American 6x9 envelope size</dd>
+                        <dt>na-10x15-envelope</dt><dd>North American 10x15 envelope size</dd>
+                        <dt>monarch-envelope</dt><dd>Monarch envelope size (3.87 x 7.5
+                            in)</dd>
+                        <dt>jis-b0</dt><dd> JIS B0 size: 1030mm x 1456mm</dd>
+                        <dt>jis-b1</dt><dd>728mm x 1030mm</dd>
+                        <dt>jis-b2</dt><dd>515mm x 728mm</dd>
+                        <dt>jis-b3</dt><dd>364mm x 515m</dd>
+                        <dt>jis-b4</dt><dd>257mm x 364mm</dd>
+                        <dt>jis-b5</dt><dd>182mm x 257mm</dd>
+                        <dt>jis-b6</dt><dd>128mm x 182mm</dd>
+                        <dt>jis-b7</dt><dd>91mm x 128mm</dd>
+                        <dt>jis-b8</dt><dd>64mm x 91mm</dd>
+                        <dt>jis-b9</dt><dd>45mm x 64mm</dd>
+                        <dt>jis-b10</dt><dd>32mm x 45mm</dd>
+                        <dt>a</dt><dd>engineering ANSI A size medium: 8.5 inches x 11
+                               inches</dd>
+                        <dt>b</dt><dd>11 inches x 17 inches</dd>
+                        <dt>c</dt><dd>17 inches x 22 inches</dd>
+                        <dt>d</dt><dd>22 inches x 34 inches</dd>
+                        <dt>e</dt><dd>34 inches x 44 inches</dd>
+                        <dt>arch-a</dt><dd>Architectural A size medium: 9 inches x 12 inches</dd>
+                        <dt>arch-b</dt><dd>12 inches x 18 inches</dd>
+                        <dt>arch-c</dt><dd>18 inches x 24 inches</dd>
+                        <dt>arch-d</dt><dd>24 inches x 36 inches</dd>
+                        <dt>arch-e</dt><dd>36 inches x 48 inches</dd>
+                        </dl>
+                    </div>
+                   <div id="multiple-document-handling" class="subsubsection">
+                        <h4>multiple-document-handling</h4>
+                        keyword   
+                        <dl>
+                        <dt>single-document</dt><dd>the result of processing all the document data
+                                                (a and then b) MUST be treated as a single sequence
+                                                of media sheets for finishing operations</dd>
+                        <dt>separate-documents-uncollated-copies</dt><dd>the result of processing 
+                                                the data in <span class='important_1'>each</span> 
+                                                document instance MUST be treated as a single 
+                                                sequence of media sheets
+                                                for finishing operations</dd>
+                        <dt>separate-documents-collated-copies</dt><dd>same + If more than one copy
+                                                is made, the ordering of the sets of media sheets
+                                                resulting from processing
+                                                the document data MUST be a(*), b(*), a(*), b(*)</dd>
+                        <dt>single-document-new-sheet</dt><dd> Same as 'single-document', except
+                                                that the Printer object MUST
+                                                ensure that the first
+                                                impression of each document
+                                                instance in the job is placed
+                                                on a new media sheet.  This
+                                                value allows multiple documents
+                                                to be stapled together with a
+                                                single staple where each
+                                                document starts on a new sheet.
+                                                </dd>
+                        </dl>
+                    </div>
+                   <div id="number-up" class="subsubsection">
+                        <h4>number-up</h4>
+                        integer (1:max)   
+                        <p>This attribute specifies the number of print-stream pages to impose
+                           upon a single side of an instance of a selected medium.</p>
+                    </div>
+                    <div id="orientation-requested" class="subsubsection">
+                        <h4>orientation-requested</h4>
+                        enum   
+                        <dl>
+                        <dt>portrait</dt>
+                        <dt>landscape</dt><dd>Landscape is defined to be a
+                                        rotation of the print-stream page to be imaged by +90
+                                        degrees with respect to the medium (i.e.
+                                        anti-clockwise) from the portrait orientation.</dd>
+                        <dt>reverse-landscape</dt>
+                        <dt>reverse-portrait</dt>
+                        </dl>
+                    </div>
+                    <div id="printer-resolution" class="subsubsection">
+                        <h4>printer-resolution</h4>
+                        resolution
+                        <dl>
+                        <dt>1440x720dpi</dt><dd>dots per inch</dd>
+                        <dt>300x300dpc</dt><dd>dots per centimeter</dd>
+                        </dl>
+                    </div>
+                    <div id="print-quality" class="subsubsection">
+                        <h4>print-quality</h4>
+                        enum   
+                        <dl>
+                        <dt>draft</dt>
+                        <dt>normal</dt>
+                        <dt>high</dt>
+                        </dl>
+                    </div>
+    
+                </div>
+            </div>
+	    <div class="section" id="readable-attributes">
+	    <h2>Readable attributes</h2>
+	    <p>See file <a href="readable-attributes.html">readable-attributes.html</a></p>
+	    </div>
+	    <div class="section" id="cups-attributes">
+	    <h2>CUPS specific attributes</h2>
+	    <p>See file <a href="cups-attributes.html">cups-attributes.html</a></p>
+	    </div>
+      <div>
+      <p class="footer">Copyright © 2005-2008 Thomas Harding.
+            <br />
+            Copying and distribution of this article can be made under General Public License.
+            see <a href="README">README</a> and <a href="COPYING">COPYING</a>.
+      </p>
+      </div>
+
+    </body>
+</html>

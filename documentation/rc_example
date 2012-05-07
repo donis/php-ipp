@@ -1,0 +1,18 @@
+
+username = "guest"
+password = "verysecret"
+host = localhost
+printer = false
+paths = false
+paths = "/root,/admin,/printers,/jobs"
+
+server_type = CUPS
+get_printer_attrs = false
+get_job_attrs = true
+port = 631
+
+mediatype = application/octet-stream
+logfile = /tmp/phpprintipp
+handle_http_exceptions = true
+handle_ipp_exceptions = true
+

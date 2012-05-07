@@ -1,0 +1,103 @@
+Index: BasicIPP.php
+===================================================================
+RCS file: /sources/phpprintipp/phpprintipp/php_classes/BasicIPP.php,v
+retrieving revision 1.5
+diff -u -r1.5 BasicIPP.php
+--- BasicIPP.php	9 Oct 2009 17:05:12 -0000	1.5
++++ BasicIPP.php	13 Aug 2010 21:49:25 -0000
+@@ -545,7 +545,8 @@
+   if (!$page_ranges) return true;
+   $page_ranges = trim(str_replace("-", ":", $page_ranges));
+   $first = true;
+-  $page_ranges = split(' ', $page_ranges);
++  #$page_ranges = split(' ', $page_ranges);
++  $page_ranges = preg_split('# #', $page_ranges);
+   foreach($page_ranges as $page_range) 
+   {
+    $value = self::_rangeOfIntegerBuild($page_range);
+@@ -1222,7 +1223,8 @@
+ 
+    default:
+    $server_response = preg_replace("/: $/", '', $this->serveroutput->headers[0]);
+-   $strings = split(' ', $server_response, 3);
++   #$strings = split(' ', $server_response, 3);
++   $strings = preg_split('# #', $server_response, 3);
+    $errno = $strings[1];
+    $string = strtoupper(str_replace(' ', '_', $strings[2]));
+    trigger_error(
+@@ -1847,7 +1849,8 @@
+ 
+  protected function _rangeOfIntegerBuild($integers) 
+  {
+-  $integers = split(":", $integers);
++  #$integers = split(":", $integers);
++  $integers = preg_split("#:#", $integers);
+   for ($i = 0; $i < 2; $i++) $outvalue[$i] = self::_integerBuild($integers[$i]);
+   return $outvalue[0] . $outvalue[1];
+  }
+Index: http_class.php
+===================================================================
+RCS file: /sources/phpprintipp/phpprintipp/php_classes/http_class.php,v
+retrieving revision 1.6
+diff -u -r1.6 http_class.php
+--- http_class.php	1 Mar 2010 19:17:36 -0000	1.6
++++ http_class.php	13 Aug 2010 21:49:25 -0000
+@@ -175,7 +175,8 @@
+   $this->connected = false;
+   $url = $arguments["URL"];
+   $port = $this->default_port;
+-  $url = split (':', $url, 2);
++  #$url = split (':', $url, 2);
++  $url = preg_split ('#:#', $url, 2);
+   $transport_type = $url[0];
+   $unix = false;
+   switch ($transport_type)
+@@ -201,7 +202,8 @@
+   $url = $url[1];
+   if (!$unix)
+   {
+-   $url = split ("/", preg_replace ("#^/{1,}#", '', $url), 2);
++   #$url = split ("/", preg_replace ("#^/{1,}#", '', $url), 2);
++   $url = preg_split ("#/#", preg_replace ("#^/{1,}#", '', $url), 2);
+    $url = $url[0];
+    $port = $this->port;
+    $error = sprintf (_("Cannot resolve url: %s"), $url);
+@@ -247,7 +249,8 @@
+   {
+    return $this->_HttpError ($error, E_USER_WARNING);
+   }
+-  $authtype = split (' ', $this->reply_headers["www-authenticate"]);
++  #$authtype = split (' ', $this->reply_headers["www-authenticate"]);
++  $authtype = preg_split ('# #', $this->reply_headers["www-authenticate"]);
+   $authtype = strtolower ($authtype[0]);
+   switch ($authtype)
+   {
+@@ -516,11 +519,14 @@
+  private function _BuildDigest ()
+  {
+   $auth = $this->reply_headers["www-authenticate"];
+-  list ($head, $auth) = split (" ", $auth, 2);
+-  $auth = split (", ", $auth);
++  #list ($head, $auth) = split (" ", $auth, 2);
++  list ($head, $auth) = preg_split ("# #", $auth, 2);
++  #$auth = split (", ", $auth);
++  $auth = preg_split ("#, #", $auth);
+   foreach ($auth as $sheme)
+   {
+-   list ($sheme, $value) = split ('=', $sheme);
++   #list ($sheme, $value) = split ('=', $sheme);
++   list ($sheme, $value) = preg_split ('#=#', $sheme);
+    $fields[$sheme] = trim (trim ($value), '"');
+   }
+   $nc = sprintf ('%x', $this->nc);
+@@ -559,7 +565,8 @@
+   if (array_key_exists ("qop", $fields))
+   {
+    $qop = strtolower ($fields["qop"]);
+-   $qop = split (" ", $qop);
++   #$qop = split (" ", $qop);
++   $qop = preg_split ("# #", $qop);
+    if (in_array ("auth", $qop))
+     $qop = "auth";
+    else
+

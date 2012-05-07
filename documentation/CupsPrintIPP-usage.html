@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: -->
+<!-- vim: set encoding=utf-8: -->
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!-- 
+@(#) $Header: /sources/phpprintipp/phpprintipp/documentation/CupsPrintIPP-usage.html,v 1.15 2008/05/12 20:19:36 harding Exp $
+ -->
+    <head>
+        <!--
+             Copyright © 2005-2006  Thomas Harding.
+                  
+                  Due to non-DFSG compliance of GFDL, this document is distributed under dual licence :
+                  
+                        The GNU Free Documentation License
+                        The GNU General Public License
+                  
+                  Permission is granted to copy, distribute and/or modify this document
+                  under the terms of the GNU Free Documentation License, Version 1.2
+                  or any later version published by the Free Software Foundation;
+                  with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+                  Texts.  A copy of the license is included in the section entitled "GNU
+                  Free Documentation License" of page "usage.html".
+                  
+                  These files are free software; you can redistribute them and/or modify
+                  them under the terms of the GNU General Public License as published by
+                  the Free Software Foundation; either version 2 of the License, or
+                  (at your option) any later version.
+
+                  This documentation is distributed in the hope that it will be useful,
+                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                  GNU General Public License for more details.
+
+                  You should have received a copy of the GNU General Public License
+                  along with this documentation; if not, write to the Free Software
+                  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+            
+            Copyright of non trivial code examples
+            
+                  Copyright © 2005-2006  Thomas Harding.
+                    
+                    All rights reserved.
+  
+                    Redistribution and use in source and binary forms, with or without
+                    modification, are permitted provided that the following conditions are
+                    met:
+ 
+                    Redistributions of source code must retain the above copyright
+                    notice, this list of conditions and the following disclaimer.
+                    Redistributions in binary form must reproduce the above copyright
+                    notice, this list of conditions and the following disclaimer in the
+                    documentation and/or other materials provided with the distribution.
+                    Neither the name of its Author nor the names of its
+                    contributors may be used to endorse or promote products derived from
+                    this software without specific prior written permission.
+
+                    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+                    IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+                    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+                    PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+                    CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+                    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+                    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+                    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+                    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+                    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+                    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+        -->
+ 
+        <meta name="Author" content="Thomas Harding" />
+        <meta http-equiv="Description" content="phpprintipp documentation: CUPS specific functions" />
+        <meta http-equiv="Keywords" content="PhpPrintIPP,documentation,php,IPP,internet printing protocol,lgpl" />
+        <link type="image/png" rel="shortcut icon" href="images/printipp-logo-shicon.png" title="PHP PrintIPP logo" />
+        <link rev="made" href="mailto:thomas.harding@laposte.net" />
+
+        <style type="text/css">
+        /* <![CDATA[ */
+            body
+            {
+              padding-top: 2em ;
+              padding-bottom: 4em ;
+              padding-left: 2em ;
+              padding-right: 4em;
+              background-color: white ;
+              color: black;
+              counter-reset: section;
+            }
+
+            li.menulogo
+            {
+              position: absolute;
+              top: 20px;
+            }
+
+            img.logo
+            {
+              margin-bottom: -0.2ex;
+            }
+
+            div.section
+            {
+              padding-left: 5em;
+              counter-increment: section;
+              counter-reset: subsection;
+              counter-reset: subsubsection;
+            }
+
+            div.section h2
+            {
+              margin-left: -2em;
+            }
+
+            div.subsubsection
+            {
+              padding-left: 5em;
+              counter-increment: subsubsection;
+            }
+
+            div.subsection
+            {
+              padding-left: 5em;
+              counter-increment: subsection;
+              counter-reset: subsubsection;
+            }
+
+            div.subsection h3
+            {
+              margin-left: -4em;
+            }
+
+            div.subsubsection h4
+            {
+              margin-left: -2em;
+            }
+
+            pre.pre
+            {
+              display: block;
+              white-space: pre;
+              font-family: monospace;
+            }
+
+            pre.pre span.normal
+            {
+              margin-left: -2em;
+              white-space: normal;
+              font-family: serif;
+            }
+
+            p.typewriter
+            {
+              display: block;
+              font-family: monospace;
+            }
+
+            p.note:before
+            {
+              content: 'Note: ';
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            p.note
+            {
+              font-size: 80%;
+            }
+
+            span.important
+            {
+              display: block ;
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            div.section h2:before
+            {
+              content: counter(section) ". ";
+            }
+
+            div.subsection h3:before
+            {
+              content: counter(section) "." counter(subsection) " ";
+            }
+
+            div.subsubsection h4:before
+            {
+              content: counter(section) "." counter(subsection) "." counter(subsubsection) " ";
+            }
+
+            div.menu dl {
+                counter-reset: depth;
+                }
+            div.menu dt:before {
+                content: counters(depth,".")". ";
+                counter-increment: depth;
+                }
+            
+            span.h2
+            {
+              font-size: 120%;    
+            }
+            span.h3
+            {
+              font-size: 110%;
+            }
+        
+            p.footer
+            {
+              width: 80% ;
+              margin-left: 170px;
+              margin-bottom: 1em;
+              text-align: center;
+              font-family: sans-serif;
+              font-size: 60%;
+              color: black;
+              background-color: #AAAAFF;
+            }
+ 
+        /* ]]> */
+        </style>
+
+
+        <title>PHP PrintIPP usage</title>
+    </head>
+    <body>
+        <h1>PHP CupsPrintIPP usage</h1>
+        
+        <div class='menu'>
+        <h2><a href="usage.html">back to PrintIPP usage</a></h2>
+        <h2>summary</h2>
+        <dl>
+            <dt><a href="#introduction">introduction</a></dt>
+            <dt><a href="#responseparsing">response parsing</a></dt>
+            <dd>
+                <dl>
+                  <dt><a href="#p1">printer-type attribute</a></dt>
+                </dl>
+            </dd>
+            <dt><a href="#functionsreference">functions reference</a></dt>
+            <dd>
+               <dl>
+                 <dt><a href="#funcops">operations</a></dt>
+                 <dd>
+                    <dl>
+                        <dt><a href="#o1">cupsGetDefault()</a></dt>
+                        <dt><a href="#o2">cupsRejectJobs($printer_uri,$printer_state_message=false)</a></dt>
+                        <dt><a href="#o3">cupsAcceptJobs($printer_uri)</a></dt>
+                        <dt><a href="#o4">cupsGetPrinters()</a></dt>
+                    </dl>
+                 </dd>
+               </dl>
+            </dd>
+        </dl>
+        </div>
+        
+        <div class="section" id="introduction">
+            <h2>introduction</h2>
+            
+            <p>CupsPrintIPP is an extension of class library of PrintIPP. It implements operations which are not part of
+            Internet Printing Protocol as described by RFCs.</p>
+            <p>It is built on CUPS-IPP-1.1 document.</p>
+        </div>
+        
+        <div class="section" id="responseparsing">
+            <h2>response parsing</h2>
+                <div class="subsection" id="p1">
+                    <h3>printer-type attribute</h3>
+                        Cups adds an attribute named "printer-type" to printer's attributes.<br />
+                        Example:
+                        <pre class="pre">
+                        
+        echo "Printer attributes for printer $i:&lt;pre&gt;\n"; print_r($ipp-&gt;printer_attributes); echo "&lt;/pre&gt;";
+        if (isset($ipp-&gt;printer_attributes-&gt;printer_type-&gt;_value2)
+                &amp;&amp; ($ipp-&gt;printer_attributes-&gt;printer_type-&gt;_value2) == 'print-black')
+            echo "The printer can print black&lt;br /&gt;\n";
+        if (isset($ipp-&gt;printer_attributes-&gt;printer_type-&gt;_value3)
+                &amp;&amp; ($ipp-&gt;printer_attributes-&gt;printer_type-&gt;_value3) == 'print-color')
+            echo "The printer can print color&lt;br /&gt;\n";
+
+                        </pre>
+                </div>
+        </div>
+        <div class="section" id="functionsreference">
+            <h2>functions reference</h2>
+            
+            <div class="subsection" id="funcops">
+                <h3>Operations</h3>     
+                    <div class="subsubsection" id="o1">
+                        <h4>cupsGetDefault()</h4>
+                        Get default printer attributes. Parsing is same as getPrinterAttributes() operation of
+                        standard PrintIPP class. Note that printer history is given as RFC3382 "collection", 
+                        which needs a different handling.<br />
+                        Example:
+                        <pre class="pre">
+        
+        $ipp-&gt;cupsGetDefaults(array('all'));
+
+        echo "&lt;/pre&gt;\nPrinter historic for default printer:\n"; 
+
+        $histo = $ipp-&gt;printer_attributes-&gt;printer_state_history-&gt;_value1;
+
+        $idx_histo = "_indice0";
+        for ($idx = 0 ; isset($histo-&gt;$idx_histo) ; $idx ++) {
+        
+            echo "&lt;h3&gt;next event:&lt;/h3&gt;\n";
+        
+            foreach ($histo-&gt;$idx_histo as $key =&gt; $value) {
+        
+                if (is_object($value))
+                    if ($key != 'printer_state_time') 
+                        printf("%s: %s&lt;br /&gt;",$key,$value-&gt;_value0);
+                    else
+                        printf("%s: %s&lt;br /&gt;",$key,date('Y-m-d H:i:s',$value-&gt;_value0));
+
+                $idx_key = "_key". ($key + 1);
+            
+                }
+            
+            $idx_histo = '_indice'. ($idx + 1);
+            }
+
+                        </pre>
+                    </div>
+                    <div class="subsubsection" id="o2">
+                        <h4>cupsRejectJobs($printer_uri,$printer_state_message=false)</h4>
+                            Causes CUPS rejecting jobs for given printer.
+                    </div>
+                    <div class="subsubsection" id="o3">
+                        <h4>cupsAcceptJobs($printer_uri)</h4>
+                            Causes CUPS accepting jobs for given printer.
+                    </div>
+                    <div class="subsubsection" id="o4">
+                        <h4>cupsGetPrinters()</h4>
+                            Alias for getPrinters().
+                    </div>
+            </div>
+        </div>
+      <div>
+      <p class="footer">Copyright © 2005-2008 Thomas Harding.
+            <br />
+            Copying and distribution of this article can be made under General Public License.
+            see <a href="README">README</a> and <a href="COPYING">COPYING</a>.
+      </p>
+      </div>
+
+    </body>
+</html>

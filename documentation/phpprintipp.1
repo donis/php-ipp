@@ -1,0 +1,361 @@
+.\"     Title: phpprintipp
+.\"    Author: Thomas Harding <thomas.harding@laposte.net>
+.\" Generator: DocBook XSL Stylesheets v1.71.0 <http://docbook.sf.net/>
+.\"      Date: 2008.06.16
+.\"    Manual: phpprintipp
+.\"    Source: PHP PrintIPP Version 0.81
+.\"
+.TH "PHPPRINTIPP" "1" "2008\-06\-16" "PHP PrintIPP Version 0.81" "phpprintipp"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+phpprintipp \- A command line interface to talk to IPP print servers
+.SH "SYNOPSIS"
+.HP 12
+\fBphpprintipp\fR [\fB\-\-abanner\ \fR\fB\fIsheet\fR\fR] [\fB\-\-bbanner\ \fR\fB\fIsheet\fR\fR] [\fB\-\-copies\ \fR\fB\fI#\fR\fR] [\fB\-\-file\ \fR\fB\fIfile\fR\fR] [\fB\-h\fR] [\fB\-\-help\fR] [\fB\-\-host\ \fR\fB\fIhostname\fR\fR] [\fB\-\-job\ \fRuri] [\fB\-\-job\-attributes\fR] [\fB\-\-logfile\ \fR\fB\fIpath\fR\fR] [\fB\-\-mediatype\ \fR\fB\fImime\-type\fR\fR] [\fB\-\-nohttpX\fR] [\fB\-\-noippX\fR] [\fB\-p\fR] [\fB\-\-password\ \fR\fB\fIpassword\fR\fR] [\fB\-\-paths\ \fR\fB\fI"path,path,path,path"\fR\fR] [\fB\-\-port\ \fR\fB\fI#\fR\fR] [\fB\-\-printer\ \fR\fB\fIuri\fR\fR] [\fB\-\-printer\-attributes\fR] [\fB\-\-server\ \fR\fB\fIrcfile\fR\fR] [\fB\-\-sides\ \fR\fB\fItoken\fR\fR] [\fB\-\-tempdir\ \fR\fB\fIdir\fR\fR] [\fB\-\-user\ \fR\fB\fIusername\fR\fR]
+.SH "DESCRIPTION"
+.PP
+\fBphpprintipp\fR
+is a php CLI interface to print servers.
+.PP
+It uses PHP classes located in /usr/share/php/printipp.
+.PP
+Combined together with foomatic\-rip, it allows to print to network IPP printers/servers without needing of a spooler on your system.
+.SH "OPTIONS"
+.PP
+\fBphpprintipp\fR
+has following options:
+.PP
+\fB\-\-abanner banner\fR
+.RS 3n
+the banner sheet to print after job
+.RE
+.PP
+\fB\-\-bbanner banner\fR
+.RS 3n
+the banner sheet to print before job
+.RE
+.PP
+\fB\-c\fR \fB\-\-credits\fR
+.RS 3n
+Display credits and licence then exit.
+.RE
+.PP
+\fB\-\-copies number\fR
+.RS 3n
+number of document copies to print
+.RE
+.PP
+\fB\-\-file /path/to/file_to_print\fR
+.RS 3n
+path, relative or absolute, to a printable file
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+\fBNote\fR
+Will print the file name if it is unreadable
+.RE
+.PP
+\fB\-h\fR \fB\-\-help\fR
+.RS 3n
+print help
+.RE
+.PP
+\fB\-\-host "hostname"\fR
+.RS 3n
+resolvable hostname/FQDN, or ipV4/V6 IP
+.RE
+.PP
+\fB\-\-job "job uri"\fR
+.RS 3n
+get job attributes for this job
+.RE
+.PP
+\fB\-\-job\-attributes\fR
+.RS 3n
+display the printed job attributes
+.RE
+.PP
+\fB\-\-logfile /path/to/log/file\fR
+.RS 3n
+default to /dev/null
+.RE
+.PP
+\fB\-\-mediatype "application/octet\-stream"\fR
+.RS 3n
+the mime media type of the file provided to your printer (default to application/octet\-stream). most printers allows only that type and "text/plain".
+.RE
+.PP
+\fB\-\-nohttpX\fR
+.RS 3n
+do not handle http exceptions
+.RE
+.PP
+\fB\-\-noippX\fR
+.RS 3n
+do not handle ipp exceptions
+.RE
+.PP
+\fB\-p\fR
+.RS 3n
+print (from pipe or standard input), overridden by
+\fB\-\-file\fR
+.RE
+.PP
+\fB\-\-password "password"\fR
+.RS 3n
+the printer password, if needed
+.RE
+.PP
+\fB\-\-paths "/,/admin,/printers,/jobs"\fR
+.RS 3n
+comma separed list of the four destinations as above (the cups default)
+.sp
+For example,
+\fB\-\-path "/P1,/P1,/lpt1,/P1"\fR
+.RE
+.PP
+\fB\-\-port "port number"\fR
+.RS 3n
+default to IPP standard port (631)
+.RE
+.PP
+\fB\-\-printer "printer uri"\fR
+.RS 3n
+mandatory if not set in rcfile (IPP standard...)
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+\fBTip\fR
+more often the "printer queue" name
+.RE
+.PP
+\fB\-\-printer\-attributes \fR
+.RS 3n
+get printer attributes
+.RE
+.PP
+\fB\-\-server "rcfile"\fR
+.RS 3n
+server: load options from "rcfile"
+\fI$HOME/.printipp/rcfile\fR
+if not found
+\fI$ETC/printipp/rcfile\fR, then
+\fI/etc/printipp/rcfile\fR
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+\fBNote\fR
+By default, if you do not ask for
+\-\-server, phpprintipp will try to load
+\fI'default'\fR
+file from the relevant paths.
+.RE
+.PP
+\fB\-\-sides (1|2|2CE)\fR
+.RS 3n
+1 for one\-sided (default), 2 for two\-sided, 2CE for two\-sided on short edge
+.RE
+.PP
+\fB\-\-tempdir /path/to/temp\fR
+.RS 3n
+default is /tmp
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+\fBWarning\fR
+You need a valid directory path, as file/string is streamed to a temp\-file, then streamed from the last (allow large files printing, to pass round the PHP "set_memory_limit" directive
+.RE
+.PP
+\fB\-\-user "username"\fR
+.RS 3n
+your user name, from printer point of view
+.RE
+.SH "RCFILES"
+.PP
+Each server or network printer given by
+\fB\-\-server myserver\fR
+needs an rcfile, located (in search order) in:
+\fI$HOME/.printipp/\fR
+\fI$ETC/printipp/\fR
+\fI/etc/printipp/\fR
+.PP
+The rcfile format is variable = "value". Blank lines and lines beginning with a "#" are ignored.
+.PP
+Here is a sample (complete) file
+.sp
+.RS 3n
+.nf
+
+          debug = false // false or 0 to 5 (5 = less verbose)
+
+          username = guest
+          password = verysecret // set it if you need authentication
+          
+          host = "localhost"
+          server_type = CUPS
+          printer = "ipp://localhost:631/printers/reseauipp";
+          
+          paths = false 
+          # => the PrintIPP defaults (CUPS compliant)
+          # example: paths = "/root,/admin,/printers,/jobs"
+          
+          get_printer_attrs = false
+          print = false
+          get_job_attrs = false
+          port = 631
+          mediatype = "text/plain"
+          logfile = "/tmp/phpprintipp_log"
+          handle_http_exceptions = true
+          handle_ipp_exceptions = true
+          tempdir = "/tmp"
+
+    
+.fi
+.RE
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+\fBNote\fR
+.PP
+rcfiles settings are overriden by command\-line options
+.SH "EXAMPLES"
+.sp
+.RS 3n
+.nf
+echo \-e \\
+  'test\\r\\nThe quick brown fox jumps over the lazy dog.\\f\\0027' | \\
+  phpprintipp \-p \-\-server myprinter \-\-mediatype 'text/plain'
+  
+.fi
+.RE
+.PP
+assuming rasterfile is in a format compliant with your printer:
+.sp
+.RS 3n
+.nf
+phpprintipp \-\-server myprinter \\
+            \-\-mediatype 'application/octet\-stream' \\
+            \-\-file /path/to/rasterfile
+  
+.fi
+.RE
+.PP
+assuming you have foomatic installed and
+\fI/etc/foomatic/direct/epson.ppd\fR
+with directive
+\fI*FoomaticRIPPostPipe: "| cat "\fR
+in, and
+\fI/etc/printipp/TE100\fR
+rcfile as above, you can type:
+.sp
+.RS 3n
+.nf
+foomatic\-rip \-P epson /path/to/file.ps | phpprintipp \-p \-\-server TE100
+  
+.fi
+.RE
+.PP
+Same as above, and using graphicsmagic to convert a png file:
+.sp
+.RS 3n
+.nf
+gm convert ~/Artwork/Gnu/gnu.png eps:\- | foomatic\-rip \-P epson | \\
+   phpprintipp \-p \-\-server TE100
+  
+.fi
+.RE
+.SH "FILES"
+.TP 3n
+\(bu
+\fI/usr/bin/phpprintipp\fR
+.TP 3n
+\(bu
+Printers configuration files given by
+.HP 1
+[\fB\-\-server\ \fR\fB\fItheserver\fR\fR]
+, scanned for in (in order):
+.IP "" 3n
+\fI$HOME/.printipp/*\fR
+.IP "" 3n
+\fI$ETC/printipp/*\fR(Win$ systems)
+.IP "" 3n
+\fI/etc/printipp/*\fR
+.TP 3n
+\(bu
+\fI/usr/share/php/printipp/\fR
+and its files:
+.IP "" 3n
+\fIhttp_class.php\fR
+	(http backend)
+.IP "" 3n
+\fIBasicIPP.php\fR
+	(base class)
+.IP "" 3n
+\fIPrintIPP.php\fR
+	(main class)
+.IP "" 3n
+\fIExtendedPrintIPP.php\fR
+	(non RFC2911 extensions)
+.IP "" 3n
+\fICupsPrintIPP.php\fR
+	(CUPS specific class)
+.SH "SEE ALSO"
+.PP
+[1]\&\fIPrintIPP usage\fR
+.PP
+[2]\&\fIrcfile example\fR
+.PP
+foomatic\-rip (1)
+.PP
+gm (1)
+.SH "COPYRIGHT"
+.PP
+Copyright 2005\-2008 Thomas Harding.
+.PP
+All rights reserved.
+.PP
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+.TP 3n
+\(bu
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+.TP 3n
+\(bu
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+.TP 3n
+\(bu
+Neither the name of the author nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+.PP
+\fI This software is provided by the copyright holders and contributors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright holder or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage.\fR
+.SH "AUTHORS"
+.PP
+These program and manual were written by
+Thomas Harding
+.SH "AUTHOR"
+.PP
+\fBThomas Harding\fR <\&thomas.harding@laposte.net\&>
+.sp -1n
+.IP "" 3n
+Author.
+.SH "COPYRIGHT"
+Copyright \(co 2005, 2008 Thomas Harding
+.br
+.SH "REFERENCES"
+.TP 3
+1.\ PrintIPP usage
+\%http://www.nongnu.org/phpprintipp/usage
+.TP 3
+2.\ rcfile example
+\%http://www.nongnu.org/phpprintipp/rc_example

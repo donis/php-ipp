@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: -->
+<!-- vim: set encoding=utf-8: -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!-- 
+@(#) $Header: /sources/phpprintipp/phpprintipp/documentation/cups-attributes.html,v 1.13 2008/05/12 20:19:36 harding Exp $
+ -->
+    <head>
+        <!--
+          CUPS-IPP-1.1
+          Easy Software Products
+          Copyright 1997-2005 All Rights Reserved
+
+                Common UNIX Printing System License Agreement
+
+                Copyright 1997-2002 by Easy Software Products
+                        44141 AIRPORT VIEW DR STE 204
+                     HOLLYWOOD, MARYLAND 20636-3111 USA
+
+                           Voice: +1.301.373.9600
+                          Email: cups-info@cups.org
+                          WWW: http://www.cups.org
+
+            
+            INTRODUCTION
+            
+            The Common UNIX Printing System(tm), ("CUPS(tm)"), is provided
+            under the GNU General Public License ("GPL") and GNU Library
+            General Public License ("LGPL"), Version 2, with exceptions for
+            Apple operating systems and the OpenSSL toolkit. A copy of the
+            exceptions and licenses follow this introduction.
+            
+            The GNU LGPL applies to the CUPS API library, located in the
+            "cups" subdirectory of the CUPS source distribution and in the
+            "cups" include directory and library files in the binary
+            distributions. The GNU GPL applies to the remainder of the CUPS
+            distribution, including the "pdftops" filter which is based upon
+            Xpdf and the CUPS imaging library.
+            
+            For those not familiar with the GNU GPL, the license basically
+            allows you to:
+            
+               - Use the CUPS software at no charge.
+               - Distribute verbatim copies of the software in source or
+                 binary form.
+               - Sell verbatim copies of the software for a media fee, or
+                 sell support for the software.
+               - Distribute or sell printer drivers and filters that use
+                 CUPS so long as source code is made available under the
+                 GPL.
+            
+            What this license *does not* allow you to do is make changes or
+            add features to CUPS and then sell a binary distribution without
+            source code. You must provide source for any new drivers,
+            changes, or additions to the software, and all code must be
+            provided under the GPL or LGPL as appropriate. The only
+            exceptions to this are the portions of the CUPS software covered
+            by the Apple operating system license exceptions outlined later
+            in this license agreement.
+            
+            The GNU LGPL relaxes the "link-to" restriction, allowing you to
+            develop applications that use the CUPS API library under other
+            licenses and/or conditions as appropriate for your application.
+            
+            
+            LICENSE EXCEPTIONS
+            
+            In addition, as the copyright holder of CUPS, Easy Software
+            Products grants the following special exceptions:
+            
+                 1. Apple Operating System Development License Exception;
+            
+            	a. Software that is developed by any person or entity
+            	   for an Apple Operating System ("Apple OS-Developed
+            	   Software"), including but not limited to Apple and
+            	   third party printer drivers, filters, and backends
+            	   for an Apple Operating System, that is linked to the
+            	   CUPS imaging library or based on any sample filters
+            	   or backends provided with CUPS shall not be
+            	   considered to be a derivative work or collective work
+            	   based on the CUPS program and is exempt from the
+            	   mandatory source code release clauses of the GNU GPL.
+            	   You may therefore distribute linked combinations of
+            	   the CUPS imaging library with Apple OS-Developed
+            	   Software without releasing the source code of the
+            	   Apple OS-Developed Software. You may also use sample
+            	   filters and backends provided with CUPS to develop
+            	   Apple OS-Developed Software without releasing the
+            	   source code of the Apple OS-Developed Software.
+            
+            	b. An Apple Operating System means any operating system
+            	   software developed and/or marketed by Apple Computer,
+            	   Inc., including but not limited to all existing
+            	   releases and versions of Apple's Darwin, Mac OS X,
+            	   and Mac OS X Server products and all follow-on
+            	   releases and future versions thereof.
+            
+            	c. This exception is only available for Apple
+            	   OS-Developed Software and does not apply to software
+            	   that is distributed for use on other operating
+            	   systems.
+            
+            	d. All CUPS software that falls under this license
+            	   exception have the following text at the top of each
+            	   source file:
+            
+            	     This file is subject to the Apple OS-Developed
+            	     Software exception.
+            
+                 2. OpenSSL Toolkit License Exception;
+            
+            	a. Easy Software Products explicitly allows the
+            	   compilation and distribution of the CUPS software
+            	   with the OpenSSL Toolkit.
+            
+            No developer is required to provide these exceptions in a
+            derived work.
+            
+            
+            TRADEMARKS
+            
+            Easy Software Products has trademarked the Common UNIX Printing
+            System, CUPS, and CUPS logo. These names and logos may be used
+            freely in any direct port or binary distribution of CUPS. Please
+            contract Easy Software Products for written permission to use
+            them in derivative products. Our intention is to protect the
+            value of these trademarks and ensure that any derivative product
+            meets the same high-quality standards as the original.
+            
+            
+            BINARY DISTRIBUTION RIGHTS
+            
+            Easy Software Products also sells rights to the CUPS source code
+            under a binary distribution license for vendors that are unable
+            to release source code for their drivers, additions, and
+            modifications to CUPS under the GNU GPL and LGPL. For
+            information please contact us at the address shown above.
+            
+            The Common UNIX Printing System provides a "pdftops" filter that
+            is based on the Xpdf software. For binary distribution licensing
+            of this software, please contact:
+            
+                 Derek B. Noonburg
+                 Email: derekn@foolabs.com
+                 WWW: http://www.foolabs.com/xpdf/
+            
+            
+            SUPPORT
+            
+            Easy Software Products sells software support for CUPS as well
+            as a commercial printing product based on CUPS called ESP Print
+            Pro. You can find out more at our web site:
+            
+                 http://www.easysw.com/
+        -->
+        <!--
+             Copyright © 2005-2006  Thomas Harding.
+                  
+                  Due to non-DFSG compliance of GFDL, this document is distributed under dual licence :
+                  
+                        The GNU Free Documentation License
+                        The GNU General Public License
+                  
+                  Permission is granted to copy, distribute and/or modify this document
+                  under the terms of the GNU Free Documentation License, Version 1.2
+                  or any later version published by the Free Software Foundation;
+                  with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+                  Texts.  A copy of the license is included in the section entitled "GNU
+                  Free Documentation License" of page "usage.html".
+                  
+                  These files are free software; you can redistribute them and/or modify
+                  them under the terms of the GNU General Public License as published by
+                  the Free Software Foundation; either version 2 of the License, or
+                  (at your option) any later version.
+
+                  This documentation is distributed in the hope that it will be useful,
+                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                  GNU General Public License for more details.
+
+                  You should have received a copy of the GNU General Public License
+                  along with this documentation; if not, write to the Free Software
+                  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+            
+            Copyright of non trivial code examples
+            
+                  Copyright © 2005-2006  Thomas Harding.
+                    
+                    All rights reserved.
+  
+                    Redistribution and use in source and binary forms, with or without
+                    modification, are permitted provided that the following conditions are
+                    met:
+ 
+                    Redistributions of source code must retain the above copyright
+                    notice, this list of conditions and the following disclaimer.
+                    Redistributions in binary form must reproduce the above copyright
+                    notice, this list of conditions and the following disclaimer in the
+                    documentation and/or other materials provided with the distribution.
+                    Neither the name of its Author nor the names of its
+                    contributors may be used to endorse or promote products derived from
+                    this software without specific prior written permission.
+
+                    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+                    IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+                    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+                    PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+                    CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+                    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+                    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+                    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+                    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+                    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+                    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+        -->
+ 
+        <meta name="Author" content="Thomas Harding" />
+        <meta name="Description" content="PhpPrintIPP documentation: CUPS specific readable attributes" />
+        <meta name="Keywords" content="documentation,php,IPP,PhpPrintIPP,internet printing protocol,lgpl" />
+        <link type="image/png" rel="shortcut icon" href="images/printipp-logo-shicon.png" title="PHP PrintIPP logo" />
+        <link rev="made" href="mailto:thomas.harding@laposte.net" />
+ 
+        <style type="text/css">
+        /* <![CDATA[ */
+            body
+            {
+              padding-top: 2em ;
+              padding-bottom: 4em ;
+              padding-left: 2em ;
+              padding-right: 4em;
+              background-color: white ;
+              color: black;
+              counter-reset: section;
+            }
+
+            li.menulogo
+            {
+              position: absolute;
+              top: 20px;
+            }
+
+            img.logo
+            {
+              margin-bottom: -0.2ex;
+            }
+
+            div.section
+            {
+              padding-left: 5em;
+              counter-increment: section;
+              counter-reset: subsection;
+              counter-reset: subsubsection;
+            }
+
+            div.section h2
+            {
+              margin-left: -2em;
+            }
+
+            div.subsubsection
+            {
+              padding-left: 5em;
+              counter-increment: subsubsection;
+            }
+
+            div.subsection
+            {
+              padding-left: 5em;
+              counter-increment: subsection;
+              counter-reset: subsubsection;
+            }
+
+            div.subsection h3
+            {
+              margin-left: -4em;
+            }
+
+            div.subsubsection h4
+            {
+              margin-left: -2em;
+            }
+
+            pre.pre
+            {
+              display: block;
+              white-space: pre;
+              font-family: monospace;
+            }
+
+            pre.pre span.normal
+            {
+              margin-left: -2em;
+              white-space: normal;
+              font-family: serif;
+            }
+
+            p.typewriter
+            {
+              display: block;
+              font-family: monospace;
+            }
+
+            p.note:before
+            {
+              content: 'Note: ';
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            p.note
+            {
+              font-size: 80%;
+            }
+
+            span.important
+            {
+              display: block ;
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            div.section h2:before
+            {
+              content: counter(section) ". ";
+            }
+
+            div.subsection h3:before
+            {
+              content: counter(section) "." counter(subsection) " ";
+            }
+
+            div.subsubsection h4:before
+            {
+              content: counter(section) "." counter(subsection) "." counter(subsubsection) " ";
+            }
+
+            div.menu dl {
+                counter-reset: depth;
+                }
+            div.menu dt:before {
+                content: counters(depth,".")". ";
+                counter-increment: depth;
+                }
+            
+            span.h2
+            {
+              font-size: 120%;    
+            }
+            span.h3
+            {
+              font-size: 110%;
+            }
+        
+            p.footer
+            {
+              width: 80% ;
+              margin-left: 170px;
+              margin-bottom: 1em;
+              text-align: center;
+              font-family: sans-serif;
+              font-size: 60%;
+              color: black;
+              background-color: #AAAAFF;
+            }
+ 
+        /* ]]> */
+        </style>
+
+
+        <title>PHP PrintIPP usage: CUPS specific attributes</title>
+    </head>
+    <body>
+        <h1>CUPS-specific attributes</h1>
+        
+        <div class='menu'>
+        <h2><a href="usage.html">back to PrintIPP usage</a></h2>
+        <h2><a href="attributes.html">back to standard attributes</a></h2>
+        <h2>summary</h2>
+        <dl>
+            <dt><a href="#introduction">introduction</a></dt>
+            <dt><a href="#attributes">tables</a></dt>
+	    <dd>
+	    	<dl>
+		<dt><span class="h3">attributes with dedicated function</span></dt>
+		<dt><span class="h3">attributes without dedicated function</span></dt>
+		  <dd>
+		  <dl>
+                       <dt><a href="#wo1">blackplot</a></dt>
+                       <dt><a href="#wo2">brightness</a></dt>
+                       <dt><a href="#wo3">columns</a></dt>
+                       <dt><a href="#wo28">cpi</a></dt>
+                       <dt><a href="#wo4">fitplot</a></dt>
+                       <dt><a href="#wo5">gamma</a></dt>
+                       <dt><a href="#wo6">hue</a></dt>
+                       <dt><a href="#wo7">job-billing</a></dt>
+                       <dt><a href="#wo8">job-hold-until</a></dt>
+                       <dt><a href="#wo9">job-sheets</a></dt>
+                       <dt><a href="#wo10">lpi</a></dt>
+                       <dt><a href="#wo11">media</a></dt>
+                       <dt><a href="#wo12">mirror</a></dt>
+                       <dt><a href="#wo13">natural-scaling</a></dt>
+                       <dt><a href="#wo14">number-up-layout</a></dt>
+                       <dt><a href="#wo15">page-border</a></dt>
+                       <dt><a href="#wo16">page-bottom</a></dt>
+                       <dt><a href="#wo17">page-label</a></dt>
+                       <dt><a href="#wo18">page-left </a></dt>
+                       <dt><a href="#wo19">page-right</a></dt>
+                       <dt><a href="#wo20">page-set</a></dt>
+                       <dt><a href="#wo21">page-top</a></dt>
+                       <dt><a href="#wo22">penwidth</a></dt>
+                       <dt><a href="#wo23">ppi</a></dt>
+                       <dt><a href="#wo24">prettyprint</a></dt>
+                       <dt><a href="#wo25">saturation</a></dt>
+                       <dt><a href="#wo26">scaling</a></dt>
+                       <dt><a href="#wo27">wrap</a></dt>
+                   </dl>
+		   </dd>
+		</dl>
+	    </dd>
+            <dt><a href="#copyright">copyright of this document</a></dt>
+        </dl>
+        </div>
+        
+        <div class="section" id="introduction">
+            <h2>introduction</h2>
+            
+            <p>Here are attributes and their values, as described in CUPS-IPP-1.1
+            document.</p>
+        </div>
+        
+        <div class="section" id="attributes">
+            <h2>Attributes</h2>
+                <div class="subsection">
+                <h3>attributes with dedicated function</h3>
+		</div>
+                <div class="subsection">
+                <h3>attributes without dedicated function</h3>
+                     <div class="subsubsection" id="wo1">
+                        <h4>blackplot</h4>
+                         boolean
+                         <p>The blackplot attribute specifies whether HP-GL/2
+                         plot files should be rendered entirely in black ink
+                         (blackplot=true) or using the colors and shades
+                         specified in the file (blackplot=false). The default
+                         value is false.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+			 </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo2">
+                        <h4>brightness</h4>
+                         integer(0:200)
+                         <p>The brightness attribute specifies the overall
+                         brightness of the printed output in percent. A
+                         brightness of 100 is normal, while 200 is twice as
+                         bright and 50 is half as bright. The default value is
+                         100.<br />
+                         
+                         Brightness is applied to the Cyan, Magenta, Yellow,
+                         and Black values using the function "f(x) = brightness
+                         / 100 * x".  </p> 
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo3">
+                        <h4>columns</h4>
+                         integer(1:4)
+                         <p>The columns attribute specifies the number of
+                         columns to generate when printing text files. The
+                         default value is 1.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo28">
+                        <h4>cpi</h4>
+                         enum
+                         <p>The cpi attribute specifies the number of
+                         characters per inch when printing text files. Only the
+                         values 10, 12, and 17 are currently supported. The
+                         default value is 10.  </p>
+                         <dl>
+                         <dt>10</dt><dd></dd>
+                         <dt>12</dt><dd></dd>
+                         <dt>17</dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo4">
+                        <h4>fitplot</h4>
+                         boolean
+                         <p>The fitplot attribute specifies whether to scale
+                         HP-GL/2 plot files to fit on the selected media
+                         (fitplot=true) or use the physical scale specified in
+                         the plot file (fitplot=false). The default value is
+                         false.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo5">
+                        <h4>gamma</h4>
+                         integer(1:10000)
+                         <p> The gamma attribute specifies the luminance
+                         correction for the output. A value of 1000 specifies
+                         no correction, while values of 2000 and 500 will
+                         generate lighter and darker output, respectively. The
+                         default value is 1000.<br />
+
+                         Gamma is applied to the Red, Green, and Blue values
+                         (or luminance for grayscale output) using the function
+                         "f(x) = x^(1000/gamma)".  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo6">
+                        <h4>hue</h4>
+                         integer(-180:180) 
+                         <p>The hue attribute specifies a
+                         color hue rotation when printing image files. The
+                         default value is 0.</p>
+                         
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo7">
+                        <h4>job-billing</h4>
+                         text(MAX)
+                         <p>The job-billing attribute provides a text value to
+                         associate with a job for billing purposes.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo8">
+                        <h4>job-hold-until</h4>
+                         keyword | name(MAX)
+                         <p>The job-hold-until attribute specifies a hold time.
+                         In addition to the standard IPP/1.1 keyword names,
+                         CUPS supports name values of the form "HH:MM" and
+                         "HH:MM:SS" that specify a hold time. The hold time is
+                         in Greenwich Mean Time (GMT) and not in the local time
+                         zone. If the specified time is less than the current
+                         time, the job is held until the next day.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo9">
+                        <h4>job-sheets</h4>
+                         1set of type3 keyword | name(MAX)
+                         <p>If only one value is supplied, the banner file is
+                         printed before the job. If two values are supplied,
+                         the first value is used as the starting banner file
+                         and the second as the ending banner file.</p>
+                         <dl>
+                         <dt>see standard attributes</dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo10">
+                        <h4>lpi</h4>
+                         enum
+                         <p>The lpi attribute specifies the number of lines per
+                         inch when printing text files. Only the values 6 and 8
+                         are currently supported. The default value is 6.</p>
+                         <dl>
+                         <dt>6</dt><dd></dd>
+                         <dt>8</dt><dd></dd>
+                         </dl>
+                     </div>
+                     <div class="subsubsection" id="wo11">
+                        <h4>media</h4>
+                        1set of keyword | name(MAX)
+                        <p>Contrary to standard way, CUPS accepts more than 1 media attribute,
+                        eg. "GlossyFilm" + "A4".
+                        See <a href="attributes#media">standard attributes page</a> for common media syntax.</p>
+                     </div>
+                     <div class="subsubsection" id="wo12">
+                        <h4>mirror</h4>
+                         boolean
+                         <p>The mirror attribute specifies whether pages are
+                         mirrored on their X axis, which is useful for printing
+                         transfer images on special media. The default value is
+                         false.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo13">
+                        <h4>natural-scaling</h4>
+                         integer(1:1000)
+                         <p>The natural-scaling attribute specifies the scaling
+                         of image files with respect to the natural image size.
+                         A value of 100 specifies that the image file should
+                         exactly the natural size, while 50 is half the natural
+                         size and 200 is twice the natural size. The default
+                         value is 100.</p>
+                         <p> The ppi option can be used to override the natural
+                         resolution of the image, which controls the natural
+                         size.
+                         </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo14">
+                        <h4>number-up-layout</h4>
+                         keyword
+                         <p>The number-up-layout attribute specifies the order
+                         each input page is placed on each output page.
+                         </p>
+                         <dl>
+                         <dt>btlr</dt><dd>Bottom to top, left to right</dd>
+                         <dt>btrl</dt><dd>Bottom to top, right to left</dd>
+                         <dt>lrbt</dt><dd>Left to right, bottom to top</dd>
+                         <dt>lrtb</dt><dd>Left to right, top to bottom (default)</dd>
+                         <dt>rlbt</dt><dd>Right to left, bottom to top</dd>
+                         <dt>rltb</dt><dd>Right to left, top to bottom</dd>
+                         <dt>tblr</dt><dd>Top to bottom, left to right</dd>
+                         <dt>tbrl</dt><dd>Top to bottom, right to left</dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo15">
+                        <h4>page-border</h4>
+                         keyword
+                         <p>The page-border attribute specifies whether a
+                         border is draw around each page.</p>
+                         <dl>
+                         <dt>double</dt><dd>Two hairline borders are drawn</dd>
+                         <dt>double-thick</dt><dd>Two 1pt borders are drawn</dd>
+                         <dt>none</dt><dd>No border is drawn (default)</dd>
+                         <dt>single</dt><dd>A single hairline border is drawn</dd>
+                         <dt>single-thick</dt><dd>A single 1pt border is drawn</dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo16">
+                        <h4>page-bottom</h4>
+                         integer (0:MAX)
+                          <p>The page-bottom attribute specifies the bottom
+                          margin in points (72 points equals 1 inch). The
+                          default value is the device physical margin.</p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo17">
+                        <h4>page-label</h4>
+                         text(MAX)
+                         <p>The page-label attribute provides a text value to
+                         place in the header and footer on each page. If a
+                         classification level is set on the server, then this
+                         classification is printed before the page label.</p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo18">
+                        <h4>page-left </h4>
+                         <p>The page-left attribute specifies the left margin
+                         in points (72 points equals 1 inch). The default value
+                         is the device physical margin.</p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo19">
+                        <h4>page-right</h4>
+                         integer(0:MAX)
+                         <p>The page-right attribute specifies the right margin
+                         in points (72 points equals 1 inch). The default value
+                         is the device physical margin.</p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo20">
+                        <h4>page-set</h4>
+                         keyword
+                         <p>The page-set attribute specifies which pages to
+                         print in a file. The default value is "all".</p>
+                         <dl>
+                         <dt>all</dt><dd></dd>
+                         <dt>even</dt><dd></dd>
+                         <dt>odd</dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo21">
+                        <h4>page-top</h4>
+                        integer(0:MAX)
+                         <p>The page-top attribute specifies the top margin in
+                         points (72 points equals 1 inch). The default value is
+                         the device physical margin.</p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo22">
+                        <h4>penwidth</h4>
+                         integer(0:MAX)
+                         <p>The penwidth attribute specifies the default pen
+                         width in micrometers when printing HP-GL/2 plot files.
+                         The default value is 1000 (1 millimeter).</p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo23">
+                        <h4>ppi</h4>
+                         integer(1:MAX)
+                         <p>The ppi attribute specifies the resolution of an
+                         image file in pixels per inch. The default value is
+                         the resolution included with the file or 128 if no
+                         resolution information is available.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo24">
+                        <h4>prettyprint</h4>
+                         boolean
+                         <p>The prettyprint attribute specifies whether text
+                         files should be printed with a shaded header and
+                         keyword highlighting (prettyprint=true) or without
+                         additional formatting (prettyprint=false). The default
+                         value is false.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo25">
+                        <h4>saturation</h4>
+                         integer(0:200)
+                         <p>The saturation attribute specifies the color
+                         saturation when printing image files. A saturation of
+                         100 is normal, while values of 50 and 200 will be half
+                         and twice as colorful, respectively. The default value
+                         is 100.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+
+                     <div class="subsubsection" id="wo26">
+                        <h4>scaling</h4>
+                         integer(1:1000)
+                         <p>The scaling attribute specifies the scaling of
+                         image files with respect to the selected media. A
+                         value of 100 specifies that the image file should fit
+                         100% of the page, or as much as possible given the
+                         image dimensions. The default value is unspecified.<br
+                         />
+                         
+                         The scaling attribute overrides the ppi attribute if
+                         specified.  </p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+
+                     <div class="subsubsection" id="wo27">
+                        <h4>wrap</h4>
+                         boolean
+                         <p>The wrap attribute specifies whether long lines
+                         should be wrapped (wrap=true) or not (wrap=false) when
+                         printing text files. The default value is true.</p>
+                         <dl>
+                         <dt></dt><dd></dd>
+                         </dl>
+                     </div>
+		     <!-- 28 is in pos 4 -->
+                </div>
+        </div>
+        <div id="copyright" class="pre">
+         
+                CUPS-IPP-1.1
+                
+          Easy Software Products
+          Copyright 1997-2005 All Rights Reserved
+
+          this document is distributed under GNU GPL License.
+          see CUPS license agreement in comments of this page.  
+        </div>
+      <div>
+      <p class="footer">Copyright © 2005-2008 Thomas Harding.
+            <br />
+            Copying and distribution of this article can be made under General Public License.
+            see <a href="README">README</a> and <a href="COPYING">COPYING</a>.
+      </p>
+      </div>
+
+    </body>
+</html>

@@ -1,0 +1,14 @@
+Alias "/print/" "WWWDIR"
+<Directory "WWWDIR">
+		Options -Indexes -FollowSymLinks -MultiViews
+		AllowOverride None
+	
+	directoryIndex index.php
+
+	# THIS RESTRICT CONNECTIONS TO LOCALHOST
+	# YOU MAY WANT TO LET IT LESS RESTRICTIVE
+		Order deny,allow
+		deny from all
+		allow from localhost
+		
+</Directory>

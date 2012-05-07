@@ -1,0 +1,19 @@
+
+
+
+     ------ PHP PrintIPP account banner ------
+
+
+          Job ID: {?job-id}
+        Job Name: {?job-name}
+     Job Billing: {?job-billing}
+   From Computer: {?job-originating-host-name}    (127.0.0.1 = local)
+    Job Priority: {?job-priority} out of 100
+    Printer Name: {?printer-name}
+     Printer URI: {?job-printer-uri}
+
+       From User: {?job-originating-user-name}
+   Creation Time: {?time-at-creation}
+   Document Name: {?document-name}
+
+

@@ -1,0 +1,8 @@
+
+If you don't use integrated http backend,
+in Order to allow authentification,
+you need phpsasl from www.phpclasses.org (BSD license)
+
+<http://www.phpclasses.org/browse/package/1888.html?download=targz>
+
+(You need to register).

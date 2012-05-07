@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim: set expandtab tabstop=2 shiftwidth=2 foldmethod=marker: -->
+<!-- vim: set encoding=utf-8: -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+
+
+        <meta name="Author" content="Thomas Harding" />
+        <meta http-equiv="Description" content="phpprintipp installation" />
+        <meta http-equiv="Keywords" content="installation,install,php,IPP,internet printing protocol,lgpl" />
+        <link type="image/png" rel="shortcut icon" href="images/printipp-logo-shicon.png" title="PHP PrintIPP logo" />
+        <link rev="made" href="mailto:thomas.harding@laposte.net" />
+        <style type="text/css">
+        /* <![CDATA[ */
+            body
+            {
+              padding-top: 2em ;
+              padding-bottom: 4em ;
+              padding-left: 2em ;
+              padding-right: 4em;
+              background-color: white ;
+              color: black;
+            }
+
+            li.menulogo
+            {
+              position: absolute;
+              top: 20px;
+            }
+
+            img.logo
+            {
+              margin-bottom: -0.2ex;
+            }
+
+            div.section
+            {
+              padding-left: 5em;
+              counter-increment: chapter;
+              counter-reset: section;
+            }
+
+            div.section h2
+            {
+              margin-left: -2em;
+            }
+
+            div.subsection
+            {
+              padding-left: 5em;
+              counter-increment: section;
+              counter-reset: subsection;
+            }
+
+            div.subsubsection
+            {
+              padding-left: 5em;
+              counter-increment: subsection;
+            }
+
+
+            div.subsection h3
+            {
+              margin-left: -4em;
+            }
+
+            div.subsubsection h4
+            {
+              margin-left: -2em;
+            }
+
+            pre.pre
+            {
+              display: block;
+              white-space: pre;
+              font-family: monospace;
+            }
+
+            pre.pre span.normal
+            {
+              margin-left: -2em;
+              white-space: normal;
+              font-family: serif;
+            }
+            span.pre
+            {
+              white-space: pre;
+              display: inline;
+              font-weight: bolder;
+              font-size: 120%;
+              font-family: monospace;
+            }
+
+            p.typewriter
+            {
+              display: block;
+              font-family: monospace;
+            }
+
+            p.note:before
+            {
+              content: 'Note: ';
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            p.note
+            {
+              font-size: 80%;
+            }
+
+            span.important
+            {
+              display: block ;
+              font-weight: bold;
+              font-size: 80%;
+            }
+
+            div.section h2:before
+            {
+              content: counter(chapter) ". ";
+            }
+
+            div.subsection h3:before
+            {
+              content: counter(chapter) "." counter(section) ". ";
+            }
+
+            div.subsubsection h4:before
+            {
+              content: counter(chapter) "." counter(section) "." counter(subsection) ". ";
+            }
+
+            div.menu dl {
+                counter-reset: depth;
+                }
+            div.menu dt:before {
+                content: counters(depth,".")". ";
+                counter-increment: depth;
+                }
+<<<<<<< HEAD
+
+            span.h2
+            {
+              font-size: 120%;
+=======
+
+            span.h2
+            {
+              font-size: 120%;
+>>>>>>> origin/master
+            }
+            span.h3
+            {
+              font-size: 110%;
+            }
+<<<<<<< HEAD
+
+=======
+
+>>>>>>> origin/master
+            p.footer
+            {
+              width: 80% ;
+              margin-left: 170px;
+              margin-bottom: 1em;
+              text-align: center;
+              font-family: sans-serif;
+              font-size: 60%;
+              color: black;
+              background-color: #AAAAFF;
+            }
+<<<<<<< HEAD
+
+=======
+
+>>>>>>> origin/master
+            dl.final a {
+              text-decoration: none;
+              font-family: sans-serif;
+            }
+        /* ]]> */
+        </style>
+
+<<<<<<< HEAD
+
+=======
+
+>>>>>>> origin/master
+        <title>PHP PrintIPP (PHP::PRINT::IPP) installation</title>
+    </head>
+    <body>
+        <h1>PHP PrintIPP (PHP::PRINT::IPP) installation</h1>
+<<<<<<< HEAD
+
+=======
+
+>>>>>>> origin/master
+        <div class='menu'>
+        <h2>Summary</h2>
+        <dl>
+            <dt><span class="h2"><a href="#debian">Debian</a></span></dt>
+            <dt><span class="h2"><a href="#unix">UNIX/LINUX</a></span></dt>
+            <dt><span class="h2"><a href="#other">OTHER</a></span></dt>
+	</dl>
+	</div>
+<<<<<<< HEAD
+
+        <div class="section" id="debian">
+            <h2>INSTALL on Debian</h2>
+	  <ul>
+	  <li>Download last .deb package <a
+=======
+
+        <div class="section" id="debian">
+            <h2>INSTALL on Debian</h2>
+	  <ul>
+	  <li>Download last .deb package <a
+>>>>>>> origin/master
+          href="http://download.savannah.nongnu.org/releases/phpprintipp/debian"
+                >from here</a>.
+	  </li>
+	  <li>as "root" or via "sudo", type
+<pre>
+ # dpkg -i php-printipp_0.*-1_all.deb
+
+  (or)
+
+ $ sudo dpkg -i php-printipp_0.*-1_all.deb
+</pre>
+    </li>
+	  </ul>
+    <p>Classes location is <span class="pre">/usr/share/php/printipp/</span>.
+    As default PHP
+    <span class="pre">include_path</span> directive includes
+    <span class="pre">/usr/share/php/</span>,
+    you'll have to put either one of the following lines in your PHP code,
+    depending
+    of what level of operations you want to perform (only one include/require is needed,
+    because top-classes will load automagically the low-level ones):</p>
+    <pre>
+      require_once('printipp/BasicIPP.php');
+    or:
+      require_once('printipp/PrintIPP.php');
+    or:
+      require_once('printipp/ExtendedPrintIPP.php');
+    or:
+      require_once('printipp/CupsPrintIPP.php');
+    </pre>
+    <p class="note">Choose the last if you are unsure</p>
+    <p>www pages are in <span class="pre">/usr/share/php-printipp/</span> (you'll have to link
+    <span class="pre">/etc/apache2/sites-available/phpprintipp</span> to
+    <span class="pre">/etc/apache2/sites-enabled</span> to make them available at
+    <span class="pre">http://localhost/print/</span>).
+    It is wise to restrict access to these pages to local net, or
+    identified hosts (default to localhost only), and to edit
+    their settings.
+    </p>
+    <p>Command-line "<span class="pre">phpprintipp</span>" tool is in
+    <span class="pre">/usr/bin</span></p>
+    <p>Documentation is in
+    <span class="pre">/usr/share/doc/php-printipp</span> directory.</p>
+<<<<<<< HEAD
+    <p>Two new cool banners (<span class="pre">txtbanner</span> and
+=======
+    <p>Two new cool banners (<span class="pre">txtbanner</span> and
+>>>>>>> origin/master
+    <span class="pre">psbanner</span>) are in
+    <span class="pre">/usr/share/cups/banners</span> directory.</p>
+    </div>
+        <div class="section" id="unix">
+            <h2>INSTALL on UNIX/LINUX</h2>
+	  <ul>
+    <li>Prerequisites for automatic install: automake/autoconf/make. See "other"
+    section for manual installation.</li>
+<<<<<<< HEAD
+	  <li>Download last tarball <a
+=======
+	  <li>Download last tarball <a
+>>>>>>> origin/master
+          href="http://download.savannah.nongnu.org/releases/phpprintipp"
+                >from here</a>.
+	  </li>
+    <li>Unpack it (<span class="pre">tar zxvf phpprintipp_0.*.tar.gz</span>)</li>
+	  <li><span class="pre">cd phpprintipp_0.*</span></li>
+	  <li>
+<pre>
+ user$ ./autogen.sh
+ user$ make
+ junior-admin$ make install
+</pre></li>
+	  <li><em>OR</em>
+<pre>
+ $ ./autogen.sh \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var
+<<<<<<< HEAD
+ $ make
+=======
+ $ make
+>>>>>>> origin/master
+ # make install
+</pre>
+    (or any paths which fit your system).
+    </li>
+	  </ul>
+<<<<<<< HEAD
+    <p><em>If you have not set the autogen selectors</em>,Classes location is
+    <span class="pre">/usr/local/share/php/printipp/</span>. You'll have to
+    modify the PHP <span class="pre">include_path</span> directive in the relevant
+    <em>"<span class="pre">php.ini</span></em>" file to it includes
+    <span class="pre">/usr/local/share/php/</span>, and you'll have to put either
+=======
+    <p><em>If you have not set the autogen selectors</em>,Classes location is
+    <span class="pre">/usr/local/share/php/printipp/</span>. You'll have to
+    modify the PHP <span class="pre">include_path</span> directive in the relevant
+    <em>"<span class="pre">php.ini</span></em>" file to it includes
+    <span class="pre">/usr/local/share/php/</span>, and you'll have to put either
+>>>>>>> origin/master
+    one of the following lines
+    in your PHP code,
+    depending
+    of what level of operations you want to perform (only one include/require is needed,
+    because top-classes will load automagically the low-level ones):</p>
+    <pre>
+      require_once('printipp/BasicIPP.php');
+    or:
+      require_once('printipp/PrintIPP.php');
+    or:
+      require_once('printipp/ExtendedPrintIPP.php');
+    or:
+      require_once('printipp/CupsPrintIPP.php');
+    </pre>
+    <p class="note">Choose the last if you are unsure</p>
+    <p><em>If you have not set the autogen selectors</em>
+      Command-line "<span class="pre">phpprintipp</span>" tool is in
+      <span class="pre">/usr/local/bin</span></p>
+    <p><em>If you have not set the autogen selectors</em>
+    www pages are in <span class="pre">/usr/local/share/php-printipp/</span>
+    (you'll have to link
+    <span class="pre">/usr/local/etc/apache2/sites-available/phpprintipp</span> to
+    <span class="pre">/etc/apache2/sites-enabled</span> to make them available at
+    <span class="pre">http://localhost/print/</span>).
+    It is wise to restrict access to these pages to local net, or
+    identified hosts (default to localhost only), and to edit
+    their settings.
+    </p>
+    <p><em>If you have not set the autogen selectors</em>
+    documentation is in <span class="pre">/usr/local/share/doc/php-printipp</span>
+    </p>
+    <p><em>If you have not set the autogen selectors</em>
+<<<<<<< HEAD
+    Two new cool banners (<span class="pre">acctxt</span> and
+=======
+    Two new cool banners (<span class="pre">acctxt</span> and
+>>>>>>> origin/master
+    <span class="pre">accps</span>) are in
+    <span class="pre">/usr/local/share/cups/banners</span> directory.</p>
+        </div>
+        <div class="section" id="other">
+            <h2>INSTALL on other systems</h2>
+	<ul>
+<<<<<<< HEAD
+	  <li>Download last tarball <a
+=======
+	  <li>Download last tarball <a
+>>>>>>> origin/master
+          href="http://download.savannah.nongnu.org/releases/phpprintipp"
+                >from here</a>.
+	  </li>
+    <li>Unpack it (<span class="pre">tar zxvf phpprintipp_0.*.tar.gz</span>),
+<<<<<<< HEAD
+      <span class="important">OR</span>
+      eg. via <span class="pre">7zip</span> (two operations, the first
+=======
+      <span class="important">OR</span>
+      eg. via <span class="pre">7zip</span> (two operations, the first
+>>>>>>> origin/master
+      expanding the compressed archive,
+      the second unpacking the tarball).</li>
+	<li>Browse to <span class="pre">/php_classes</span> directory of the
+  unpacked archive</li>
+  <li>Manually copy the 5 php files
+  (<span class="pre">*IPP.php</span> + <span class="pre">http_class.php</span>)
+  in a same
+  directory. It can be a 'printipp' directory in your project, preferably
+  out of the web-accessable path, or, better, a directory in your
+  php <span class="pre">include_path</span>
+  (eg <span class="pre">c:\php\includes"</span>,
+  see your <span class="pre">php.ini</span> file) for a system-wide
+  installation.</li>
+  <li>
+    <p>you'll have to put either one of the following lines
+    in your PHP code,
+    depending
+    of what level of operations you want to perform (only one include/require is needed,
+    because top-classes will load automagically the low-level ones):</p>
+    <pre>
+      require_once('printipp/BasicIPP.php');
+    or:
+      require_once('printipp/PrintIPP.php');
+    or:
+      require_once('printipp/ExtendedPrintIPP.php');
+    or:
+      require_once('printipp/CupsPrintIPP.php');
+    </pre>
+    <p class="note">Choose the last if you are unsure</p>
+
+  </li>
+<<<<<<< HEAD
+	<li>Manually copy &mdash; if needed &mdash; the unpacked
+=======
+	<li>Manually copy &mdash; if needed &mdash; the unpacked
+>>>>>>> origin/master
+  archive's <span class="pre"
+  >bin/*.php</span> in a system's directory <span class="pre">PATH</span>
+  included.</li>
+	<li>Manually copy &mdash; if needed &mdash; the unpacked archive's
+  <span class="pre"
+  >www/*</span> (www pages) into the web directory location you want.
+  It is wise to restrict access to these pages to local net, or
+  identified hosts, and to edit their settings.
+  </li>
+	<li>Manually copy the unpacked archive's <span class="pre"
+  >/documentation</span> where you want &mdash; preferably in a local
+  web repository directory, in order file links works.</li>
+	</ul>
+  </div>
+</body>
+</html>
