@@ -1,9 +1,0 @@
-
-If you experience problems with integrated http backend,
-put here file http.php
-
-You'll fing it at http://www.phpclasses.org/browse/package/3.html
-(you need to register)
-the class name is: "Class: HTTP protocol client".
-
-License: BSD
