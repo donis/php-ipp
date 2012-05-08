@@ -1,5 +1,5 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
+
 /* @(#) $Header: /sources/phpprintipp/phpprintipp/php_classes/CupsPrintIPP.php,v 1.1 2008/06/21 00:30:56 harding Exp $
  *
  * Class PrintIPP - Send extended IPP requests.
@@ -50,10 +50,9 @@ class CupsPrintIPP extends ExtendedPrintIPP
 		self::_initTags();
 	}
 
-//
-// OPERATIONS
-//
-
+	//
+	// OPERATIONS
+	//
 	public function cupsGetDefaults($attributes = array("all"))
 	{
 		//The CUPS-Get-Default operation returns the default printer URI and attributes
@@ -316,7 +315,6 @@ class CupsPrintIPP extends ExtendedPrintIPP
 
 	public function getPrinters($printer_location = false, $printer_info = false, $attributes = array())
 	{
-
 		if (count($attributes) == 0)
 		{
 			true;
@@ -457,10 +455,9 @@ class CupsPrintIPP extends ExtendedPrintIPP
 		return $result;
 	}
 
-//
-// SETUP
-//
-
+	//
+	// SETUP
+	//
 	protected function _initTags()
 	{
 
@@ -500,13 +497,11 @@ class CupsPrintIPP extends ExtendedPrintIPP
 		$this->job_tags = array_merge($this->job_tags, $job_tags);
 	}
 
-//
-// REQUEST BUILDING
-//
-
+	//
+	// REQUEST BUILDING
+	//
 	protected function _enumBuild($tag, $value)
 	{
-
 		$value_built = parent::_enumBuild($tag, $value);
 
 		switch ($tag)
@@ -548,13 +543,11 @@ class CupsPrintIPP extends ExtendedPrintIPP
 		return $prepend . $value_built;
 	}
 
-//
-// RESPONSE PARSING
-//
-
+	//
+	// RESPONSE PARSING
+	//
 	private function _getAvailablePrinters()
 	{
-
 		$this->available_printers = array();
 		$k = 0;
 		$this->printers_attributes = new stdClass();
@@ -732,7 +725,6 @@ class CupsPrintIPP extends ExtendedPrintIPP
 
 	protected function _interpretEnum($attribute_name, $value)
 	{
-
 		$value_parsed = self::_interpretInteger($value);
 
 		switch ($attribute_name)
@@ -749,14 +741,3 @@ class CupsPrintIPP extends ExtendedPrintIPP
 		return $value;
 	}
 }
-
-;
-
-/*
- * Local variables:
- * mode: php
- * tab-width: 4
- * c-basic-offset: 4
- * End:
- */
-?>

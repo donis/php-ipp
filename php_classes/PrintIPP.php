@@ -1,5 +1,5 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
+
 /* @(#) $Header: /sources/phpprintipp/phpprintipp/php_classes/PrintIPP.php,v 1.3 2010/09/06 22:41:41 harding Exp $
  *
  * Class PrintIPP - Send IPP requests, Get and parses IPP Responses.
@@ -49,18 +49,9 @@ class PrintIPP extends BasicIPP
 		parent::__construct();
 	}
 
-	/*****************
-	 *
-	 * PUBLIC FUNCTIONS
-	 *
-	 *******************/
-// SETTINGS
-
-// OPERATIONS
-
+	// OPERATIONS
 	public function printJob()
 	{
-
 		self::_putDebug(sprintf("*************************\nDate: %s\n*************************\n\n", date('Y-m-d H:i:s')));
 
 		if (!$this->_stringJob())
@@ -150,7 +141,6 @@ class PrintIPP extends BasicIPP
 
 	public function cancelJob($job_uri)
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
 
@@ -197,7 +187,6 @@ class PrintIPP extends BasicIPP
 
 	public function validateJob()
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
 
@@ -364,7 +353,6 @@ class PrintIPP extends BasicIPP
 
 	public function getPrinterAttributes()
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
 
@@ -470,7 +458,6 @@ class PrintIPP extends BasicIPP
 
 	public function getJobs($my_jobs = true, $limit = 0, $which_jobs = "not-completed", $subset = false)
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
 
@@ -648,7 +635,6 @@ class PrintIPP extends BasicIPP
 
 	public function getJobAttributes($job_uri, $subset = false, $attributes_group = "all")
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
 
@@ -808,18 +794,11 @@ class PrintIPP extends BasicIPP
 
 	public function getPrinters()
 	{
-
 		// placeholder for vendor extension operation (getAvailablePrinters for CUPS)
 		$this->jobs = array_merge($this->jobs, array(''));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(''));
 		$this->status = array_merge($this->status, array(''));
 	}
-
-	/******************
-	 *
-	 * DEVELOPPEMENT FUNCTIONS
-	 *
-	 *******************/
 
 	public function generateError($error)
 	{
@@ -842,14 +821,7 @@ class PrintIPP extends BasicIPP
 		trigger_error(sprintf(_('Reset Error %s'), $error), E_USER_NOTICE);
 	}
 
-	/******************
-	 *
-	 * PROTECTED FUNCTIONS
-	 *
-	 *******************/
-
-// SETUP
-
+	// SETUP
 	protected function _setOperationId()
 	{
 		$prepend = '';
@@ -885,8 +857,7 @@ class PrintIPP extends BasicIPP
 		self::_putDebug("job-uri is: " . $job_uri . "\n", 2);
 	}
 
-// RESPONSE PARSING
-
+	// RESPONSE PARSING
 	protected function _parsePrinterAttributes()
 	{
 
@@ -1090,7 +1061,6 @@ class PrintIPP extends BasicIPP
 
 	protected function _readTag($tag)
 	{
-
 		switch ($tag)
 		{
 			case 0x10:
@@ -1187,7 +1157,6 @@ class PrintIPP extends BasicIPP
 				$tag = "extended type";
 				break;
 			default:
-
 				if ($tag >= 0x14 && $tag < 0x15 && $tag > 0x17 && $tag <= 0x1f)
 				{
 					$tag = "out-of-band";
@@ -1215,12 +1184,12 @@ class PrintIPP extends BasicIPP
 
 				break;
 		}
+
 		return $tag;
 	}
 
 	protected function _readCollection($attributes_type, $j)
 	{
-
 		$name_length = ord($this->serveroutput->body[$this->_parsing->offset]) * 256
 			+ ord($this->serveroutput->body[$this->_parsing->offset + 1]);
 
@@ -1347,7 +1316,6 @@ class PrintIPP extends BasicIPP
 
 	protected function _readAttributeName($attributes_type, $j, $write = 1)
 	{
-
 		$name_length = ord($this->serveroutput->body[$this->_parsing->offset]) * 256
 			+ ord($this->serveroutput->body[$this->_parsing->offset + 1]);
 		$this->_parsing->offset += 2;
@@ -1377,7 +1345,6 @@ class PrintIPP extends BasicIPP
 
 	protected function _readValue($type, $attributes_type, $j, $write = 1)
 	{
-
 		$value_length = ord($this->serveroutput->body[$this->_parsing->offset]) * 256
 			+ ord($this->serveroutput->body[$this->_parsing->offset + 1]);
 
@@ -1461,7 +1428,6 @@ class PrintIPP extends BasicIPP
 	{
 		//if (!preg_match('#successful#',$this->serveroutput->status))
 		//    return false;
-
 		$k = -1;
 		$l = 0;
 		for ($i = 0; $i < count($this->serveroutput->response); $i++)
@@ -1510,7 +1476,6 @@ class PrintIPP extends BasicIPP
 
 	protected function _interpretAttribute($attribute_name, $type, $value)
 	{
-
 		switch ($type)
 		{
 			case "integer":
@@ -1558,7 +1523,6 @@ class PrintIPP extends BasicIPP
 
 	protected function _interpretRangeOfInteger($value)
 	{
-
 		$value_parsed = 0;
 		$integer1 = $integer2 = 0;
 
@@ -1591,7 +1555,6 @@ class PrintIPP extends BasicIPP
 
 	protected function _interpretEnum($attribute_name, $value)
 	{
-
 		$value_parsed = self::_interpretInteger($value);
 
 		switch ($attribute_name)
@@ -1917,7 +1880,6 @@ class PrintIPP extends BasicIPP
 
 	protected function _getJobId()
 	{
-
 		if (!isset($this->serveroutput->response))
 		{
 			$this->jobs = array_merge($this->jobs, array('NO JOB'));
@@ -1943,7 +1905,6 @@ class PrintIPP extends BasicIPP
 
 	protected function _getJobUri()
 	{
-
 		if (!isset($this->jobs_uri))
 		{
 			$this->jobs_uri = array();
@@ -1974,12 +1935,10 @@ class PrintIPP extends BasicIPP
 		$this->index = 0;
 		for ($i = $this->_parsing->offset; $i < strlen($this->serveroutput->body); $i = $this->_parsing->offset)
 		{
-
 			$tag = ord($this->serveroutput->body[$this->_parsing->offset]);
 
 			if ($tag > 0x0F)
 			{
-
 				self::_readAttribute($j);
 				$this->index++;
 				continue;
@@ -2055,8 +2014,7 @@ class PrintIPP extends BasicIPP
 
 	   */
 
-// REQUEST BUILDING
-
+	// REQUEST BUILDING
 	protected function _stringCancel($job_uri)
 	{
 
@@ -2106,14 +2064,3 @@ class PrintIPP extends BasicIPP
 		return TRUE;
 	}
 }
-
-;
-
-/*
- * Local variables:
- * mode: php
- * tab-width: 4
- * c-basic-offset: 4
- * End:
- */
-?>

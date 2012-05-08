@@ -1,5 +1,5 @@
 <?php
-/* vim: set expandtab tabstop=2 shiftwidth=2 foldmethod=marker: */
+
 /* @(#) $Header: /sources/phpprintipp/phpprintipp/php_classes/BasicIPP.php,v 1.7 2012/03/01 17:21:04 harding Exp $
  *
  * Class BasicIPP - Send Basic IPP requests, Get and parses IPP Responses.
@@ -35,89 +35,9 @@
    - RFC 3380
    - RFC 3382
  */
-/*
-   TODO: beta tests on other servers than Cups
- */
-// required and included files
+
 require_once ("http_class.php");
-/*
-// If you want http backend from http://www.phpclasses.org/browse/package/3.html
-require_once("HTTP/http.php");
-include_once("SASL/sasl.php");
-include_once("SASL/basic_sasl_client.php");
-include_once("SASL/digest_sasl_client.php");
-include_once("SASL/ntlm_sasl_client.php");
- */
-/**
- * Class and Function List:
- * Function list:
- * - __construct()
- * - getErrorFormatted()
- * - getErrno()
- * - setPort()
- * - setUnix()
- * - setHost()
- * - setTimeout()
- * - setPrinterURI()
- * - setData()
- * - setRawText()
- * - unsetRawText()
- * - setBinary()
- * - setFormFeed()
- * - unsetFormFeed()
- * - setCharset()
- * - setLanguage()
- * - setDocumentFormat()
- * - setMimeMediaType()
- * - setCopies()
- * - setDocumentName()
- * - setJobName()
- * - setUserName()
- * - setAuthentification()
- * - setAuthentication()
- * - setSides()
- * - setFidelity()
- * - unsetFidelity()
- * - setMessage()
- * - setPageRanges()
- * - setAttribute()
- * - unsetAttribute()
- * - setLog()
- * - printDebug()
- * - getDebug()
- * - printJob()
- * - _sendHttp()
- * - _initTags()
- * - _setOperationId()
- * - _setJobId()
- * - _setJobUri()
- * - _parseServerOutput()
- * - _parseHttpHeaders()
- * - _parseIppVersion()
- * - _parseStatusCode()
- * - _parseRequestID()
- * - _interpretInteger()
- * - _parseResponse()
- * - _stringJob()
- * - _buildValues()
- * - _giveMeStringLength()
- * - _enumBuild()
- * - _integerBuild()
- * - _rangeOfIntegerBuild()
- * - _setJobAttribute()
- * - _setOperationAttribute()
- * - _setPrinterAttribute()
- * - _putDebug()
- * - _errorLog()
- * Classes list:
- * - ippException extends Exception
- * - BasicIPP
- */
-/***********************
- *
- * ippException class
- *
- ************************/
+
 class ippException extends Exception
 {
 	protected $errno;
@@ -143,11 +63,6 @@ class ippException extends Exception
 
 class BasicIPP
 {
-	//
-	// variables declaration
-	//
-
-	// setup variables
 	public $paths = array(
 		"root" => "/",
 		"admin" => "/admin/",
@@ -176,6 +91,7 @@ class BasicIPP
 	public $printers_uri = array();
 	public $debug = array();
 	public $response;
+	public $meta;
 
 	// protected variables;
 	protected $log_level = 2; // max 3: very verbose
@@ -201,7 +117,6 @@ class BasicIPP
 	protected $datatype;
 	protected $datahead;
 	protected $datatail;
-	public $meta;
 	protected $operation_id;
 	protected $delay;
 	protected $error_generation; //devel feature
@@ -218,13 +133,14 @@ class BasicIPP
 	protected $collection_nbr = array(); //RFC3382
 	protected $unix = false; // true -> use unix sockets instead of http
 
-	// constructor
 	public function __construct()
 	{
 		$tz = getenv("date.timezone");
-		if (!$tz) {
+		if (!$tz)
+		{
 			$tz = @date_default_timezone_get();
 		}
+
 		date_default_timezone_set($tz);
 		$this->meta = new stdClass();
 		$this->setup = new stdClass();
@@ -235,9 +151,6 @@ class BasicIPP
 		self::_initTags();
 	}
 
-	//
-	// SETUP
-	//
 	public function setPort($port = '631')
 	{
 		$this->port = $port;
@@ -379,9 +292,12 @@ class BasicIPP
 	public function setCopies($nbrcopies = 1)
 	{
 		$this->meta->copies = "";
-		if ($nbrcopies == 1 || !$nbrcopies) {
+
+		if ($nbrcopies == 1 || !$nbrcopies)
+		{
 			return true;
 		}
+
 		$copies = self::_integerBuild($nbrcopies);
 		$this->meta->copies = chr(0x21) // integer type | value-tag
 			. chr(0x00) . chr(0x06) //             name-length
@@ -481,9 +397,11 @@ class BasicIPP
 	public function setSides($sides = 2)
 	{
 		$this->meta->sides = '';
-		if (!$sides) {
+		if (!$sides)
+		{
 			return true;
 		}
+
 		switch ($sides)
 		{
 			case 1:
@@ -497,11 +415,8 @@ class BasicIPP
 			case "2CE":
 				$sides = "two-sided-short-edge";
 				break;
-
-			default:
-				$sides = $sides; // yeah, what ?
-				break;
 		}
+
 		$this->meta->sides = chr(0x44) // keyword type | value-tag
 			. chr(0x00) . chr(0x05) //        name-length
 			. "sides" // sides |             name
@@ -696,7 +611,6 @@ class BasicIPP
 	//
 	// LOGGING / DEBUGGING
 	//
-
 	public function setLog($log_destination, $destination_type = 'file', $level = 2)
 	{
 
@@ -753,7 +667,6 @@ class BasicIPP
 	//
 	// OPERATIONS
 	//
-
 	public function printJob()
 	{
 		// this BASIC version of printJob do not parse server
@@ -840,16 +753,9 @@ class BasicIPP
 		return false;
 	}
 
-	/******************
-	 *
-	 * PROTECTED FUNCTIONS
-	 *
-	 *******************/
-
 	//
 	// HTTP OUTPUT
 	//
-
 	protected function _sendHttp($post_values, $uri)
 	{
 		/*
@@ -1009,7 +915,6 @@ class BasicIPP
 	//
 	// INIT
 	//
-
 	protected function _initTags()
 	{
 		$this->tags_types = array(
@@ -1173,7 +1078,6 @@ class BasicIPP
 	//
 	// SETUP
 	//
-
 	protected function _setOperationId()
 	{
 		$prepend = '';
@@ -1206,7 +1110,6 @@ class BasicIPP
 	//
 	// RESPONSE PARSING
 	//
-
 	protected function _parseServerOutput()
 	{
 		$this->serveroutput->response = array();
@@ -1530,7 +1433,6 @@ class BasicIPP
 	//
 	// REQUEST BUILDING
 	//
-
 	protected function _stringJob()
 	{
 		if (!isset($this->setup->charset)) {
@@ -2060,13 +1962,3 @@ class BasicIPP
 		return;
 	}
 }
-
-;
-/*
- * Local variables:
- * mode: php
- * tab-width: 4
- * c-basic-offset: 4
- * End:
- */
-?>

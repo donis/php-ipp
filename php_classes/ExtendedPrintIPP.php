@@ -1,5 +1,5 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
+
 /* @(#) $Header: /sources/phpprintipp/phpprintipp/php_classes/ExtendedPrintIPP.php,v 1.1 2008/06/21 00:30:57 harding Exp $
  *
  * Class PrintIPP - Send extended IPP requests.
@@ -50,14 +50,7 @@ class ExtendedPrintIPP extends PrintIPP
 		parent::__construct();
 	}
 
-	/******************
-	 *
-	 * PUBLIC FUNCTIONS
-	 *
-	 *******************/
-
-// OPERATIONS
-
+	// OPERATIONS
 	public function printURI($uri)
 	{
 
@@ -120,7 +113,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function purgeJobs()
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
 
@@ -223,7 +215,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function createJob()
 	{
-
 		self::_setOperationId();
 		$this->parsed = array();
 		unset($this->printer_attributes);
@@ -392,7 +383,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function sendDocument($job, $is_last = false)
 	{
-
 		self::_putDebug(sprintf("*************************\nDate: %s\n*************************\n\n", date('Y-m-d H:i:s')));
 
 		if (!$this->_stringDocument($job, $is_last))
@@ -478,7 +468,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function sendURI($uri, $job, $is_last = false)
 	{
-
 		self::_putDebug(sprintf("*************************\nDate: %s\n*************************\n\n", date('Y-m-d H:i:s')));
 
 		if (!$this->_stringSendUri($uri, $job, $is_last))
@@ -540,7 +529,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function pausePrinter()
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
 
@@ -643,7 +631,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function resumePrinter()
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
 
@@ -741,7 +728,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function holdJob($job_uri, $until = 'indefinite')
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(trim($job_uri)));
 
@@ -843,7 +829,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function releaseJob($job_uri)
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(trim($job_uri)));
 
@@ -928,7 +913,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function restartJob($job_uri)
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(trim($job_uri)));
 
@@ -1020,7 +1004,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	public function setJobAttributes($job_uri, $deleted_attributes = array())
 	{
-
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(trim($job_uri)));
 
@@ -1142,22 +1125,22 @@ class ExtendedPrintIPP extends PrintIPP
 	public function setPrinterAttributes($document_format = '', $deleted_attributes = array())
 	{
 		/* $document_format (RFC 3380)
-				 If the client includes this attribute, the Printer MUST change
-				 the supplied attributes for the document format specified by
-				 this attribute.  If a supplied attribute is a member of the
-				 "document-format-varying-attributes" (i.e., the attribute
-				 varies by document format, see section 6.3), the Printer MUST
-				 change the supplied attribute for the document format specified
-				 by this attribute, but not for other document formats.  If a
-				 supplied attribute isn't a member of the "document-format-
-				 varying-attributes" (i.e., it doesn't vary by document format),
-				 the Printer MUST change the supplied attribute for all document
-				 formats.
+		 If the client includes this attribute, the Printer MUST change
+		 the supplied attributes for the document format specified by
+		 this attribute.  If a supplied attribute is a member of the
+		 "document-format-varying-attributes" (i.e., the attribute
+		 varies by document format, see section 6.3), the Printer MUST
+		 change the supplied attribute for the document format specified
+		 by this attribute, but not for other document formats.  If a
+		 supplied attribute isn't a member of the "document-format-
+		 varying-attributes" (i.e., it doesn't vary by document format),
+		 the Printer MUST change the supplied attribute for all document
+		 formats.
 
-				 If the client omits this attribute, the Printer MUST change the
-				 supplied attributes for all document formats, whether or not
-				 they vary by document-format.
-				 */
+		 If the client omits this attribute, the Printer MUST change the
+		 supplied attributes for all document formats, whether or not
+		 they vary by document-format.
+		 */
 
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
@@ -1284,11 +1267,9 @@ class ExtendedPrintIPP extends PrintIPP
 		return false;
 	}
 
-// REQUEST BUILDING
-
+	// REQUEST BUILDING
 	protected function _setDocumentUri()
 	{
-
 		$this->meta->document_uri = chr(0x45) // type uri
 			. chr(0x00) . chr(0x0c) // name-length
 			. "document-uri"
@@ -1301,7 +1282,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	protected function _stringUri()
 	{
-
 		self::_setDocumentUri();
 
 		if (!isset($this->setup->document_uri))
@@ -1442,7 +1422,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	protected function _stringDocument($job, $is_last)
 	{
-
 		if ($is_last == false)
 		{
 			$is_last = chr(0x00);
@@ -1556,7 +1535,6 @@ class ExtendedPrintIPP extends PrintIPP
 
 	protected function _stringSendUri($uri, $job, $is_last)
 	{
-
 		$this->document_uri = $uri;
 		self::_setDocumentUri();
 
@@ -1677,14 +1655,3 @@ class ExtendedPrintIPP extends PrintIPP
 		return TRUE;
 	}
 }
-
-;
-
-/*
- * Local variables:
- * mode: php
- * tab-width: 4
- * c-basic-offset: 4
- * End:
- */
-?>
