@@ -1,8 +1,8 @@
 2010-09-07:
-   - applying a patche from Brian Kroth (untesteds) :
+   - applying a patche from Brian Kroth (untested) :
       fix getjobs attributes for CUPS 1.4.4
 2010-08-22:
-   - applying two patches from Brian Kroth (untesteds) :
+   - applying two patches from Brian Kroth (untested) :
         * deprecated split function replaced by preg_split
         * modification of _interpretAttribute function
 2008-06-21:
@@ -26,7 +26,7 @@
    - introducing "phpprintipp" CLI program. Works fine
      together with foomatic-rip (which converts PostScript
      to a printer-comprehensive format, with many adjustable
-     parameters), or with GIMP printed-to-file files, or 
+     parameters), or with GIMP printed-to-file files, or
      standalone for (ASCII) text/plain. You may adjust
      $tempdir (/tmp) in to fit your system (a tempfile is
      necessary to avoid memory consumption, by streaming to/
@@ -89,12 +89,12 @@
   - improved doc with variables documentation.
   - http digest authentication works (with CUPS)!
     don't forget to make "lppasswd -a user" before to test :).
-    
+
 2005-01-18 V0.73:
   - added CupsAcceptJobs adn cupsRejectJobs operations in CupsPrintIPP.
   - added CUPS specific job attributes in CupsPrintIPP.
   - added documentation for attributes
-  
+
 2005-01-16 V0.72:
   - Improved setAttribute and related: 1setOf xxx now supported:
     use setAttribute('attribute',array('foo','bar'))
@@ -109,9 +109,9 @@
   - Adding operation cupsGetDefaults (From CUPS-IPP-1.1) in CupsPrintIPP
   - correcting parsing of validateJob() operation: now result is found
     in $ipp->attributes.
-  
+
 2005-01-10 V0.71:
-    Improved HTTP backend: loads systematically complete 
+    Improved HTTP backend: loads systematically complete
     response from server
 
 2005-01-09 V0.7:
@@ -124,7 +124,7 @@
 2005-01-07 V0.6b:
   - Integrated changes by Manuel Lemos on _sendHTTP
     to merge with his new HTTP backend.
-  
+
   - HTTP backend is no more shipped-with:
     You have to download it at
     http://www.phpclasses.org/browse/package/3.html
@@ -142,10 +142,10 @@
 
 2005-01-05 (CVS):
     all RFC 2911 operations implemented
-    
+
 2006-01-4 V0.5a:
     corrected bugs in html.php, corrected testfiles
 
-2006-01-03 V0.5: 
+2006-01-03 V0.5:
     all RFC2911 mandatory operations implemented
 
