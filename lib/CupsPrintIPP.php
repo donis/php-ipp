@@ -26,7 +26,6 @@
  */
 
 /*
-
 	This class is intended to implement Internet Printing Protocol on client side.
 
 	References needed to debug / add functionnalities:
@@ -43,6 +42,9 @@ class CupsPrintIPP extends ExtendedPrintIPP
 {
 	public $printers_attributes;
 	public $defaults_attributes;
+
+	protected $parsed;
+	private $output;
 
 	public function __construct()
 	{
@@ -460,7 +462,6 @@ class CupsPrintIPP extends ExtendedPrintIPP
 	//
 	protected function _initTags()
 	{
-
 		// override parent with specific cups attributes
 
 		$operation_tags = array();
@@ -630,96 +631,115 @@ class CupsPrintIPP extends ExtendedPrintIPP
 			$type[0] = 'printer-class';
 			$value_parsed -= 1;
 		}
+
 		if ($value_parsed % 4 == 2)
 		{
 			$type[1] = 'remote-destination';
 			$value_parsed -= 2;
 		}
+
 		if ($value_parsed % 8 == 4)
 		{
 			$type[2] = 'print-black';
 			$value_parsed -= 4;
 		}
+
 		if ($value_parsed % 16 == 8)
 		{
 			$type[3] = 'print-color';
 			$value_parsed -= 8;
 		}
+
 		if ($value_parsed % 32 == 16)
 		{
 			$type[4] = 'hardware-print-on-both-sides';
 			$value_parsed -= 16;
 		}
+
 		if ($value_parsed % 64 == 32)
 		{
 			$type[5] = 'hardware-staple-output';
 			$value_parsed -= 32;
 		}
+
 		if ($value_parsed % 128 == 64)
 		{
 			$type[6] = 'hardware-fast-copies';
 			$value_parsed -= 64;
 		}
+
 		if ($value_parsed % 256 == 128)
 		{
 			$type[7] = 'hardware-fast-copy-collation';
 			$value_parsed -= 128;
 		}
+
 		if ($value_parsed % 512 == 256)
 		{
 			$type[8] = 'punch-output';
 			$value_parsed -= 256;
 		}
+
 		if ($value_parsed % 1024 == 512)
 		{
 			$type[9] = 'cover-output';
 			$value_parsed -= 512;
 		}
+
 		if ($value_parsed % 2048 == 1024)
 		{
 			$type[10] = 'bind-output';
 			$value_parsed -= 1024;
 		}
+
 		if ($value_parsed % 4096 == 2048)
 		{
 			$type[11] = 'sort-output';
 			$value_parsed -= 2048;
 		}
+
 		if ($value_parsed % 8192 == 4096)
 		{
 			$type[12] = 'handle-media-up-to-US-Legal-A4';
 			$value_parsed -= 4096;
 		}
+
 		if ($value_parsed % 16384 == 8192)
 		{
 			$type[13] = 'handle-media-between-US-Legal-A4-and-ISO_C-A2';
 			$value_parsed -= 8192;
 		}
+
 		if ($value_parsed % 32768 == 16384)
 		{
 			$type[14] = 'handle-media-larger-than-ISO_C-A2';
 			$value_parsed -= 16384;
 		}
+
 		if ($value_parsed % 65536 == 32768)
 		{
 			$type[15] = 'handle-user-defined-media-sizes';
 			$value_parsed -= 32768;
 		}
+
 		if ($value_parsed % 131072 == 65536)
 		{
 			$type[16] = 'implicit-server-generated-class';
 			$value_parsed -= 65536;
 		}
+
 		if ($value_parsed % 262144 == 131072)
 		{
 			$type[17] = 'network-default-printer';
 			$value_parsed -= 131072;
 		}
+
 		if ($value_parsed % 524288 == 262144)
 		{
 			$type[18] = 'fax-device';
 			$value_parsed -= 262144;
 		}
+
 		return $type;
 	}
 

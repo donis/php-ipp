@@ -611,12 +611,25 @@ class BasicIPP
 	//
 	// LOGGING / DEBUGGING
 	//
+	/**
+	 * Sets log file destination. Creates the file if has permission.
+	 *
+	 * @param string $log_destination
+	 * @param string $destination_type
+	 * @param int $level
+	 *
+	 * @throws ippException
+	 */
 	public function setLog($log_destination, $destination_type = 'file', $level = 2)
 	{
-
-		if (is_string($log_destination) && !empty($log_destination))
+		if (!file_exists($log_destination) && is_writable(dirname($log_destination)))
 		{
-			$this->log_destination = $log_destination;
+			touch($log_destination);
+			chmod($log_destination, 0777);
+		}
+		else
+		{
+			throw new ippException('Could not create log file. Log file doesn\'t exist.');
 		}
 
 		switch ($destination_type)
