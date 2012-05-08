@@ -198,7 +198,7 @@ class PrintIPP extends BasicIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 		if (!isset($this->setup->datatype))
 		{
@@ -385,7 +385,7 @@ class PrintIPP extends BasicIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -487,7 +487,7 @@ class PrintIPP extends BasicIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -670,7 +670,7 @@ class PrintIPP extends BasicIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -2020,7 +2020,7 @@ class PrintIPP extends BasicIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 		if (!isset($this->setup->datatype))
 		{

@@ -142,7 +142,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -241,7 +241,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -558,7 +558,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -660,7 +660,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -737,7 +737,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -838,7 +838,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -922,7 +922,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -1013,7 +1013,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -1151,7 +1151,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -1317,7 +1317,6 @@ class ExtendedPrintIPP extends PrintIPP
 		{
 			$this->meta->charset = "";
 		}
-		//    self::setCharset('us-ascii');
 		if (!isset($this->setup->datatype))
 		{
 			self::setBinary();
@@ -1433,7 +1432,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 		if (!isset($this->setup->datatype))
 		{
@@ -1558,7 +1557,7 @@ class ExtendedPrintIPP extends PrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 		if (!isset($this->setup->datatype))
 		{

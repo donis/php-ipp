@@ -66,7 +66,7 @@ class CupsPrintIPP extends ExtendedPrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -168,7 +168,7 @@ class CupsPrintIPP extends ExtendedPrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -241,7 +241,7 @@ class CupsPrintIPP extends ExtendedPrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))
@@ -329,7 +329,7 @@ class CupsPrintIPP extends ExtendedPrintIPP
 
 		if (!isset($this->setup->charset))
 		{
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 
 		if (!isset($this->setup->language))

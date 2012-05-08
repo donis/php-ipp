@@ -246,7 +246,7 @@ class BasicIPP
 		$this->setup->noFormFeed = 1;
 	}
 
-	public function setCharset($charset = 'us-ascii')
+	public function setCharset($charset = 'utf-8')
 	{
 		$charset = strtolower($charset);
 		$this->charset = $charset;
@@ -1449,7 +1449,7 @@ class BasicIPP
 	protected function _stringJob()
 	{
 		if (!isset($this->setup->charset)) {
-			self::setCharset('us-ascii');
+			self::setCharset();
 		}
 		if (!isset($this->setup->datatype)) {
 			self::setBinary();
@@ -1947,9 +1947,11 @@ class BasicIPP
 		if ($level === false) {
 			return;
 		}
+
 		if ($level < $this->debug_level) {
 			return;
 		}
+
 		$this->debug[$this->debug_count] = substr($string, 0, 1024);
 		$this->debug_count++;
 		//$this->debug .= substr($string,0,1024);
@@ -1964,12 +1966,15 @@ class BasicIPP
 		if ($level > $this->log_level) {
 			return;
 		}
+
 		$string = sprintf('%s : %s:%s user %s : %s', basename($_SERVER['PHP_SELF']), $this->host, $this->port, $this->requesting_user, $string_to_log);
+
 		if ($this->log_type == 0)
 		{
 			error_log($string);
 			return;
 		}
+
 		$string = sprintf("%s %s Host %s:%s user %s : %s\n", date('M d H:i:s'), basename($_SERVER['PHP_SELF']), $this->host, $this->port, $this->requesting_user, $string_to_log);
 		error_log($string, $this->log_type, $this->log_destination);
 		return;
