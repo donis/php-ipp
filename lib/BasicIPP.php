@@ -88,6 +88,7 @@ class BasicIPP
 	public $job_attributes; // object you can read: last job attributes
 	public $jobs_attributes; // object you can read: jobs attributes after getJobs()
 	public $available_printers = array();
+    public $printer_map = array();
 	public $printers_uri = array();
 	public $debug = array();
 	public $response;
@@ -110,6 +111,7 @@ class BasicIPP
 	protected $stream;
 	protected $host = "localhost";
 	protected $port = "631";
+    protected $requesting_user = '';
 	protected $printer_uri;
 	protected $timeout = "20"; //20 secs
 	protected $errNo;
@@ -132,6 +134,7 @@ class BasicIPP
 	protected $end_collection = false; //RFC3382
 	protected $collection_nbr = array(); //RFC3382
 	protected $unix = false; // true -> use unix sockets instead of http
+    protected $output;
 
 	public function __construct()
 	{
@@ -626,10 +629,6 @@ class BasicIPP
 		{
 			touch($log_destination);
 			chmod($log_destination, 0777);
-		}
-		else
-		{
-			throw new ippException('Could not create log file. Log file doesn\'t exist.');
 		}
 
 		switch ($destination_type)

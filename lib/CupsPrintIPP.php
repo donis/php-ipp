@@ -44,7 +44,7 @@ class CupsPrintIPP extends ExtendedPrintIPP
 	public $defaults_attributes;
 
 	protected $parsed;
-	private $output;
+	protected $output;
 
 	public function __construct()
 	{
@@ -321,7 +321,7 @@ class CupsPrintIPP extends ExtendedPrintIPP
 		{
 			true;
 		}
-		$attributes = array('printer-uri-supported', 'printer-location', 'printer-info', 'printer-type', 'color-supported');
+		$attributes = array('printer-uri-supported', 'printer-location', 'printer-info', 'printer-type', 'color-supported', 'printer-name');
 		$this->jobs = array_merge($this->jobs, array(""));
 		$this->jobs_uri = array_merge($this->jobs_uri, array(""));
 
@@ -550,6 +550,7 @@ class CupsPrintIPP extends ExtendedPrintIPP
 	private function _getAvailablePrinters()
 	{
 		$this->available_printers = array();
+        $this->printer_map = array();
 		$k = 0;
 		$this->printers_attributes = new stdClass();
 
@@ -583,6 +584,9 @@ class CupsPrintIPP extends ExtendedPrintIPP
 							break;
 						case '':
 							break;
+                        case 'printer_name':
+                            $this->printer_map[$value] = $k;
+                            break;
 						default:
 							$this->printers_attributes->$phpname->$name = $value;
 							break;
