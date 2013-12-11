@@ -60,3 +60,7 @@ TESTS
 Enjoy !
 --
 Thomas Harding.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/donis/php-ipp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
