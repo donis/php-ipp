@@ -345,9 +345,21 @@ class http_class
 
 	private function _streamString($string)
 	{
+		if (strlen($string) == 0)
+		{
+		    return true;
+		}
 		$success = fwrite($this->connection, $string);
+		//fflush($this->connection);
 		if (!$success)
 		{
+			//ob_start();
+			//var_dump(error_get_last());
+			//var_dump($string);
+			//$buffer = ob_get_contents();
+			//ob_end_clean();
+			//die($buffer);
+			//die(strlen($string));
 			return false;
 		}
 		return true;
